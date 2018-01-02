@@ -1,0 +1,6 @@
+export { default as LFeatureGroup } from './LFeatureGroup/LFeatureGroup'
+export { default as LGeoJsonCollection } from './LGeoJsonCollection/LGeoJsonCollection'
+export { default as LGeoJsonLayer } from './LGeoJsonLayer/LGeoJsonLayer'
+export { default as LMap } from './LMap/LMap'
+export { default as LMarker } from './LMarker/LMarker'
+export { default as LTileLayer } from './LTileLayer/LTileLayer'
