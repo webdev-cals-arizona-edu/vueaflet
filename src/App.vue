@@ -14,12 +14,12 @@
     <div class="example-map">
       <l-map map-id="componentMap" :options="{ zoom: 12, center: [32.231139, -110.953296] }">
         <l-tile-layer v-bind="streetBasemap"/>
-        <l-feature-group layer-name="basic-markers-v2" :order="5">
+        <l-feature-group layer-name="basic-markers-v2" :order="12">
           <l-marker :latlng="[32.231139, -110.953296]"/>
         </l-feature-group>
 
         <l-feature-group layer-name="more-markers-v2" :order="10">
-          <l-marker :latlng="[32.231332940630914, -110.95161437988283]"/>
+          <l-marker :latlng="[32.231332940630914, -110.95161437988283]" :options="{ draggable: true }"/>
         </l-feature-group>
       </l-map>
     </div>
@@ -28,7 +28,6 @@
 
 <script>
   import { mapState } from 'vuex'
-  import Leaflet from 'leaflet'
 
   export default {
     name: 'app',
