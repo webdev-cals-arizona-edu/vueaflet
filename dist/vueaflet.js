@@ -1013,7 +1013,7 @@ function applyToTag (styleElement, obj) {
 
 
 // TODO: figure out mouse events
-var events = ['load', 'click', 'dblclick', 'contextmenu', 'keypress', 'preclick'];
+var events = ['load', 'click', 'dblclick', 'contextmenu', 'keypress', 'preclick', 'locationerror', 'locationfound'];
 
 var LMap = {
   name: 'l-map',
