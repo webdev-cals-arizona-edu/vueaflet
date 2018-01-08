@@ -42,7 +42,9 @@
     'dblclick',
     'contextmenu',
     'keypress',
-    'preclick'
+    'preclick',
+    'locationerror',
+    'locationfound'
   ]
 
   let LMap = {
