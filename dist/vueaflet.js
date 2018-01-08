@@ -234,21 +234,21 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("vuex");
-
-/***/ }),
-/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MapBus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VueafletBus; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 
 
-var MapBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+var VueafletBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("vuex");
 
 /***/ }),
 /* 6 */
@@ -338,11 +338,11 @@ module.exports = require("vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_leaflet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_buses__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_store_mutation_types__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_utils__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__buses__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils__ = __webpack_require__(7);
 
 
 //
@@ -377,7 +377,7 @@ var LFeatureGroup = {
 
   data: function data() {
     return {
-      layerTypeLookup: __WEBPACK_IMPORTED_MODULE_6_utils__["a" /* layerTypeLookup */],
+      layerTypeLookup: __WEBPACK_IMPORTED_MODULE_6__utils__["a" /* layerTypeLookup */],
       innerFeatureGroup: null
     };
   },
@@ -404,13 +404,13 @@ var LFeatureGroup = {
         _this.$emit(event, _this.innerFeatureGroup);
       });
       _this.innerFeatureGroup.on(event, function (ev) {
-        __WEBPACK_IMPORTED_MODULE_4_buses__["a" /* MapBus */].$emit('feature-group-' + _this.mapId + '-' + event, _this.innerFeatureGroup);
+        __WEBPACK_IMPORTED_MODULE_4__buses__["a" /* VueafletBus */].$emit('feature-group-' + _this.mapId + '-' + event, _this.innerFeatureGroup);
       });
     });
   },
   mounted: function mounted() {
     this.$emit('ready', this.layerName);
-    __WEBPACK_IMPORTED_MODULE_4_buses__["a" /* MapBus */].$emit('feature-group-' + this.mapId + '-ready', this.layerName);
+    __WEBPACK_IMPORTED_MODULE_4__buses__["a" /* VueafletBus */].$emit('feature-group-' + this.mapId + '-ready', this.layerName);
   },
   destroyed: function destroyed() {
     this.layerName ? this.removeNamedLayer({ id: this.mapId, name: this.layerName }) : this.removeLayer({ id: this.mapId, layer: this.innerFeatureGroup });
@@ -420,9 +420,9 @@ var LFeatureGroup = {
   computed: __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapGetters"])(['getNamedLayer'])),
 
   methods: __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapMutations"])({
-    addLayer: __WEBPACK_IMPORTED_MODULE_5_store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
-    addNamedLayer: __WEBPACK_IMPORTED_MODULE_5_store_mutation_types__["c" /* VUEAFLET_ADD_NAMED_LAYER */],
-    removeLayer: __WEBPACK_IMPORTED_MODULE_5_store_mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */]
+    addLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
+    addNamedLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["c" /* VUEAFLET_ADD_NAMED_LAYER */],
+    removeLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */]
   }), Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapActions"])(['removeNamedLayer']), {
     registerOptions: function registerOptions(options) {
       return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()({}, options, __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({
@@ -546,10 +546,10 @@ var LGeoJsonCollection = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_leaflet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_buses__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_store_mutation_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__buses__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__ = __webpack_require__(2);
 
 
 //
@@ -613,9 +613,9 @@ var LGeoJsonLayer = {
   computed: __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapGetters"])(['getNamedLayer'])),
 
   methods: __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapMutations"])({
-    addLayer: __WEBPACK_IMPORTED_MODULE_5_store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
-    addNamedLayer: __WEBPACK_IMPORTED_MODULE_5_store_mutation_types__["c" /* VUEAFLET_ADD_NAMED_LAYER */],
-    removeLayer: __WEBPACK_IMPORTED_MODULE_5_store_mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */]
+    addLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
+    addNamedLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["c" /* VUEAFLET_ADD_NAMED_LAYER */],
+    removeLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */]
   }), Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapActions"])(['removeNamedLayer']), {
     initRoutine: function initRoutine() {
       var _this = this;
@@ -631,13 +631,13 @@ var LGeoJsonLayer = {
           _this.$emit(event, _this.innerGeoJSON);
         });
         _this.innerGeoJSON.on(event, function (ev) {
-          __WEBPACK_IMPORTED_MODULE_4_buses__["a" /* MapBus */].$emit('geo-json-' + _this.layerName + '-' + _this.mapId + '-' + event, _this.innerGeoJSON);
+          __WEBPACK_IMPORTED_MODULE_4__buses__["a" /* VueafletBus */].$emit('geo-json-' + _this.layerName + '-' + _this.mapId + '-' + event, _this.innerGeoJSON);
         });
       });
     },
     readyRoutine: function readyRoutine() {
       this.$emit('ready', this.layerName);
-      __WEBPACK_IMPORTED_MODULE_4_buses__["a" /* MapBus */].$emit('geo-json-' + this.layerName + '-' + this.mapId + '-ready', this.layerName);
+      __WEBPACK_IMPORTED_MODULE_4__buses__["a" /* VueafletBus */].$emit('geo-json-' + this.layerName + '-' + this.mapId + '-ready', this.layerName);
     },
     destroyRoutine: function destroyRoutine() {
       if (this.layerName && this.getNamedLayer(this.layerName)) {
@@ -971,10 +971,10 @@ function applyToTag (styleElement, obj) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_buses__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__buses__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_store_mutation_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_mutation_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash_forEach__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash_forEach___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash_forEach__);
 
@@ -1012,7 +1012,8 @@ function applyToTag (styleElement, obj) {
 
 
 
-var events = ['load', 'click', 'dblclick', 'mousedown', 'mouseup', 'mouseover', 'mouseout', 'mousemove', 'contextmenu', 'keypress', 'preclick'];
+// TODO: figure out mouse events
+var events = ['load', 'click', 'dblclick', 'contextmenu', 'keypress', 'preclick'];
 
 var LMap = {
   name: 'l-map',
@@ -1069,7 +1070,7 @@ var LMap = {
     }).then(function () {
       _this.ready = true;
       _this.$emit('ready');
-      __WEBPACK_IMPORTED_MODULE_1_buses__["a" /* MapBus */].$emit('map-' + _this.mapId + '-ready');
+      __WEBPACK_IMPORTED_MODULE_1__buses__["a" /* VueafletBus */].$emit('map-' + _this.mapId + '-ready');
     });
 
     events.forEach(function (event, index) {
@@ -1077,15 +1078,15 @@ var LMap = {
           _this.$emit(event, ev);
         } });
       _this.addEvent({ id: _this.mapId, event: event, func: function func(ev) {
-          __WEBPACK_IMPORTED_MODULE_1_buses__["a" /* MapBus */].$emit('map-' + _this.mapId + '-' + event, ev);
+          __WEBPACK_IMPORTED_MODULE_1__buses__["a" /* VueafletBus */].$emit('map-' + _this.mapId + '-' + event, ev);
         } });
     });
   },
 
 
   methods: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["mapMutations"])({
-    addEvent: __WEBPACK_IMPORTED_MODULE_3_store_mutation_types__["a" /* VUEAFLET_ADD_MAP_EVENT */],
-    addLayer: __WEBPACK_IMPORTED_MODULE_3_store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */]
+    addEvent: __WEBPACK_IMPORTED_MODULE_3__store_mutation_types__["a" /* VUEAFLET_ADD_MAP_EVENT */],
+    addLayer: __WEBPACK_IMPORTED_MODULE_3__store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */]
   }), Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["mapActions"])(['createMap', 'destroyMap']), {
     layerTypeLookup: function layerTypeLookup(type) {
       return {
@@ -1099,7 +1100,7 @@ var LMap = {
 
   destroy: function destroy() {
     this.destroyMap();
-    // TODO: add $off to MapBus
+    // TODO: add $off to VueafletBus
   }
 };
 
@@ -1116,10 +1117,10 @@ var LMap = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_leaflet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_buses__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__buses__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vuex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_store_mutation_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__ = __webpack_require__(2);
 
 
 //
@@ -1206,7 +1207,7 @@ var LMarker = {
         _this.$emit(event, _this.innerMarker);
       });
       _this.innerMarker.on(event, function (ev) {
-        __WEBPACK_IMPORTED_MODULE_3_buses__["a" /* MapBus */].$emit('marker-' + _this.mapId + '-' + event, _this.innerMarker);
+        __WEBPACK_IMPORTED_MODULE_3__buses__["a" /* VueafletBus */].$emit('marker-' + _this.mapId + '-' + event, _this.innerMarker);
       });
     });
   },
@@ -1218,8 +1219,8 @@ var LMarker = {
 
 
   methods: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["mapMutations"])({
-    addLayer: __WEBPACK_IMPORTED_MODULE_5_store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
-    removeLayer: __WEBPACK_IMPORTED_MODULE_5_store_mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */]
+    addLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
+    removeLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */]
   }))
 };
 
@@ -1234,10 +1235,10 @@ var LMarker = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_leaflet__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_leaflet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_buses__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__buses__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_store_mutation_types__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__ = __webpack_require__(2);
 
 //
 //
@@ -1284,8 +1285,8 @@ var LTileLayer = {
 
 
   methods: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapMutations"])({
-    addLayer: __WEBPACK_IMPORTED_MODULE_4_store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
-    removeLayer: __WEBPACK_IMPORTED_MODULE_4_store_mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */]
+    addLayer: __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
+    removeLayer: __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */]
   }))
 };
 
@@ -1297,37 +1298,41 @@ var LTileLayer = {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVueafletStore", function() { return createVueafletStore; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_utils__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_store_modules_vueaflet__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store_modules_vueaflet__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__buses__ = __webpack_require__(4);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "VueafletBus", function() { return __WEBPACK_IMPORTED_MODULE_4__buses__["a"]; });
 
 
 
 
 
-var createInstaller = function createInstaller(config, components) {
-  return function (Vue) {
+// TODO: test options
+var createInstaller = function createInstaller(components) {
+  return function (Vue, options) {
+    // do something with options
     Object(__WEBPACK_IMPORTED_MODULE_1_utils__["b" /* registerComponents */])(Vue, components);
   };
 };
 
-var createVuexStore = function createVuexStore() {
+var createVueaflet = function createVueaflet() {
+  return { install: createInstaller(__WEBPACK_IMPORTED_MODULE_3__components__) };
+};
+
+// TODO: test module name
+var createVueafletStore = function createVueafletStore() {
   var moduleName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'vueaflet';
   return function (store) {
-    store.registerModule(moduleName, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, __WEBPACK_IMPORTED_MODULE_2_store_modules_vueaflet__["a" /* default */]));
+    store.registerModule(moduleName, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, __WEBPACK_IMPORTED_MODULE_2__store_modules_vueaflet__["a" /* default */]));
   };
 };
 
-function createVueaflet() {
-  return {
-    install: createInstaller({}, __WEBPACK_IMPORTED_MODULE_3__components__),
-    store: createVuexStore()
-  };
-}
+/* harmony default export */ __webpack_exports__["default"] = (createVueaflet());
 
-/* harmony default export */ __webpack_exports__["default"] = (createVueaflet);
 
 /***/ }),
 /* 20 */
@@ -2084,13 +2089,13 @@ var content = __webpack_require__(43);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(15)("2b3228f4", content, false);
+var update = __webpack_require__(15)("41d5728c", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9988e162\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/stylus-loader/index.js?{\"sourceMap\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1&bustCache!./LMap.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9988e162\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/stylus-loader/index.js?{\"sourceMap\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1&bustCache!./LMap.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9988e162\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1&bustCache!./LMap.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js?{\"sourceMap\":false}!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-9988e162\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1&bustCache!./LMap.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -2108,7 +2113,7 @@ exports = module.exports = __webpack_require__(14)(false);
 
 
 // module
-exports.push([module.i, "\n.map {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n  z-index: 0;\n}\n.map__mount {\n  width: 100%;\n  height: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.map {\n  position: relative;\n  width:100%;\n  height: 100%;\n  overflow: hidden;\n  z-index: 0;\n}\n.map__mount {\n  width: 100%;\n  height: 100%;\n}\n", ""]);
 
 // exports
 

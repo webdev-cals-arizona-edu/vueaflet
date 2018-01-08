@@ -1,20 +1,21 @@
 import { registerComponents } from 'utils'
-import vueafletStore from 'store/modules/vueaflet'
+import vueafletStore from './store/modules/vueaflet'
 import * as components from './components'
 
-const createInstaller = (config, components) => (Vue) => {
+// TODO: test options
+const createInstaller = (components) => (Vue, options) => {
+  // do something with options
   registerComponents(Vue, components)
 }
 
-const createVuexStore = (moduleName = 'vueaflet') => (store) => {
+const createVueaflet = () => { 
+  return { install: createInstaller(components) }
+}
+
+// TODO: test module name
+export const createVueafletStore = (moduleName = 'vueaflet') => (store) => {
   store.registerModule(moduleName, { ...vueafletStore })
 }
 
-function createVueaflet() {
-  return {
-    install: createInstaller({}, components),
-    store: createVuexStore()
-  }
-}
-
-export default createVueaflet
+export default createVueaflet()
+export { VueafletBus } from './buses'

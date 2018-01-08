@@ -27,23 +27,19 @@
 </template>
 
 <script>
-  import { MapBus } from 'buses'
+  import { VueafletBus } from '../../buses'
   import { mapMutations, mapActions } from 'vuex'
   import { 
     VUEAFLET_ADD_MAP_EVENT,
     VUEAFLET_ADD_MAP_LAYER
-  } from 'store/mutation-types'
+  } from '../../store/mutation-types'
   import forEach from 'lodash.forEach'
 
+  // TODO: figure out mouse events
   const events = [
     'load',
     'click',
     'dblclick',
-    'mousedown',
-    'mouseup',
-    'mouseover',
-    'mouseout',
-    'mousemove',
     'contextmenu',
     'keypress',
     'preclick'
@@ -100,12 +96,12 @@
       }).then(() => {
         this.ready = true
         this.$emit('ready')
-        MapBus.$emit(`map-${this.mapId}-ready`)
+        VueafletBus.$emit(`map-${this.mapId}-ready`)
       })
 
       events.forEach((event, index) => {
         this.addEvent({ id: this.mapId, event, func: (ev) => { this.$emit(event, ev) } })
-        this.addEvent({ id: this.mapId, event, func: (ev) => { MapBus.$emit(`map-${this.mapId}-${event}`, ev) } })
+        this.addEvent({ id: this.mapId, event, func: (ev) => { VueafletBus.$emit(`map-${this.mapId}-${event}`, ev) } })
       })
     },
 
@@ -127,7 +123,7 @@
 
     destroy() {
       this.destroyMap()
-      // TODO: add $off to MapBus
+      // TODO: add $off to VueafletBus
     }
   }
 
@@ -135,7 +131,7 @@
 </script>
 
 <style src="leaflet/dist/leaflet.css"></style>
-<style lang="styl">
+<style>
   .map {
     position: relative;
     width:100%;

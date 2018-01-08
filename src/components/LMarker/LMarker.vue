@@ -2,9 +2,9 @@
 
 <script>
   import Leaflet from 'leaflet'
-  import { MapBus } from 'buses'
+  import { VueafletBus } from '../../buses'
   import { mapMutations } from 'vuex'
-  import { VUEAFLET_ADD_MAP_LAYER, VUEAFLET_REMOVE_MAP_LAYER } from 'store/mutation-types'
+  import { VUEAFLET_ADD_MAP_LAYER, VUEAFLET_REMOVE_MAP_LAYER } from '../../store/mutation-types'
 
   const events = [
     'click',
@@ -94,7 +94,7 @@
 
       events.forEach((event) => {
         this.innerMarker.on(event, (ev) => { this.$emit(event, this.innerMarker) })
-        this.innerMarker.on(event, (ev) => { MapBus.$emit(`marker-${this.mapId}-${event}`, this.innerMarker) })
+        this.innerMarker.on(event, (ev) => { VueafletBus.$emit(`marker-${this.mapId}-${event}`, this.innerMarker) })
       })
     },
 

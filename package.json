@@ -1,9 +1,8 @@
 {
   "name": "vueaflet",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A Leaflet plugin for Vue/Vuex",
   "author": "Matthew King <>",
-  "private": true,
   "main": "dist/vueaflet.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

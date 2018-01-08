@@ -3,12 +3,12 @@
 <script>
   import Leaflet from 'leaflet'
   import { mapMutations, mapGetters, mapActions } from 'vuex'
-  import { MapBus } from 'buses'
+  import { VueafletBus } from '../../buses'
   import { 
     VUEAFLET_ADD_MAP_LAYER,
     VUEAFLET_ADD_NAMED_LAYER, 
     VUEAFLET_REMOVE_MAP_LAYER 
-  } from 'store/mutation-types'
+  } from '../../store/mutation-types'
 
   const events = [
     'add',
@@ -89,12 +89,12 @@
 
         events.forEach((event) => {
           this.innerGeoJSON.on(event, (ev) => { this.$emit(event, this.innerGeoJSON) })
-          this.innerGeoJSON.on(event, (ev) => { MapBus.$emit(`geo-json-${this.layerName}-${this.mapId}-${event}`, this.innerGeoJSON) })
+          this.innerGeoJSON.on(event, (ev) => { VueafletBus.$emit(`geo-json-${this.layerName}-${this.mapId}-${event}`, this.innerGeoJSON) })
         })
       },
       readyRoutine() {
         this.$emit('ready', this.layerName)
-        MapBus.$emit(`geo-json-${this.layerName}-${this.mapId}-ready`, this.layerName)
+        VueafletBus.$emit(`geo-json-${this.layerName}-${this.mapId}-ready`, this.layerName)
       },
       destroyRoutine() {
         if (this.layerName && this.getNamedLayer(this.layerName)) {

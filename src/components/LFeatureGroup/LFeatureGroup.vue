@@ -10,13 +10,13 @@
 <script>
   import Leaflet from 'leaflet'
   import { mapMutations, mapGetters, mapActions } from 'vuex'
-  import { MapBus } from 'buses'
+  import { VueafletBus } from '../../buses'
   import { 
     VUEAFLET_ADD_MAP_LAYER,
     VUEAFLET_ADD_NAMED_LAYER, 
     VUEAFLET_REMOVE_MAP_LAYER 
-  } from 'store/mutation-types'
-  import { layerTypeLookup } from 'utils'
+  } from '../../store/mutation-types'
+  import { layerTypeLookup } from '../../utils'
 
   const events = [
     'add',
@@ -61,13 +61,13 @@
 
       events.forEach((event) => {
         this.innerFeatureGroup.on(event, (ev) => { this.$emit(event, this.innerFeatureGroup) })
-        this.innerFeatureGroup.on(event, (ev) => { MapBus.$emit(`feature-group-${this.mapId}-${event}`, this.innerFeatureGroup) })
+        this.innerFeatureGroup.on(event, (ev) => { VueafletBus.$emit(`feature-group-${this.mapId}-${event}`, this.innerFeatureGroup) })
       })
     },
 
     mounted() {
       this.$emit('ready', this.layerName)
-      MapBus.$emit(`feature-group-${this.mapId}-ready`, this.layerName)
+      VueafletBus.$emit(`feature-group-${this.mapId}-ready`, this.layerName)
     },
 
     destroyed() {

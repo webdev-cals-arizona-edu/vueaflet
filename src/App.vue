@@ -28,11 +28,22 @@
 
 <script>
   import { mapState } from 'vuex'
+  import { VueafletBus } from 'buses'
 
   export default {
     name: 'app',
 
     components: {},
+
+    mounted() {
+      VueafletBus.$on('map-componentMap-ready', () => {
+        console.log('componentMap ready!')
+      })
+
+      VueafletBus.$on(`feature-group-componentMap-ready`, (name) => {
+        console.log(name, 'feature group componentMap ready!')
+      })
+    },
 
     data() {
       return {
