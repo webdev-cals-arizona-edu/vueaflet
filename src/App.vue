@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <h1>From Store config</h1>
+    <example-one/>
+    <example-two/>
+    <example-three/>
+    <example-four/>
+    <!-- <h1>From Store config</h1>
     <div class="example-map">
       <l-map map-id="storedMap"
         :options="{ zoom: 12, center: [32.231139, -110.953296] }"
@@ -22,18 +26,27 @@
           <l-marker :latlng="[32.231332940630914, -110.95161437988283]" :options="{ draggable: true }"/>
         </l-feature-group>
       </l-map>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
   import { mapState } from 'vuex'
   import { VueafletBus } from 'buses'
+  import ExampleOne from 'components/Example/ExampleOne'
+  import ExampleTwo from 'components/Example/ExampleTwo'
+  import ExampleThree from 'components/Example/ExampleThree'
+  import ExampleFour from 'components/Example/ExampleFour'
 
   export default {
     name: 'app',
 
-    components: {},
+    components: {
+      ExampleOne,
+      ExampleTwo,
+      ExampleThree,
+      ExampleFour,
+    },
 
     mounted() {
       VueafletBus.$on('map-componentMap-ready', () => {
@@ -87,6 +100,10 @@
   .example-map {
     margin: 0 auto;
     width: 500px;
+    height: 100%;
+  }
+
+  .example-map .map {
     height: 400px;
   }
 </style>
