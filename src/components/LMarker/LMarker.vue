@@ -3,8 +3,7 @@
 <script>
   import Leaflet from 'leaflet'
   import { VueafletBus } from '../../buses'
-  import { mapMutations } from 'vuex'
-  import { VUEAFLET_ADD_MAP_LAYER, VUEAFLET_REMOVE_MAP_LAYER } from '../../store/mutation-types'
+  import LayerMixin from 'mixins/LayerMixin'
 
   const events = [
     'click',
@@ -27,87 +26,47 @@
 
   let LMarker = {
     name: 'l-marker',
-    
-    inject: ['mapId', 'registerOptions'],
 
-    props: {
-      latlng: {
-        type: [Array, Object],
-      },
-      options: {
-        type: Object,
-        default: () => { return {} }
-      }
-    },
+    mixins: [LayerMixin],
 
     data() {
       return {
-        innerMarker: null,
-        parent: null,
-        defaultIcon: Leaflet.icon({
-          iconUrl: require('leaflet/dist/images/marker-icon.png'),
-          shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-          iconSize: [25, 41],
-          shadowSize: [41, 41],
-          iconAnchor: [12.5, 41],
-          shadowAnchor: [13.1, 41]
-        })
+        type: 'marker',
+        defaultOptions: {
+          icon: Leaflet.icon({
+            iconUrl: require('leaflet/dist/images/marker-icon.png'),
+            shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+            iconSize: [25, 41],
+            shadowSize: [41, 41],
+            iconAnchor: [12.5, 41],
+            shadowAnchor: [13.1, 41],
+            popupAnchor: [2, -33]
+          })
+        }
       }
     },
 
     watch: {
       latlng(newArray) {
-        this.innerMarker.setLatLng(newArray)
+        this.innerLayer.setLatLng(newArray)
       },
       'options.draggable'(newValue) {
         (newValue)
-          ? this.innerMarker.dragging.enable()
-          : this.innerMarker.dragging.disable()
+          ? this.innerLayer.dragging.enable()
+          : this.innerLayer.dragging.disable()
       },
       'options.icon': {
         handler(icon) {
-          this.innerMarker.setIcon(icon)
+          this.innerLayer.setIcon(icon)
         },
         deep: true
       }
     },
 
     mounted() {
-      let options = (this.registerOptions) ? this.registerOptions(this.options) : {}
-
-      this.innerMarker = Leaflet.marker(this.latlng, Object.assign({
-        icon: this.defaultIcon
-      }, options))
-
-      // TODO: can probably do this during the "registerOptions" call back
-      let { 
-        $data: {
-          innerFeatureGroup
-        } = {} 
-      } = this.$parent
-
-      this.parent = innerFeatureGroup
-
-      this.parent
-        ? this.parent.addLayer(this.innerMarker)
-        : this.addLayer({ id: this.mapId, layer: this.innerMarker })
-
       events.forEach((event) => {
-        this.innerMarker.on(event, (ev) => { this.$emit(event, this.innerMarker) })
-        this.innerMarker.on(event, (ev) => { VueafletBus.$emit(`marker-${this.mapId}-${event}`, this.innerMarker) })
-      })
-    },
-
-    destroyed() {
-      if (!this.parent) {
-        this.removeLayer({ id: this.mapId, layer: this.innerMarker })
-      }
-    },
-
-    methods: {
-      ...mapMutations({
-        addLayer: VUEAFLET_ADD_MAP_LAYER,
-        removeLayer: VUEAFLET_REMOVE_MAP_LAYER
+        this.innerLayer.on(event, (ev) => { this.$emit(event, this.innerLayer) })
+        this.innerLayer.on(event, (ev) => { VueafletBus.$emit(`${this.type}-${this.mapId}-${event}`, this.innerLayer) })
       })
     }
   }
