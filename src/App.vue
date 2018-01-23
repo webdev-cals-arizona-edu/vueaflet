@@ -10,8 +10,7 @@
         :options="{ zoom: 12, center: [32.231139, -110.953296] }"
         :basemaps="storedBasemaps" 
         :layers="storedLayers" 
-        active-basemap="Street" 
-        v-on:click="handleStoreClick"/>
+        active-basemap="Street"/>
     </div>
 
     <h1>From Components</h1>
@@ -48,15 +47,7 @@
       ExampleFour,
     },
 
-    mounted() {
-      VueafletBus.$on('map-componentMap-ready', () => {
-        console.log('componentMap ready!')
-      })
-
-      VueafletBus.$on(`feature-group-componentMap-ready`, (name) => {
-        console.log(name, 'feature group componentMap ready!')
-      })
-    },
+    mounted() {},
 
     data() {
       return {
@@ -77,12 +68,6 @@
         storedLayers: state => state.maps.layers,
         storedBasemaps: state => state.maps.basemaps
       })
-    },
-
-    methods: {
-      handleStoreClick(e) {
-        console.log(e)
-      }
     }
   }
 </script>
