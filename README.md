@@ -15,7 +15,7 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. An a
    - [Feature Groups](#feature-groups)
    - [Manage your layers using Vuex](#manage-your-layers-using-vuex)
 
-####Features not documented####
+### Features not documented
 
  - Layers
    - LGeoJsonLayer
@@ -26,7 +26,7 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. An a
    - Ordering z-index of panes using an `order` prop
    - Leaflet.PM (drawing shapes on the map
 
-####Feature in development####
+### Feature in development
 
  - Lots!
  - Hosted, practical examples
@@ -37,7 +37,7 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. An a
  - Evaluation of other Leaflet features that can be represented in component format
 
 ----------
-## Getting Started ##
+## Getting Started
 ```
 git clone git@github.com:webdev-cals-arizona-edu/vueaflet.git
 npm install
@@ -88,13 +88,13 @@ export default new Vuex.Store({
 })
 
 ```
-## Quick Start Guide ##
+## Quick Start Guide
 These simple examples mirror the effort in the [Leaflet Quick Start Guide](http://leafletjs.com/examples/quick-start/). These examples are utilize the single file component methodology brought to use by `vue-loader`
 
 
 ----------
 
-####Preparing your page####
+### Preparing your page
 Create a new Vue component with a container `div`:
 ```
 <template>
@@ -120,7 +120,7 @@ Create a new Vue component with a container `div`:
 ----------
 
 
-### Setting up the map###
+### Setting up the map
 When this plugin is ingested by Vue, `Vue.use(Vueaflet)`, all vueaflet components are globally registered. Added a nested `<l-map/>` which accept a prop called `mapId` that accepts a string. This string value becomes the `div#id` the Leaflet map will mount into: 
 ```
 <template>
@@ -220,7 +220,7 @@ Before we move on, we'd like to mention the purpose of this library is solely to
 Once you have the object... use it! All the Leaflet options and methods are at your disposal. There are *some* features that we provide an easy interface to, however. See popups below.
 
 ----------
-####Markers, circles and polygons####
+### Markers, circles and polygons
 Easily add other layers to your map! Let's add a marker:
 ```
 <template>
@@ -284,7 +284,7 @@ polygonProps: {
 ----------
 
 ```
-####Working with popups####
+### Working with popups
 Simply pass a string to the `popup` prop on each of these simple layer types:
 ```
 ...
@@ -299,7 +299,7 @@ Each layer `$emits` a ready status. **Event documentation**
 
 ----------
 
-####Try out some other simple layers####
+### Try out some other simple layers
 ```
 <l-rectangle v-bind="rectangleProps"/>
 <l-polyline v-bind="polylineProps"/>
@@ -332,7 +332,7 @@ multiPolylineProps: {
 
 ----------
 
-####Events####
+### Events
 Common events are emitted from each layer and available on a global `bus` called VueafletBus. Please look at the source code for each layer component to find out which events are currently supported. Here are a couple examples:
 ```
 <template>
@@ -389,7 +389,7 @@ Couple of things to note:
 
 ----------
 
-####Feature groups####
+### Feature groups
 Wrap the layers we created in previous examples in the `<l-feature-group/>` component. Make sure to include a `layer-name` prop for your feature group:
 
 ```
@@ -456,7 +456,7 @@ Now you can toggle that feature layer without using `Leaflet.control`:
 
 ----------
 
-####Manage your layers using Vuex####
+### Manage your layers using Vuex
 We've already provided an example for how to utilize the `vueaflet` store for retrieving the map object. You can achieve the same functionality for an `<l-feature-group/>`. By passing the feature group component a `layer-name` prop, you are also storing this `Leaflet.featureGroup` object in the vueaflet store using the `layer-name` as the object `key`. You can access that feature group like so:
 ```
 /* layerName being the string prop passed to l-feature-group */
