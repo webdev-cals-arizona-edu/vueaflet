@@ -1,8 +1,13 @@
 {
   "name": "vueaflet",
   "version": "0.2.1",
-  "description": "A Leaflet plugin for Vue/Vuex",
-  "author": "Matthew King <>",
+  "description": "A component driven approach to managing Leaflet objects using Vue and Vuex.",
+  "author": {
+    "name": "CALS CCT",
+    "email": "webdev@cals.arizona.edu"
+  },
+  "homepage": "https://cct.cals.arizona.edu",
+  "repository:": "webdev-cals-arizona-edu/vueaflet",
   "main": "dist/vueaflet.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

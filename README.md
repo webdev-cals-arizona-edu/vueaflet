@@ -29,6 +29,7 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. An a
 ### Feature in development
 
  - Lots!
+ - **esri-vueaflet:** additional set of components inspired by esri-leaflet, that sit on top of Vueaflet
  - Hosted, practical examples
  - Ensuring all "options" for each layer are watched/reactive
    - i.e. instead of `setOpacity` or `setStyle`, just change `options.opacity`
