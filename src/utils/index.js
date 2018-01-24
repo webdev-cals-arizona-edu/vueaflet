@@ -1,37 +1,17 @@
 import Leaflet from 'leaflet'
 
-export function testIcon() {
-  return Leaflet.icon(Object.assign({}, {
-      iconUrl: 'https://esri.github.io/esri-leaflet/img/bus-stop-east.png',
-      iconRetinaUrl: 'https://esri.github.io/esri-leaflet/img/bus-stop-east@2x.png',
-      iconSize: [31, 27],
-      iconAnchor: [13.5, 17.5],
-      popupAnchor: [0, -11],
-  }))
-}
-
-export function filterBaseIcon(slug) {
-  return Leaflet.icon(Object.assign({}, {
-    iconUrl: `../static/svg/marker-colorfill-${slug}.svg`,
-    iconSize: [40, 40],
-    iconAnchor: [20, 20]
-  }))
-}
-
-export function filterSelectedIcon(slug) {
-  return Leaflet.icon(Object.assign({}, {
-    iconUrl: `../static/svg/marker-selected-${slug}.svg`,
-    iconSize: [70, 70],
-    iconAnchor: [35, 35]
-  }))
-}
 
 export function layerTypeLookup(type) {
+  // TODO: need to add all layer types
   let layerTypes = {
-    marker: 'l-marker'
+    circle: 'l-circle',
+    marker: 'l-marker',
+    polygon: 'l-polygon',
+    polyline: 'l-polyline',
+    rectangle: 'l-rectangle'
   }
 
-  if (!layerTypes[type]) throw new Error('[layerTypeLookup] layer type does not exist')
+  if (!layerTypes[type]) throw new Error(`[layerTypeLookup] layer ${type} does not exist`)
 
   return layerTypes[type]
 }
