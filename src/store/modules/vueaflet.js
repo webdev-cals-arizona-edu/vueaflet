@@ -12,7 +12,6 @@ import {
   VUEAFLET_REMOVE_MAP_LAYER,
   VUEAFLET_REMOVE_NAMED_LAYER,
   VUEAFLET_PAN_TO,
-  VUEAFLET_PAN_TO_OFFSET,
   VUEAFLET_PM_ENABLE_DRAW,
   VUEAFLET_PM_DISABLE_DRAW,
   VUEAFLET_PM_ADD_SHAPE_LAYER,
@@ -132,13 +131,6 @@ const mutations = {
     let { latlng, zoom = DEFAULT_ZOOM, options = {} } = payload
 
     state.maps[id].setView(latlng, zoom, { pan: options })
-  },
-  [VUEAFLET_PAN_TO_OFFSET](state, { id = DEFAULT_MAP_ID, latlng, zoom = state.maps[DEFAULT_MAP_ID]._zoom, offset, options }) {
-    var x = state.maps[id].latLngToContainerPoint(latlng).x - offset[0]
-    var y = state.maps[id].latLngToContainerPoint(latlng).y - offset[1]
-    var point = state.maps[id].containerPointToLatLng([x, y])
-
-    state.maps[id].setView(point, zoom, { pan: options })
   },
   [VUEAFLET_PM_ENABLE_DRAW](state, { id = DEFAULT_MAP_ID, shape }) {
     let { pm } = state.maps[id]
