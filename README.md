@@ -40,20 +40,8 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. An a
 ----------
 ## Getting Started
 ```
-git clone git@github.com:webdev-cals-arizona-edu/vueaflet.git
-npm install
-npm run dev
+npm install --save-dev vueaflet
 ```
-
-Go to `localhost:8080` on your machine. The home page is still in progress, but will mirror the [Leaflet Quick Start Guide](http://leafletjs.com/examples/quick-start/).
-
-To see how these examples were composed, go to `/src/components/Example` and look around the src code!
-
-Until this library is up on NPM, you can install it by adding the following entry in your `package.json`:
-
-    "vueaflet": "git@github.com:webdev-cals-arizona-edu/vueaflet.git"
-
-----------
 
 Assuming you are using a `vue-cli` template, your `src/main.js` will look something like this:
 ```
