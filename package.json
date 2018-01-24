@@ -1,15 +1,15 @@
 {
   "name": "vueaflet",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A component driven approach to managing Leaflet objects using Vue and Vuex.",
   "author": {
     "name": "CALS CCT",
     "email": "webdev@cals.arizona.edu"
   },
   "homepage": "https://cct.cals.arizona.edu",
-  "repository" : { 
-    "type" : "git",
-    "url" : "https://github.com/webdev-cals-arizona-edu/vueaflet"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webdev-cals-arizona-edu/vueaflet"
   },
   "main": "dist/vueaflet.js",
   "scripts": {
