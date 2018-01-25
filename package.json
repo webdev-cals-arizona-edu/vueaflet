@@ -1,6 +1,6 @@
 {
   "name": "vueaflet",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A component driven approach to managing Leaflet objects using Vue and Vuex.",
   "author": {
     "name": "CALS CCT",
