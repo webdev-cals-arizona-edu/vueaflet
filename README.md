@@ -1,6 +1,6 @@
 
 # Vueaflet #
-A component driven approach to managing Leaflet objects using Vue and Vuex. An attempt to simplify the process of exposing all the wonders of Leaflet in a Vue environment. Each component registers its Leaflet object in a Vuex store, granting easy access to your Leaflet objects anywhere in your Vue application.
+A component driven approach to managing Leaflet objects using Vue and Vuex. Each component registers its Leaflet object in a Vuex store, allowing easy access to your Leaflet objects anywhere in your Vue application.
 
 **This project is currently in development with ZERO test coverage! Use at your own risk :)** 
 
@@ -19,19 +19,19 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. An a
 
  - Layers
    - LGeoJsonLayer
-   - LGeoJsonCollection (handle multiple feature types)
+   - LGeoJsonCollection (handles multiple geo types)
  - Vuex
-   - **Still in development:** Instead of using `<template>` you can simply pass a single Javascript object into your map component and let `Veuaflet` do the rest! Documentation for shape of object coming soon.
+   - **Still in development:** Instead of using the tag-like syntax inside of a `<template>`, you can simply pass a single Javascript object into `<l-map/>` component, and let `Veuaflet` do the rest! Documentation for shape of object coming soon.
  - Misc
    - Ordering z-index of panes using an `order` prop
-   - Leaflet.PM (drawing shapes on the map
+   - Leaflet.PM (drawing shapes on the map)
 
 ### Feature in development
 
  - Lots!
- - **esri-vueaflet:** additional set of components inspired by esri-leaflet, that sit on top of Vueaflet
+ - **esri-vueaflet:** additional set of components inspired by esri-leaflet, that uses Vueaflet as a dependency.
  - Hosted, practical examples
- - Ensuring all "options" for each layer are watched/reactive
+ - Ensuring all "options" for each Leaflet UI layer are watched/reactive
    - i.e. instead of `setOpacity` or `setStyle`, just change `options.opacity`
  - Documentation for vueaflet store structure
  - Layer controls to toggle basemaps and layers
@@ -78,7 +78,7 @@ export default new Vuex.Store({
 
 ```
 ## Quick Start Guide
-These simple examples mirror the effort in the [Leaflet Quick Start Guide](http://leafletjs.com/examples/quick-start/). These examples are utilize the single file component methodology brought to use by `vue-loader`
+These simple examples mirror the effort in the [Leaflet Quick Start Guide](http://leafletjs.com/examples/quick-start/). These examples use the single file component structure, loaded by `vue-loader`
 
 
 ----------
@@ -110,7 +110,7 @@ Create a new Vue component with a container `div`:
 
 
 ### Setting up the map
-When this plugin is ingested by Vue, `Vue.use(Vueaflet)`, all vueaflet components are globally registered. Added a nested `<l-map/>` which accept a prop called `mapId` that accepts a string. This string value becomes the `div#id` the Leaflet map will mount into: 
+When this plugin is ingested by Vue, `Vue.use(Vueaflet)`, all vueaflet components are globally registered. Add a nested `<l-map/>` which takes a string prop called `mapId`. This string value becomes the `div#id` the Leaflet map will mount into:
 ```
 <template>
   <div class="map-container">
@@ -172,7 +172,7 @@ Let's `setView` so we can start creating some layers. This is where Vuex comes i
 </script>
 
 ```
-When the `<l-map/>` component mounted, it added the Leaflet map object to a Vuex store created during the `createVueafletStore()` process in your `store/index.js` file. Documentation on the shape of the Vueaflet store coming soon. Here are some other ways to get the map object from the store:
+When the `<l-map/>` component mounted, it added the Leaflet map object to a Vuex store (created during the `createVueafletStore()` process in your `store/index.js` file). Documentation on the shape of the Vueaflet store coming soon. Here are some other ways to get the map object from the store:
 ```
 ...
 
@@ -206,7 +206,7 @@ Before we move on, we'd like to mention the purpose of this library is solely to
  - Create the `Leaflet.map` object
  - Fetch the `Leaflet.map` object using the Vuex interface
  
-Once you have the object... use it! All the Leaflet options and methods are at your disposal. There are *some* features that we provide an easy interface to, however. See popups below.
+Once you have the object... use it! All the Leaflet options and methods are at your disposal. However, there are *some* features that we provide an easy interface to. [See popups belows.](#working-with-popups)
 
 ----------
 ### Markers, circles and polygons
@@ -284,7 +284,7 @@ Simply pass a string to the `popup` prop on each of these simple layer types:
 
 ...
 ```
-Each layer `$emits` a ready status. **Event documentation**
+Each layer `$emits` a `ready` status.
 
 ----------
 
@@ -322,7 +322,7 @@ multiPolylineProps: {
 ----------
 
 ### Events
-Common events are emitted from each layer and available on a global `bus` called VueafletBus. Please look at the source code for each layer component to find out which events are currently supported. Here are a couple examples:
+Common events are emitted from each layer and available on a global `bus` called `VueafletBus`. Please look at the source code for each layer component to find out which events are currently supported. Documentation for `VueafletBus` coming soon. Here are a couple examples:
 ```
 <template>
   <div class="map-container">
@@ -451,7 +451,7 @@ We've already provided an example for how to utilize the `vueaflet` store for re
 /* layerName being the string prop passed to l-feature-group */
 this.$store.state.vueaflet.namedLayers[layerName]
 ```
-Here is a separate single file component that is part of the same example app. This is to showcase how these Leaflet object can stretch across your entire app. This example uses a vueaflet `getter` to access and manipulate the feature group object:
+Here is a separate single file component that is part of the same example app. This is to showcase how these Leaflet objects can stretch across your entire app. This example uses a vueaflet `getter` to access and manipulate the feature group object created in `./App.vue`:
 ```
 <template>
   <div class="mock-controls" style="margin-top: 30px;">
