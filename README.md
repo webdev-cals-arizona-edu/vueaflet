@@ -14,6 +14,7 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. Each
    - [Events](#events)
    - [Feature Groups](#feature-groups)
    - [Manage your layers using Vuex](#manage-your-layers-using-vuex)
+ - [More Code Examples Here](https://github.com/webdev-cals-arizona-edu/vueaflet/tree/master/src/components/Examples)
 
 ### Features not documented
 
