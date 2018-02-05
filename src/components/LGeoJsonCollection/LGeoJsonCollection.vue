@@ -3,9 +3,9 @@
     <template v-for="(features, index) in collection">
       <!-- the key attr is what allows this to work! -->
       <l-geo-json-layer :features="features" 
-        :options="getOptions(features[0].geometry.type)" 
-        :layer-name="`${layerName}-${features[0].geometry.type}`" 
-        :key="getKey(features[0])"
+        :options="getOptions(getGeometryType(features))" 
+        :layer-name="`${layerName}-${getGeometryType(features)}`" 
+        :key="index"
         :order="order"/>
     </template>
   </div>
@@ -14,8 +14,7 @@
 <script>
   import values from 'lodash.values'
   import reduce from 'lodash.reduce'
-  // TODO: this componet could be optimized by normalizing the data into "feature groups"
-  // that way geo-json-layer is triggering so many actions and mutaitons
+
   let LGeoJsonCollection = {
     name: 'l-geo-json-collection',
 
@@ -43,11 +42,11 @@
         default() { return [] }
       },
       pointOptions: Function,
-      multipolygonOptions: Function,
       multipointOptions: Function,
-      polygonOptions: Function,
+      linestringOptions: Function,
       multilinestringOptions: Function,
-      linestringOptions: Function
+      polygonOptions: Function,
+      multipolygonOptions: Function
     },
 
     methods: {
@@ -65,24 +64,28 @@
         }, {})
 
         let temp = values(innerCollection)
-        // debugger
 
         this.collection = values(innerCollection)
       },
+      getGeometryType(features) {
+        let innerType;
+        let index = 0;
+
+        do {
+          let { 
+            geometry: {
+              type
+            } = {}
+          } = features[index]
+
+          innerType = type
+          index++
+        } while(!innerType)
+
+        return innerType
+      },
       getOptions(type) {
         return this[`${type.toLowerCase()}Options`](type) || {}
-      },
-      getKey(feature) {
-        let {
-          id,
-          layerId,
-          properties: {
-            OBJECTID,
-            OBJECTID_1
-          } = {}
-        } = feature
-
-        return `${feature.id}${feature.layerId}${OBJECTID || OBJECTID_1}`
       }
     }
   }
