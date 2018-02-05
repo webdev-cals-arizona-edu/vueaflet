@@ -4,6 +4,8 @@
     <example-two/>
     <example-three/>
     <example-four/>
+    <example-five/>
+    <example-six/>
     <!-- <h1>From Store config</h1>
     <div class="example-map">
       <l-map map-id="storedMap"
@@ -32,10 +34,12 @@
 <script>
   import { mapState } from 'vuex'
   import { VueafletBus } from 'buses'
-  import ExampleOne from 'components/Example/ExampleOne'
-  import ExampleTwo from 'components/Example/ExampleTwo'
-  import ExampleThree from 'components/Example/ExampleThree'
-  import ExampleFour from 'components/Example/ExampleFour'
+  import ExampleOne from 'components/Examples/SettingUpMap'
+  import ExampleTwo from 'components/Examples/MarkersCirclesPolygons'
+  import ExampleThree from 'components/Examples/WorkingWithPopups'
+  import ExampleFour from 'components/Examples/OtherVectorLayers'
+  import ExampleFive from 'components/Examples/UsingGeoJson'
+  import ExampleSix from 'components/Examples/VueafletGeoJsonCollection'
 
   export default {
     name: 'app',
@@ -45,6 +49,8 @@
       ExampleTwo,
       ExampleThree,
       ExampleFour,
+      ExampleFive,
+      ExampleSix
     },
 
     mounted() {},
