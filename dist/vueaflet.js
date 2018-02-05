@@ -214,18 +214,17 @@ module.exports = require("babel-runtime/helpers/extends");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return VUEAFLET_CREATE_MAP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return VUEAFLET_ADD_MAP_LAYER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return VUEAFLET_ADD_NAMED_LAYER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return VUEAFLET_REMOVE_MAP_LAYER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return VUEAFLET_REMOVE_NAMED_LAYER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return VUEAFLET_REMOVE_MAP_LAYER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return VUEAFLET_REMOVE_NAMED_LAYER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VUEAFLET_ADD_MAP_EVENT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return VUEAFLET_SET_VIEW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return VUEAFLET_SET_VIEW; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return VUEAFLET_ADD_TO_MAP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return VUEAFLET_PAN_TO; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return VUEAFLET_PAN_TO_OFFSET; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return VUEAFLET_PM_ENABLE_DRAW; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return VUEAFLET_PM_DISABLE_DRAW; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return VUEAFLET_PM_ADD_SHAPE_LAYER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return VUEAFLET_PM_REMOVE_SHAPE_LAYERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return VUEAFLET_RESET; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return VUEAFLET_PM_ENABLE_DRAW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return VUEAFLET_PM_DISABLE_DRAW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return VUEAFLET_PM_ADD_SHAPE_LAYER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return VUEAFLET_PM_REMOVE_SHAPE_LAYERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return VUEAFLET_RESET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return VUEAFLET_INVALIDATE; });
 var VUEAFLET_CREATE_MAP = 'VUEAFLET_CREATE_MAP';
 var VUEAFLET_ADD_MAP_LAYER = 'VUEAFLET_ADD_MAP_LAYER';
@@ -236,7 +235,6 @@ var VUEAFLET_ADD_MAP_EVENT = 'VUEAFLET_ADD_MAP_EVENT';
 var VUEAFLET_SET_VIEW = 'VUEAFLET_SET_VIEW';
 var VUEAFLET_ADD_TO_MAP = 'VUEAFLET_ADD_TO_MAP';
 var VUEAFLET_PAN_TO = 'VUEAFLET_PAN_TO';
-var VUEAFLET_PAN_TO_OFFSET = 'VUEAFLET_PAN_TO_OFFSET';
 var VUEAFLET_PM_ENABLE_DRAW = 'VUEAFLET_PM_ENABLE_DRAW';
 var VUEAFLET_PM_DISABLE_DRAW = 'VUEAFLET_PM_DISABLE_DRAW';
 var VUEAFLET_PM_ADD_SHAPE_LAYER = 'VUEAFLET_PM_ADD_SHAPE_LAYER';
@@ -312,7 +310,7 @@ var VUEAFLET_INVALIDATE = 'VUEAFLET_INVALIDATE';
 
   methods: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapMutations"])({
     addLayer: __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
-    removeLayer: __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */]
+    removeLayer: __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__["l" /* VUEAFLET_REMOVE_MAP_LAYER */]
   }), {
     addLayerToParent: function addLayerToParent() {
       var _$parent$$data = this.$parent.$data;
@@ -344,53 +342,26 @@ module.exports = require("babel-runtime/core-js/object/assign");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export testIcon */
-/* unused harmony export filterBaseIcon */
-/* unused harmony export filterSelectedIcon */
 /* harmony export (immutable) */ __webpack_exports__["a"] = layerTypeLookup;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return registerComponents; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_keys__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_leaflet__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_leaflet__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_leaflet__);
 
 
-
-
-function testIcon() {
-  return __WEBPACK_IMPORTED_MODULE_2_leaflet___default.a.icon(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()({}, {
-    iconUrl: 'https://esri.github.io/esri-leaflet/img/bus-stop-east.png',
-    iconRetinaUrl: 'https://esri.github.io/esri-leaflet/img/bus-stop-east@2x.png',
-    iconSize: [31, 27],
-    iconAnchor: [13.5, 17.5],
-    popupAnchor: [0, -11]
-  }));
-}
-
-function filterBaseIcon(slug) {
-  return __WEBPACK_IMPORTED_MODULE_2_leaflet___default.a.icon(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()({}, {
-    iconUrl: '../static/svg/marker-colorfill-' + slug + '.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 20]
-  }));
-}
-
-function filterSelectedIcon(slug) {
-  return __WEBPACK_IMPORTED_MODULE_2_leaflet___default.a.icon(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()({}, {
-    iconUrl: '../static/svg/marker-selected-' + slug + '.svg',
-    iconSize: [70, 70],
-    iconAnchor: [35, 35]
-  }));
-}
 
 function layerTypeLookup(type) {
+  // TODO: need to add all layer types
   var layerTypes = {
-    marker: 'l-marker'
+    circle: 'l-circle',
+    marker: 'l-marker',
+    polygon: 'l-polygon',
+    polyline: 'l-polyline',
+    rectangle: 'l-rectangle'
   };
 
-  if (!layerTypes[type]) throw new Error('[layerTypeLookup] layer type does not exist');
+  if (!layerTypes[type]) throw new Error('[layerTypeLookup] layer ' + type + ' does not exist');
 
   return layerTypes[type];
 }
@@ -556,7 +527,7 @@ var LFeatureGroup = {
   methods: __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapMutations"])({
     addLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
     addNamedLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["c" /* VUEAFLET_ADD_NAMED_LAYER */],
-    removeLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */]
+    removeLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["l" /* VUEAFLET_REMOVE_MAP_LAYER */]
   }), Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapActions"])(['removeNamedLayer']), {
     registerOptions: function registerOptions(options) {
       return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()({}, options, __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({
@@ -593,8 +564,7 @@ var LFeatureGroup = {
 
 
 
-// TODO: this componet could be optimized by normalizing the data into "feature groups"
-// that way geo-json-layer is triggering so many actions and mutaitons
+
 var LGeoJsonCollection = {
   name: 'l-geo-json-collection',
 
@@ -626,11 +596,11 @@ var LGeoJsonCollection = {
       }
     },
     pointOptions: Function,
-    multipolygonOptions: Function,
     multipointOptions: Function,
-    polygonOptions: Function,
+    linestringOptions: Function,
     multilinestringOptions: Function,
-    linestringOptions: Function
+    polygonOptions: Function,
+    multipolygonOptions: Function
   },
 
   methods: {
@@ -646,23 +616,27 @@ var LGeoJsonCollection = {
       }, {});
 
       var temp = __WEBPACK_IMPORTED_MODULE_0_lodash_values___default()(innerCollection);
-      // debugger
 
       this.collection = __WEBPACK_IMPORTED_MODULE_0_lodash_values___default()(innerCollection);
     },
+    getGeometryType: function getGeometryType(features) {
+      var innerType = void 0;
+      var index = 0;
+
+      do {
+        var _features$index$geome = features[index].geometry;
+        _features$index$geome = _features$index$geome === undefined ? {} : _features$index$geome;
+        var type = _features$index$geome.type;
+
+
+        innerType = type;
+        index++;
+      } while (!innerType);
+
+      return innerType;
+    },
     getOptions: function getOptions(type) {
       return this[type.toLowerCase() + 'Options'](type) || {};
-    },
-    getKey: function getKey(feature) {
-      var id = feature.id,
-          layerId = feature.layerId,
-          _feature$properties = feature.properties;
-      _feature$properties = _feature$properties === undefined ? {} : _feature$properties;
-      var OBJECTID = _feature$properties.OBJECTID,
-          OBJECTID_1 = _feature$properties.OBJECTID_1;
-
-
-      return '' + feature.id + feature.layerId + (OBJECTID || OBJECTID_1);
     }
   }
 };
@@ -749,7 +723,7 @@ var LGeoJsonLayer = {
   methods: __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapMutations"])({
     addLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
     addNamedLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["c" /* VUEAFLET_ADD_NAMED_LAYER */],
-    removeLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */]
+    removeLayer: __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__["l" /* VUEAFLET_REMOVE_MAP_LAYER */]
   }), Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapActions"])(['removeNamedLayer']), {
     initRoutine: function initRoutine() {
       var _this = this;
@@ -1527,7 +1501,7 @@ var LTileLayer = {
 
   methods: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapMutations"])({
     addLayer: __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
-    removeLayer: __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */]
+    removeLayer: __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__["l" /* VUEAFLET_REMOVE_MAP_LAYER */]
   }))
 };
 
@@ -1677,10 +1651,10 @@ var actions = {
     var commit = _ref5.commit;
 
     state.shapeLayers.forEach(function (layer) {
-      commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */], layer);
+      commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["l" /* VUEAFLET_REMOVE_MAP_LAYER */], layer);
     });
 
-    commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["l" /* VUEAFLET_PM_REMOVE_SHAPE_LAYERS */]);
+    commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["k" /* VUEAFLET_PM_REMOVE_SHAPE_LAYERS */]);
   },
   removeNamedLayer: function removeNamedLayer(_ref6, _ref7) {
     var commit = _ref6.commit;
@@ -1689,27 +1663,27 @@ var actions = {
 
     var layer = state.namedLayers[name];
 
-    commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */], { id: id, layer: layer });
-    commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["n" /* VUEAFLET_REMOVE_NAMED_LAYER */], name);
+    commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["l" /* VUEAFLET_REMOVE_MAP_LAYER */], { id: id, layer: layer });
+    commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["m" /* VUEAFLET_REMOVE_NAMED_LAYER */], name);
   },
   enableMapDrawing: function enableMapDrawing(_ref8) {
     var commit = _ref8.commit;
 
-    commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["k" /* VUEAFLET_PM_ENABLE_DRAW */]);
+    commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["j" /* VUEAFLET_PM_ENABLE_DRAW */]);
   },
   disableMapDrawing: function disableMapDrawing(_ref9) {
     var commit = _ref9.commit,
         dispatch = _ref9.dispatch;
 
     dispatch('removeShapeLayers').then(function () {
-      commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["j" /* VUEAFLET_PM_DISABLE_DRAW */]);
+      commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["i" /* VUEAFLET_PM_DISABLE_DRAW */]);
     });
   },
   destroyMap: function destroyMap(_ref10) {
     var commit = _ref10.commit;
     var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DEFAULT_MAP_ID;
 
-    commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["o" /* VUEAFLET_RESET */], id);
+    commit(__WEBPACK_IMPORTED_MODULE_4__mutation_types__["n" /* VUEAFLET_RESET */], id);
   }
 };
 
@@ -1720,7 +1694,7 @@ var mutations = (_mutations = {}, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_help
 
   state.maps[id] = __WEBPACK_IMPORTED_MODULE_2_leaflet___default.a.map(id, options);
   // state.maps[id].zoomControl.setPosition('bottomright');
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["p" /* VUEAFLET_SET_VIEW */], function (state, _ref12) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["o" /* VUEAFLET_SET_VIEW */], function (state, _ref12) {
   var _ref12$id = _ref12.id,
       id = _ref12$id === undefined ? DEFAULT_MAP_ID : _ref12$id,
       _ref12$config = _ref12.config,
@@ -1758,13 +1732,13 @@ var mutations = (_mutations = {}, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_help
 
     state.maps[id].addLayer(layer);
   }
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["m" /* VUEAFLET_REMOVE_MAP_LAYER */], function (state, _ref15) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["l" /* VUEAFLET_REMOVE_MAP_LAYER */], function (state, _ref15) {
   var _ref15$id = _ref15.id,
       id = _ref15$id === undefined ? DEFAULT_MAP_ID : _ref15$id,
       layer = _ref15.layer;
 
   state.maps[id].removeLayer(layer);
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["n" /* VUEAFLET_REMOVE_NAMED_LAYER */], function (state, name) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["m" /* VUEAFLET_REMOVE_NAMED_LAYER */], function (state, name) {
   __WEBPACK_IMPORTED_MODULE_1_vue___default.a.delete(state.namedLayers, name);
 }), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["a" /* VUEAFLET_ADD_MAP_EVENT */], function (state, _ref16) {
   var _ref16$id = _ref16.id,
@@ -1791,24 +1765,10 @@ var mutations = (_mutations = {}, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_help
 
 
   state.maps[id].setView(latlng, zoom, { pan: options });
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["h" /* VUEAFLET_PAN_TO_OFFSET */], function (state, _ref19) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["j" /* VUEAFLET_PM_ENABLE_DRAW */], function (state, _ref19) {
   var _ref19$id = _ref19.id,
       id = _ref19$id === undefined ? DEFAULT_MAP_ID : _ref19$id,
-      latlng = _ref19.latlng,
-      _ref19$zoom = _ref19.zoom,
-      zoom = _ref19$zoom === undefined ? state.maps[DEFAULT_MAP_ID]._zoom : _ref19$zoom,
-      offset = _ref19.offset,
-      options = _ref19.options;
-
-  var x = state.maps[id].latLngToContainerPoint(latlng).x - offset[0];
-  var y = state.maps[id].latLngToContainerPoint(latlng).y - offset[1];
-  var point = state.maps[id].containerPointToLatLng([x, y]);
-
-  state.maps[id].setView(point, zoom, { pan: options });
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["k" /* VUEAFLET_PM_ENABLE_DRAW */], function (state, _ref20) {
-  var _ref20$id = _ref20.id,
-      id = _ref20$id === undefined ? DEFAULT_MAP_ID : _ref20$id,
-      shape = _ref20.shape;
+      shape = _ref19.shape;
   var pm = state.maps[id].pm;
 
 
@@ -1816,10 +1776,10 @@ var mutations = (_mutations = {}, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_help
   pm.enableDraw(shape);
 
   state.shape = shape;
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["j" /* VUEAFLET_PM_DISABLE_DRAW */], function (state, _ref21) {
-  var _ref21$id = _ref21.id,
-      id = _ref21$id === undefined ? DEFAULT_MAP_ID : _ref21$id,
-      shape = _ref21.shape;
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["i" /* VUEAFLET_PM_DISABLE_DRAW */], function (state, _ref20) {
+  var _ref20$id = _ref20.id,
+      id = _ref20$id === undefined ? DEFAULT_MAP_ID : _ref20$id,
+      shape = _ref20.shape;
   var pm = state.maps[id].pm;
 
 
@@ -1827,11 +1787,11 @@ var mutations = (_mutations = {}, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_help
   pm.toggleGlobalRemovalMode();
 
   state.shape = null;
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["i" /* VUEAFLET_PM_ADD_SHAPE_LAYER */], function (state, layer) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["h" /* VUEAFLET_PM_ADD_SHAPE_LAYER */], function (state, layer) {
   state.shapeLayers.splice(state.shapeLayers.length, 0, layer);
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["l" /* VUEAFLET_PM_REMOVE_SHAPE_LAYERS */], function (state) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["k" /* VUEAFLET_PM_REMOVE_SHAPE_LAYERS */], function (state) {
   state.shapeLayers = [];
-}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["o" /* VUEAFLET_RESET */], function (state) {
+}), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_mutations, __WEBPACK_IMPORTED_MODULE_4__mutation_types__["n" /* VUEAFLET_RESET */], function (state) {
   var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DEFAULT_MAP_ID;
 
   state.maps[id] = {};
@@ -2152,11 +2112,11 @@ var render = function() {
       _vm._l(_vm.collection, function(features, index) {
         return [
           _c("l-geo-json-layer", {
-            key: _vm.getKey(features[0]),
+            key: index,
             attrs: {
               features: features,
-              options: _vm.getOptions(features[0].geometry.type),
-              "layer-name": _vm.layerName + "-" + features[0].geometry.type,
+              options: _vm.getOptions(_vm.getGeometryType(features)),
+              "layer-name": _vm.layerName + "-" + _vm.getGeometryType(features),
               order: _vm.order
             }
           })
