@@ -3,7 +3,7 @@
     <h2>Vueaflet GeoJsonCollection component.</h2>
     <p>The GeoJsonCollection component can take a mixed bag of geometry types and will create the respective GeoJsonLayers for each type. However, only accepts styles per goemetry type. Very useful when perform a query/find against a map service that return a "Feature Collection", but with multiple geo types.</p>
 
-    <l-map :map-id="mapId" v-on:click="handleClick">
+    <l-map :map-id="mapId">
       <l-tile-layer v-bind="tileLayer"/>
 
       <l-geo-json-collection
@@ -257,9 +257,6 @@
     },
 
     methods: {
-      handleClick(e) {
-        console.log(e)
-      },
       multiPolygonOptions(type) {
         let vm = this
 

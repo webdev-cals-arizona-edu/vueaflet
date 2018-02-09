@@ -4,8 +4,11 @@
     <example-two/>
     <example-three/>
     <example-four/>
+    <working-with-events/>
     <example-five/>
     <example-six/>
+
+    <readme-example/>
     <!-- <h1>From Store config</h1>
     <div class="example-map">
       <l-map map-id="storedMap"
@@ -38,8 +41,10 @@
   import ExampleTwo from 'components/Examples/MarkersCirclesPolygons'
   import ExampleThree from 'components/Examples/WorkingWithPopups'
   import ExampleFour from 'components/Examples/OtherVectorLayers'
+  import WorkingWithEvents from 'components/Examples/WorkingWithEvents'
   import ExampleFive from 'components/Examples/UsingGeoJson'
   import ExampleSix from 'components/Examples/VueafletGeoJsonCollection'
+  import ReadmeExample from 'components/Examples/ReadmeExample'
 
   export default {
     name: 'app',
@@ -49,8 +54,10 @@
       ExampleTwo,
       ExampleThree,
       ExampleFour,
+      WorkingWithEvents,
       ExampleFive,
-      ExampleSix
+      ExampleSix,
+      ReadmeExample
     },
 
     mounted() {},
@@ -85,11 +92,11 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    padding: 60px 0;
   }
 
   .example-map {
-    margin: 0 auto;
+    margin: 0 auto 50px;
     width: 500px;
     height: 100%;
   }

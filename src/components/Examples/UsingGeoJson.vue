@@ -3,7 +3,7 @@
     <h2>Using GeoJSON</h2>
     <p>Contains all the GeoJSON examples from the <a href="http://leafletjs.com/examples/geojson/" target="_blank">Leaflet documentation</a></p>
 
-    <l-map :map-id="mapId" v-on:click="handleClick">
+    <l-map :map-id="mapId">
       <l-tile-layer v-bind="tileLayer"/>
 
       <l-geo-json-layer layer-name="geojsonFeature" :features="geojsonFeature" :options="optionsForPopupFeatures"/>
@@ -164,9 +164,6 @@
     },
 
     methods: {
-      handleClick(e) {
-        console.log(e)
-      },
       onPopupFeature(feature, layer) {
         if (feature.properties && feature.properties.popupContent) {
           layer.bindPopup(feature.properties.popupContent);

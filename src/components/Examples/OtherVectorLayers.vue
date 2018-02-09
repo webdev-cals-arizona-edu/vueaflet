@@ -2,7 +2,7 @@
   <div class="example-map">
     <h2>Other vector layers</h2>
     <p>Reactangle (&lt;l-rectangle/&gt;), Polyline (&lt;l-polyline/&gt;), and MultiPolyline (&lt;l-polyline/&gt; but with multiPolyline options)</p>
-    <l-map :map-id="mapId" v-on:click="handleClick">
+    <l-map :map-id="mapId">
       <l-tile-layer v-bind="tileLayer"/>
       <l-rectangle v-bind="rectangleProps"/>
       <l-polyline v-bind="polylineProps"/>
@@ -61,12 +61,6 @@
 
     computed: {
       ...mapGetters(['getMap'])
-    },
-
-    methods: {
-      handleClick(e) {
-        console.log(e)
-      }
     }
   }
 </script>
