@@ -4,6 +4,7 @@ import {
   VUEAFLET_ADD_MAP_LAYER, 
   VUEAFLET_REMOVE_MAP_LAYER 
 } from '../store/mutation-types'
+import { VueafletBus } from '../buses'
 
 export default {
   inject: {
@@ -21,6 +22,11 @@ export default {
       type: Object,
       default: () => { return {} }
     },
+    events: {
+      type: Array,
+      default: () => { return [] }
+    },
+    enableBus: Boolean,
     popup: String
   },
 
@@ -40,9 +46,12 @@ export default {
   mounted() {
     this.addLayerToParent()
 
+    this.addEventListeners()
+
     this.popup && this.innerLayer.bindPopup(this.popup)
 
     this.$emit('ready', this.innerLayer)
+    this.enableBus && VueafletBus.$emit(`${this.type}-${this.mapId}-ready`, this.innerLayer)
   },
 
   destroyed() {
@@ -68,6 +77,13 @@ export default {
       this.parent
         ? this.parent.addLayer(this.innerLayer)
         : this.addLayer({ id: this.mapId, layer: this.innerLayer })
+    },
+    addEventListeners() {
+      // only $emit on the VueafletBus is flag is enabled
+      this.events.forEach((event) => {
+        this.innerLayer.on(event, (ev) => { this.$emit(event, { event: ev, layer: this.innerLayer }) })
+        this.enableBus && this.innerLayer.on(event, (ev) => { VueafletBus.$emit(`${this.type}-${this.mapId}-${event}`, { event: ev, layer: this.innerLayer }) })
+      })
     }
   }
 }

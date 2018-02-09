@@ -35,18 +35,6 @@
   } from '../../store/mutation-types'
   import forEach from 'lodash.forEach'
 
-  // TODO: figure out mouse events
-  const events = [
-    'load',
-    'click',
-    'dblclick',
-    'contextmenu',
-    'keypress',
-    'preclick',
-    'locationerror',
-    'locationfound'
-  ]
-
   let LMap = {
     name: 'l-map',
 
@@ -68,6 +56,11 @@
         type: Array,
         default: () => { return [] }
       },
+      events: {
+        type: Array,
+        default: () => { return [] }
+      },
+      enableBus: Boolean,
       mapId: {
         type: String,
         default: 'mainMap',
@@ -101,9 +94,19 @@
         VueafletBus.$emit(`map-${this.mapId}-ready`)
       })
 
-      events.forEach((event, index) => {
-        this.addEvent({ id: this.mapId, event, func: (ev) => { this.$emit(event, ev) } })
-        this.addEvent({ id: this.mapId, event, func: (ev) => { VueafletBus.$emit(`map-${this.mapId}-${event}`, ev) } })
+      // only $emit on the VueafletBus is flag is enabled
+      this.events.forEach((event, index) => {
+        this.addEvent({ 
+          id: this.mapId, 
+          event, 
+          func: (ev) => { this.$emit(event, ev) }
+        })
+        
+        this.enableBus && this.addEvent({
+          id: this.mapId,
+          event,
+          func: (ev) => { VueafletBus.$emit(`map-${this.mapId}-${event}`, ev) }
+        })
       })
     },
 

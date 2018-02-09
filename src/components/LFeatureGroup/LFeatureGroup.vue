@@ -18,11 +18,6 @@
   } from '../../store/mutation-types'
   import { layerTypeLookup } from '../../utils'
 
-  const events = [
-    'add',
-    'remove'
-  ]
-
   let LFeatureGroup = {
     name: 'l-feature-group',
 
@@ -44,7 +39,15 @@
     props: {
       layerName: String,
       layers: Array,
-      options: Object,
+      options: {
+        type: Object,
+        default: () => { return {} }
+      },
+      events: {
+        type: Array,
+        default: () => { return [] }
+      },
+      enableBus: Boolean,
       order: [String, Number]
     },
     
@@ -59,9 +62,19 @@
         ? this.addNamedLayer({ id: this.mapId, name: this.layerName, layer: this.innerFeatureGroup, order: this.order })
         : this.addLayer({ id: this.mapId, layer: this.innerFeatureGroup })
 
-      events.forEach((event) => {
-        this.innerFeatureGroup.on(event, (ev) => { this.$emit(event, this.innerFeatureGroup) })
-        this.innerFeatureGroup.on(event, (ev) => { VueafletBus.$emit(`feature-group-${this.mapId}-${event}`, this.innerFeatureGroup) })
+      // only $emit on the VueafletBus is flag is enabled
+      this.events.forEach((event) => {
+        this.innerFeatureGroup.on(event, (ev) => { 
+          this.$emit(event, { 
+            event: ev, layer: this.innerFeatureGroup 
+          }) 
+        })
+
+        this.enableBus && this.innerFeatureGroup.on(event, (ev) => {
+          VueafletBus.$emit(`feature-group-${this.mapId}-${event}`, {
+            event: ev, layer: this.innerFeatureGroup
+          })
+        })
       })
     },
 

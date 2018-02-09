@@ -10,12 +10,6 @@
     VUEAFLET_REMOVE_MAP_LAYER 
   } from '../../store/mutation-types'
 
-  const events = [
-    'add',
-    'remove',
-    'layeradd',
-    'layerremove'
-  ]
 
   delete Leaflet.Icon.Default.prototype._getIconUrl
   Leaflet.Icon.Default.mergeOptions({
@@ -44,6 +38,11 @@
         type: Array,
         default() { return [] }
       },
+      events: {
+        type: Array,
+        default: () => { return [] }
+      },
+      enableBus: Boolean,
       options: {
         type: Object,
         default() {
@@ -87,9 +86,19 @@
           ? this.addNamedLayer({ id: this.mapId, name: this.layerName, layer: this.innerGeoJSON, order: this.order })
           : this.addLayer({ id: this.mapId, layer: this.innerGeoJSON })
 
-        events.forEach((event) => {
-          this.innerGeoJSON.on(event, (ev) => { this.$emit(event, this.innerGeoJSON) })
-          this.innerGeoJSON.on(event, (ev) => { VueafletBus.$emit(`geo-json-${this.layerName}-${this.mapId}-${event}`, this.innerGeoJSON) })
+        this.events.forEach((event) => {
+          this.innerGeoJSON.on(event, (ev) => { 
+            this.$emit(event, { 
+              event: ev, layer: this.innerGeoJSON 
+            }) 
+          })
+
+          // only $emit on the VueafletBus is flag is enabled
+          this.enableBus && this.innerGeoJSON.on(event, (ev) => {
+            VueafletBus.$emit(`feature-group-${this.mapId}-${event}`, {
+              event: ev, layer: this.innerGeoJSON
+            })
+          })
         })
       },
       readyRoutine() {

@@ -190,24 +190,12 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VueafletBus; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-
-
-var VueafletBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/helpers/extends");
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -243,19 +231,21 @@ var VUEAFLET_RESET = 'VUEAFLET_RESET';
 var VUEAFLET_INVALIDATE = 'VUEAFLET_INVALIDATE';
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_leaflet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__buses__ = __webpack_require__(6);
+
 
 
 
@@ -280,6 +270,13 @@ var VUEAFLET_INVALIDATE = 'VUEAFLET_INVALIDATE';
         return {};
       }
     },
+    events: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    enableBus: Boolean,
     popup: String
   },
 
@@ -297,9 +294,12 @@ var VUEAFLET_INVALIDATE = 'VUEAFLET_INVALIDATE';
   mounted: function mounted() {
     this.addLayerToParent();
 
+    this.addEventListeners();
+
     this.popup && this.innerLayer.bindPopup(this.popup);
 
     this.$emit('ready', this.innerLayer);
+    this.enableBus && __WEBPACK_IMPORTED_MODULE_5__buses__["a" /* VueafletBus */].$emit(this.type + '-' + this.mapId + '-ready', this.innerLayer);
   },
   destroyed: function destroyed() {
     if (!this.parent) {
@@ -321,15 +321,40 @@ var VUEAFLET_INVALIDATE = 'VUEAFLET_INVALIDATE';
       this.parent = innerFeatureGroup;
 
       this.parent ? this.parent.addLayer(this.innerLayer) : this.addLayer({ id: this.mapId, layer: this.innerLayer });
+    },
+    addEventListeners: function addEventListeners() {
+      var _this = this;
+
+      // only $emit on the VueafletBus is flag is enabled
+      this.events.forEach(function (event) {
+        _this.innerLayer.on(event, function (ev) {
+          _this.$emit(event, { event: ev, layer: _this.innerLayer });
+        });
+        _this.enableBus && _this.innerLayer.on(event, function (ev) {
+          __WEBPACK_IMPORTED_MODULE_5__buses__["a" /* VueafletBus */].$emit(_this.type + '-' + _this.mapId + '-' + event, { event: ev, layer: _this.innerLayer });
+        });
+      });
     }
   })
 });
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports = require("vuex");
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VueafletBus; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+
+
+var VueafletBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 /***/ }),
 /* 7 */
@@ -388,16 +413,12 @@ module.exports = require("vue");
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_leaflet__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_leaflet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_LayerMixin__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__buses__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_LayerMixin__ = __webpack_require__(4);
 //
 //
 
 
 
-
-
-var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contextmenu', 'dragstart', 'drag', 'dragend', 'move', 'add', 'remove', 'popupopen', 'popupclose', 'tooltipopen', 'tooltipclose'];
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'l-circle',
@@ -416,19 +437,6 @@ var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contex
     latlng: function latlng(newArray) {
       this.innerLayer.setLatLng(newArray);
     }
-  },
-
-  mounted: function mounted() {
-    var _this = this;
-
-    events.forEach(function (event) {
-      _this.innerLayer.on(event, function (ev) {
-        _this.$emit(event, _this.innerLayer);
-      });
-      _this.innerLayer.on(event, function (ev) {
-        __WEBPACK_IMPORTED_MODULE_2__buses__["a" /* VueafletBus */].$emit(_this.type + '-' + _this.mapId + '-' + event, _this.innerLayer);
-      });
-    });
   }
 });
 
@@ -439,14 +447,14 @@ var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contex
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_leaflet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__buses__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__buses__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils__ = __webpack_require__(8);
 
 
@@ -465,8 +473,6 @@ var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contex
 
 
 
-
-var events = ['add', 'remove'];
 
 var LFeatureGroup = {
   name: 'l-feature-group',
@@ -491,7 +497,19 @@ var LFeatureGroup = {
   props: {
     layerName: String,
     layers: Array,
-    options: Object,
+    options: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    events: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    enableBus: Boolean,
     order: [String, Number]
   },
 
@@ -504,12 +522,18 @@ var LFeatureGroup = {
 
     this.layerName ? this.addNamedLayer({ id: this.mapId, name: this.layerName, layer: this.innerFeatureGroup, order: this.order }) : this.addLayer({ id: this.mapId, layer: this.innerFeatureGroup });
 
-    events.forEach(function (event) {
+    // only $emit on the VueafletBus is flag is enabled
+    this.events.forEach(function (event) {
       _this.innerFeatureGroup.on(event, function (ev) {
-        _this.$emit(event, _this.innerFeatureGroup);
+        _this.$emit(event, {
+          event: ev, layer: _this.innerFeatureGroup
+        });
       });
-      _this.innerFeatureGroup.on(event, function (ev) {
-        __WEBPACK_IMPORTED_MODULE_4__buses__["a" /* VueafletBus */].$emit('feature-group-' + _this.mapId + '-' + event, _this.innerFeatureGroup);
+
+      _this.enableBus && _this.innerFeatureGroup.on(event, function (ev) {
+        __WEBPACK_IMPORTED_MODULE_4__buses__["a" /* VueafletBus */].$emit('feature-group-' + _this.mapId + '-' + event, {
+          event: ev, layer: _this.innerFeatureGroup
+        });
       });
     });
   },
@@ -650,14 +674,14 @@ var LGeoJsonCollection = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_leaflet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__buses__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__buses__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store_mutation_types__ = __webpack_require__(3);
 
 
 //
@@ -667,8 +691,6 @@ var LGeoJsonCollection = {
 
 
 
-
-var events = ['add', 'remove', 'layeradd', 'layerremove'];
 
 delete __WEBPACK_IMPORTED_MODULE_2_leaflet___default.a.Icon.Default.prototype._getIconUrl;
 __WEBPACK_IMPORTED_MODULE_2_leaflet___default.a.Icon.Default.mergeOptions({
@@ -700,6 +722,13 @@ var LGeoJsonLayer = {
         return [];
       }
     },
+    events: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    enableBus: Boolean,
     options: {
       type: Object,
       default: function _default() {
@@ -734,12 +763,18 @@ var LGeoJsonLayer = {
 
       this.layerName ? this.addNamedLayer({ id: this.mapId, name: this.layerName, layer: this.innerGeoJSON, order: this.order }) : this.addLayer({ id: this.mapId, layer: this.innerGeoJSON });
 
-      events.forEach(function (event) {
+      this.events.forEach(function (event) {
         _this.innerGeoJSON.on(event, function (ev) {
-          _this.$emit(event, _this.innerGeoJSON);
+          _this.$emit(event, {
+            event: ev, layer: _this.innerGeoJSON
+          });
         });
-        _this.innerGeoJSON.on(event, function (ev) {
-          __WEBPACK_IMPORTED_MODULE_4__buses__["a" /* VueafletBus */].$emit('geo-json-' + _this.layerName + '-' + _this.mapId + '-' + event, _this.innerGeoJSON);
+
+        // only $emit on the VueafletBus is flag is enabled
+        _this.enableBus && _this.innerGeoJSON.on(event, function (ev) {
+          __WEBPACK_IMPORTED_MODULE_4__buses__["a" /* VueafletBus */].$emit('feature-group-' + _this.mapId + '-' + event, {
+            event: ev, layer: _this.innerGeoJSON
+          });
         });
       });
     },
@@ -1077,12 +1112,12 @@ function applyToTag (styleElement, obj) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__buses__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__buses__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_mutation_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_mutation_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash_forEach__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash_forEach___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash_forEach__);
 
@@ -1120,9 +1155,6 @@ function applyToTag (styleElement, obj) {
 
 
 
-// TODO: figure out mouse events
-var events = ['load', 'click', 'dblclick', 'contextmenu', 'keypress', 'preclick', 'locationerror', 'locationfound'];
-
 var LMap = {
   name: 'l-map',
 
@@ -1147,6 +1179,13 @@ var LMap = {
         return [];
       }
     },
+    events: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    enableBus: Boolean,
     mapId: {
       type: String,
       default: 'mainMap',
@@ -1181,13 +1220,23 @@ var LMap = {
       __WEBPACK_IMPORTED_MODULE_1__buses__["a" /* VueafletBus */].$emit('map-' + _this.mapId + '-ready');
     });
 
-    events.forEach(function (event, index) {
-      _this.addEvent({ id: _this.mapId, event: event, func: function func(ev) {
+    // only $emit on the VueafletBus is flag is enabled
+    this.events.forEach(function (event, index) {
+      _this.addEvent({
+        id: _this.mapId,
+        event: event,
+        func: function func(ev) {
           _this.$emit(event, ev);
-        } });
-      _this.addEvent({ id: _this.mapId, event: event, func: function func(ev) {
+        }
+      });
+
+      _this.enableBus && _this.addEvent({
+        id: _this.mapId,
+        event: event,
+        func: function func(ev) {
           __WEBPACK_IMPORTED_MODULE_1__buses__["a" /* VueafletBus */].$emit('map-' + _this.mapId + '-' + event, ev);
-        } });
+        }
+      });
     });
   },
 
@@ -1221,21 +1270,17 @@ var LMap = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_leaflet__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_leaflet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__buses__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mixins_LayerMixin__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_LayerMixin__ = __webpack_require__(4);
 //
 //
 
 
 
-
-
-var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contextmenu', 'dragstart', 'drag', 'dragend', 'move', 'add', 'remove', 'popupopen', 'popupclose', 'tooltipopen', 'tooltipclose'];
 
 var LMarker = {
   name: 'l-marker',
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_2_mixins_LayerMixin__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_1_mixins_LayerMixin__["a" /* default */]],
 
   data: function data() {
     return {
@@ -1270,19 +1315,6 @@ var LMarker = {
 
       deep: true
     }
-  },
-
-  mounted: function mounted() {
-    var _this = this;
-
-    events.forEach(function (event) {
-      _this.innerLayer.on(event, function (ev) {
-        _this.$emit(event, _this.innerLayer);
-      });
-      _this.innerLayer.on(event, function (ev) {
-        __WEBPACK_IMPORTED_MODULE_1__buses__["a" /* VueafletBus */].$emit(_this.type + '-' + _this.mapId + '-' + event, _this.innerLayer);
-      });
-    });
   }
 };
 
@@ -1295,16 +1327,12 @@ var LMarker = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_leaflet__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_leaflet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_LayerMixin__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__buses__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_LayerMixin__ = __webpack_require__(4);
 //
 //
 
 
 
-
-
-var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contextmenu', 'dragstart', 'drag', 'dragend', 'move', 'add', 'remove', 'popupopen', 'popupclose', 'tooltipopen', 'tooltipclose'];
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'l-polygon',
@@ -1323,19 +1351,6 @@ var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contex
     latlng: function latlng(newArray) {
       this.innerLayer.setLatLng(newArray);
     }
-  },
-
-  mounted: function mounted() {
-    var _this = this;
-
-    events.forEach(function (event) {
-      _this.innerLayer.on(event, function (ev) {
-        _this.$emit(event, _this.innerLayer);
-      });
-      _this.innerLayer.on(event, function (ev) {
-        __WEBPACK_IMPORTED_MODULE_2__buses__["a" /* VueafletBus */].$emit(_this.type + '-' + _this.mapId + '-' + event, _this.innerLayer);
-      });
-    });
   }
 });
 
@@ -1346,11 +1361,9 @@ var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contex
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_leaflet__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_leaflet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_LayerMixin__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__buses__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_LayerMixin__ = __webpack_require__(4);
 //
 //
-
 
 
 
@@ -1374,19 +1387,6 @@ var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contex
     latlng: function latlng(newArray) {
       this.innerLayer.setLatLng(newArray);
     }
-  },
-
-  mounted: function mounted() {
-    var _this = this;
-
-    events.forEach(function (event) {
-      _this.innerLayer.on(event, function (ev) {
-        _this.$emit(event, _this.innerLayer);
-      });
-      _this.innerLayer.on(event, function (ev) {
-        __WEBPACK_IMPORTED_MODULE_2__buses__["a" /* VueafletBus */].$emit(_this.type + '-' + _this.mapId + '-' + event, _this.innerLayer);
-      });
-    });
   }
 });
 
@@ -1397,11 +1397,9 @@ var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contex
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_leaflet__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_leaflet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_LayerMixin__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__buses__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mixins_LayerMixin__ = __webpack_require__(4);
 //
 //
-
 
 
 
@@ -1425,19 +1423,6 @@ var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contex
     latlng: function latlng(newArray) {
       this.innerLayer.setLatLng(newArray);
     }
-  },
-
-  mounted: function mounted() {
-    var _this = this;
-
-    events.forEach(function (event) {
-      _this.innerLayer.on(event, function (ev) {
-        _this.$emit(event, _this.innerLayer);
-      });
-      _this.innerLayer.on(event, function (ev) {
-        __WEBPACK_IMPORTED_MODULE_2__buses__["a" /* VueafletBus */].$emit(_this.type + '-' + _this.mapId + '-' + event, _this.innerLayer);
-      });
-    });
   }
 });
 
@@ -1446,14 +1431,13 @@ var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contex
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_leaflet__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_leaflet__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__buses__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vuex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuex__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_mutation_types__ = __webpack_require__(3);
 
 //
 //
@@ -1461,9 +1445,6 @@ var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contex
 
 
 
-
-
-// TODO: add events
 
 var LTileLayer = {
   name: 'l-tile-layer',
@@ -1499,9 +1480,9 @@ var LTileLayer = {
   },
 
 
-  methods: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["mapMutations"])({
-    addLayer: __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
-    removeLayer: __WEBPACK_IMPORTED_MODULE_4__store_mutation_types__["l" /* VUEAFLET_REMOVE_MAP_LAYER */]
+  methods: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["mapMutations"])({
+    addLayer: __WEBPACK_IMPORTED_MODULE_3__store_mutation_types__["b" /* VUEAFLET_ADD_MAP_LAYER */],
+    removeLayer: __WEBPACK_IMPORTED_MODULE_3__store_mutation_types__["l" /* VUEAFLET_REMOVE_MAP_LAYER */]
   }))
 };
 
@@ -1514,12 +1495,12 @@ var LTileLayer = {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVueafletStore", function() { return createVueafletStore; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_utils__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store_modules_vueaflet__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__buses__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__buses__ = __webpack_require__(6);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "VueafletBus", function() { return __WEBPACK_IMPORTED_MODULE_4__buses__["a"]; });
 
 
@@ -1568,7 +1549,7 @@ module.exports = require("babel-runtime/core-js/object/keys");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_leaflet__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_leaflet_pm__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_leaflet_pm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_leaflet_pm__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mutation_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mutation_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_filter__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash_filter__);
 

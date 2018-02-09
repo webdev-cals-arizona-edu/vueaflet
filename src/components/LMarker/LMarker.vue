@@ -2,27 +2,7 @@
 
 <script>
   import Leaflet from 'leaflet'
-  import { VueafletBus } from '../../buses'
   import LayerMixin from 'mixins/LayerMixin'
-
-  const events = [
-    'click',
-    'dblclick',
-    'mousedown',
-    'mouseover',
-    'mouseout',
-    'contextmenu',
-    'dragstart',
-    'drag',
-    'dragend',
-    'move',
-    'add',
-    'remove',
-    'popupopen',
-    'popupclose',
-    'tooltipopen',
-    'tooltipclose'
-  ]
 
   let LMarker = {
     name: 'l-marker',
@@ -61,13 +41,6 @@
         },
         deep: true
       }
-    },
-
-    mounted() {
-      events.forEach((event) => {
-        this.innerLayer.on(event, (ev) => { this.$emit(event, this.innerLayer) })
-        this.innerLayer.on(event, (ev) => { VueafletBus.$emit(`${this.type}-${this.mapId}-${event}`, this.innerLayer) })
-      })
     }
   }
 

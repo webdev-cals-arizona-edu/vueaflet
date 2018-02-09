@@ -323,11 +323,11 @@ multiPolylineProps: {
 ----------
 
 ### Events
-Common events are emitted from each layer and available on a global `bus` called `VueafletBus`. Please look at the source code for each layer component to find out which events are currently supported. Documentation for `VueafletBus` coming soon. Here are a couple examples:
+Pass in an array events (as strings) that are supported by the layer type. See [Leaflets docs](http://leafletjs.com/reference-1.3.0.html) for events. There is a "ready" event that is handle by Vueaflet for you :). Each Leaflet supported event `$emits` back an `{ event, layer }` object:
 ```
 <template>
   <div class="map-container">
-    <l-map :mapId="mapId" v-on:click="handleMapClick">
+    <l-map :mapId="mapId" :events="['click']" v-on:click="handleMapClick">
       ...
       
       <l-marker v-bind="dragMarkerProps"
@@ -365,13 +365,15 @@ Common events are emitted from each layer and available on a global `bus` called
       handleMarkerReady(marker) {
         marker.bindPopup('Drag me!').openPopup()
       },
-      handleMarkerDragEnd(marker) {
-        alert(`Marker dragged to: ${marker.getLatLng()}`)
+      handleMarkerDragEnd({ event, layer }) {
+        alert(`Marker dragged to: ${layer.getLatLng()}`)
       }
     }
   }
 </script>
 ```
+Additionaly, you can pass a boolean prop called `enabled-bus` which will also attach each event passed in the array of events to a global `VueafletBus`. More on that soon...
+
 Couple of things to note:
 
  - `v-on:ready` occurs on all layers, custom to Vueaflet
@@ -385,11 +387,12 @@ Wrap the layers we created in previous examples in the `<l-feature-group/>` comp
 ```
 <template>
   <div class="map-container">
-    <l-map :mapId="mapId" v-on:click="handleMapClick">
+    <l-map :mapId="mapId" :events="['click']" v-on:click="handleMapClick">
       <l-tile-layer v-bind="tileLayer"/>
       
       <!-- leave a few layers out of the feature group, for fun! -->
     <l-marker v-bind="dragMarkerProps"
+          :events="['dragend']"
           v-on:ready="handleMarkerReady"
           v-on:dragend="handleMarkerDragEnd"/>
       <l-rectangle v-bind="rectangleProps"/>
@@ -411,7 +414,7 @@ Now you can toggle that feature layer without using `Leaflet.control`:
 ```
 <template>
   <div class="map-container">
-    <l-map :mapId="mapId" v-on:click="handleMapClick">
+    <l-map :mapId="mapId" :events="['click']" v-on:click="handleMapClick">
       <l-tile-layer v-bind="tileLayer"/>
 
       <l-feature-group v-if="toggleFeatureGroup" layer-name="featureGroup">
@@ -498,7 +501,7 @@ Meanwhile in the other component:
 ```
 <template>
   <div class="map-container">
-    <l-map :mapId="mapId" v-on:click="handleMapClick">
+    <l-map :mapId="mapId" :events="['click']" v-on:click="handleMapClick">
       ...
     </l-map>
 

@@ -2,11 +2,8 @@
 
 <script>
   import Leaflet from 'leaflet'
-  import { VueafletBus } from '../../buses'
   import { mapMutations } from 'vuex'
   import { VUEAFLET_ADD_MAP_LAYER, VUEAFLET_REMOVE_MAP_LAYER } from '../../store/mutation-types'
-
-  // TODO: add events
 
   let LTileLayer = {
     name: 'l-tile-layer',
