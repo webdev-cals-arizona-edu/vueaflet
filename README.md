@@ -16,6 +16,9 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. Each
    - [Manage your layers using Vuex](#manage-your-layers-using-vuex)
  - [More Code Examples Here](https://github.com/webdev-cals-arizona-edu/vueaflet/tree/master/src/components/Examples)
 
+### Demos
+[Demo for all code exmamples in /src/components/Examples]https://cct.cals.arizona.edu/vueaflet/
+
 ### Features not documented
 
  - Layers
