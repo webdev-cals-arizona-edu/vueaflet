@@ -7,6 +7,10 @@
       <l-circle v-bind="circleProps" popup="I am a circle."/>
       <l-polygon v-bind="polygonProps" popup="I am a polygon."/>
     </l-map>
+
+    <p>
+      <a href="https://github.com/webdev-cals-arizona-edu/vueaflet/blob/master/src/components/Examples/WorkingWithPopups.vue" target="_blank" rel="noopener">Code on Github</a>
+    </p>
   </div>
 </template>
 

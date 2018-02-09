@@ -25,6 +25,10 @@
       <span>Marker Drags: {{ markerDrags }}</span>
       <span>Circle Popup: {{ circlePopups }}</span>
     </div>
+
+    <p>
+      <a href="https://github.com/webdev-cals-arizona-edu/vueaflet/blob/master/src/components/Examples/WorkingWithEvents.vue" target="_blank" rel="noopener">Code on Github</a>
+    </p>
   </div>
 </template>
 

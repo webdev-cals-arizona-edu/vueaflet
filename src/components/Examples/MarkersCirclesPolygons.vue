@@ -9,6 +9,9 @@
       <l-rectangle v-bind="rectangleProps"/>
       <l-polyline v-bind="polylineProps"/>
     </l-map>
+    <p>
+      <a href="https://github.com/webdev-cals-arizona-edu/vueaflet/blob/master/src/components/Examples/MarkersCirclesPolygons.vue" target="_blank" rel="noopener">Code on Github</a>
+    </p>
   </div>
 </template>
 

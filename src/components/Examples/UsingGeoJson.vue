@@ -12,6 +12,10 @@
       <l-geo-json-layer layer-name="pointToLayer" :features="someGeojsonFeature" :options="optionsForPointToLayer"/>
       <l-geo-json-layer layer-name="filterFeatures" :features="filterFeatures" :options="optionsForFilter"/>
     </l-map>
+
+    <p>
+      <a href="https://github.com/webdev-cals-arizona-edu/vueaflet/blob/master/src/components/Examples/UsingGeoJson.vue" target="_blank" rel="noopener">Code on Github</a>
+    </p>
   </div>
 </template>
 
