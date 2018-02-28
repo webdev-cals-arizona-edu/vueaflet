@@ -32,7 +32,6 @@ export default {
 
   data() {
     return {
-      innerLayer: null,
       parent: null,
       mergedOptions: null
     }

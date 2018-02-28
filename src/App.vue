@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <h1>Vueaflet</h1>
+    <a href="https://github.com/webdev-cals-arizona-edu/vueaflet" target="_blank" rel="noopener">Github</a>
+    <a href="https://www.npmjs.com/package/vueaflet" target="_blank" rel="noopener">NPM</a>
     <example-one/>
     <example-two/>
     <example-three/>

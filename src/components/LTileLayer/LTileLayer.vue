@@ -24,12 +24,6 @@
       }
     },
 
-    data() {
-      return {
-        innerLayer: null
-      }
-    },
-
     created() {
       this.innerLayer = Leaflet.tileLayer(this.urlTemplate, this.options)
 

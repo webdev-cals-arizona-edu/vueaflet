@@ -6,7 +6,7 @@
       <l-tile-layer v-bind="tileLayer"/>
       <l-marker v-bind="dragMarkerProps"
           :events="['dragend']"
-          v-on:ready="handleMarkerReady"
+          v-on:ready="handleDragMarkerReady"
           v-on:dragend="handleMarkerDragEnd"/>
       <l-rectangle v-bind="rectangleProps"/>
       <l-polyline v-bind="polylineProps"/>
@@ -20,6 +20,7 @@
     </l-map>
 
     <button @click.prevent="toggleFeatureGroup = !toggleFeatureGroup">Toggle Feature Group</button>
+    <button @click.prevent="handleDisableDragMarker">Toggle drag marker</button>
     <mock-controls/>
 
     <p>
@@ -105,11 +106,14 @@
       handleMapClick(e) {
         alert(e.latlng)
       },
-      handleMarkerReady(marker) {
+      handleDragMarkerReady(marker) {
         marker.bindPopup('Drag me!').openPopup()
       },
       handleMarkerDragEnd({ event, layer }) {
         alert(`Marker dragged to: ${layer.getLatLng()}`)
+      },
+      handleDisableDragMarker() {
+        this.dragMarkerProps.options.draggable = !this.dragMarkerProps.options.draggable
       }
     }
   }

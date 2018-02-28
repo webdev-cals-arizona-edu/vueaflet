@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Leaflet from 'leaflet'
-import 'leaflet.pm'
+// TODO figure out better impementation of Leaflet.PM
+// import 'leaflet.pm'
 // import 'leaflet.pm/dist/leaflet.pm.css' // TODO: this will need to be included when people use library
 import { 
   VUEAFLET_CREATE_MAP,
