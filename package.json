@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "leaflet": "^1.2.0",
-    "leaflet.pm": "^0.23.0",
     "lodash.filter": "^4.6.0",
     "lodash.foreach": "^4.5.0",
     "lodash.reduce": "^4.6.0",
