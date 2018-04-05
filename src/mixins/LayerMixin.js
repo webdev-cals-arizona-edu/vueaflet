@@ -43,9 +43,8 @@ export default {
   },
 
   mounted() {
-    this.addLayerToParent()
-
     this.addEventListeners()
+    this.addLayerToParent()
 
     this.popup && this.innerLayer.bindPopup(this.popup)
 

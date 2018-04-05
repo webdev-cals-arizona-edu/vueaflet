@@ -11,7 +11,8 @@
         :features="featureCollection"
         :multipolygon-options="multiPolygonOptions"
         :point-options="pointOptions"
-        :linestring-options="lineStringOptions"/>  
+        :linestring-options="lineStringOptions"
+        v-on:ready="handleReady"/>  
     </l-map>
 
     <p>
@@ -261,6 +262,9 @@
     },
 
     methods: {
+      handleReady(layers) {
+        console.log(layers)
+      },
       multiPolygonOptions(type) {
         let vm = this
 

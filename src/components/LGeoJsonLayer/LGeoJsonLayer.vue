@@ -82,10 +82,6 @@
             Object.assign({}, this.options, { pane: this.layerName })
           )
 
-        this.layerName
-          ? this.addNamedLayer({ id: this.mapId, name: this.layerName, layer: this.innerGeoJSON, order: this.order })
-          : this.addLayer({ id: this.mapId, layer: this.innerGeoJSON })
-
         this.events.forEach((event) => {
           this.innerGeoJSON.on(event, (ev) => { 
             this.$emit(event, { 
@@ -95,11 +91,15 @@
 
           // only $emit on the VueafletBus is flag is enabled
           this.enableBus && this.innerGeoJSON.on(event, (ev) => {
-            VueafletBus.$emit(`feature-group-${this.mapId}-${event}`, {
+            VueafletBus.$emit(`geo-json-${this.mapId}-${event}`, {
               event: ev, layer: this.innerGeoJSON
             })
           })
         })
+
+        this.layerName
+          ? this.addNamedLayer({ id: this.mapId, name: this.layerName, layer: this.innerGeoJSON, order: this.order })
+          : this.addLayer({ id: this.mapId, layer: this.innerGeoJSON })
       },
       readyRoutine() {
         this.$emit('ready', this.layerName)

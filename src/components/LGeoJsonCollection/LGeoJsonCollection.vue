@@ -5,6 +5,8 @@
       <l-geo-json-layer :features="features" 
         :options="getOptions(getGeometryType(features))" 
         :layer-name="`${layerName}-${getGeometryType(features)}`" 
+        :events="['add']"
+        v-on:add="handleAddedToMap"
         :key="index"
         :order="order"/>
     </template>
@@ -30,7 +32,8 @@
 
     data() {
       return {
-        collection: []
+        collection: [],
+        geoJsonLayers: [] 
       }
     },
 
@@ -86,6 +89,13 @@
       },
       getOptions(type) {
         return this[`${type.toLowerCase()}Options`](type) || {}
+      },
+      handleAddedToMap(obj) {
+        this.geoJsonLayers.push(obj.layer)
+
+        if(this.geoJsonLayers.length === this.collection.length) {
+          this.$emit('ready', this.geoJsonLayers)
+        }
       }
     }
   }
