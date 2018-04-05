@@ -19,7 +19,7 @@
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
     "build": "node build/build.js",
-    "build:npm": "rimraf ./dist && webpack --config ./build/webpack.package.conf.js"
+    "build:npm": "rimraf ./dist && webpack -p --config ./build/webpack.package.conf.js"
   },
   "dependencies": {
     "leaflet": "^1.2.0",
