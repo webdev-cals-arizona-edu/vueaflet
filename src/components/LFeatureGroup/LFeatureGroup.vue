@@ -58,10 +58,6 @@
         ? existingFeatureGroup
         : Leaflet.featureGroup()
 
-      this.layerName
-        ? this.addNamedLayer({ id: this.mapId, name: this.layerName, layer: this.innerFeatureGroup, order: this.order })
-        : this.addLayer({ id: this.mapId, layer: this.innerFeatureGroup })
-
       // only $emit on the VueafletBus is flag is enabled
       this.events.forEach((event) => {
         this.innerFeatureGroup.on(event, (ev) => { 
@@ -76,6 +72,10 @@
           })
         })
       })
+
+      this.layerName
+        ? this.addNamedLayer({ id: this.mapId, name: this.layerName, layer: this.innerFeatureGroup, order: this.order })
+        : this.addLayer({ id: this.mapId, layer: this.innerFeatureGroup })
     },
 
     mounted() {

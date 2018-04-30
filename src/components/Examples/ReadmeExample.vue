@@ -12,7 +12,10 @@
       <l-polyline v-bind="polylineProps"/>
       <l-polyline v-bind="multiPolylineProps"/>
 
-      <l-feature-group v-if="toggleFeatureGroup" layer-name="featureGroup">
+      <l-feature-group v-if="toggleFeatureGroup" 
+        :events="['add']"
+        layer-name="featureGroup" 
+        v-on:add="handlFeatureGroupAdd">
         <l-marker v-bind="markerProps" popup="Hello. I am a marker."/>
         <l-circle v-bind="circleProps" popup="Hello. I am a circle."/>
         <l-polygon v-bind="polygonProps" popup="Hello. I am a polygon."/>
@@ -114,6 +117,9 @@
       },
       handleDisableDragMarker() {
         this.dragMarkerProps.options.draggable = !this.dragMarkerProps.options.draggable
+      },
+      handlFeatureGroupAdd(e) {
+        console.log(e)
       }
     }
   }
