@@ -18,11 +18,12 @@
         v-on:add="handlFeatureGroupAdd">
         <l-marker v-bind="markerProps" popup="Hello. I am a marker."/>
         <l-circle v-bind="circleProps" popup="Hello. I am a circle."/>
-        <l-polygon v-bind="polygonProps" popup="Hello. I am a polygon."/>
+        <l-polygon v-bind="polygonProps" popup="Hello. I am a polygon." v-if="togglePolygonChildOfGroup"/>
       </l-feature-group>
     </l-map>
 
     <button @click.prevent="toggleFeatureGroup = !toggleFeatureGroup">Toggle Feature Group</button>
+    <button @click.prevent="togglePolygonChildOfGroup = !togglePolygonChildOfGroup">Toggle Polygon Child of Group</button>
     <button @click.prevent="handleDisableDragMarker">Toggle drag marker</button>
     <mock-controls/>
 
@@ -49,6 +50,7 @@
       return {
         mapId: 'exampleMap',
         toggleFeatureGroup: true,
+        togglePolygonChildOfGroup: true,
         tileLayer: {
           urlTemplate: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}?access_token={accessToken}',
           options: {

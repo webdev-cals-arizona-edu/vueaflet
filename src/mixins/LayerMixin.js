@@ -53,9 +53,9 @@ export default {
   },
 
   destroyed() {
-    if (!this.parent) {
-      this.removeLayer({ id: this.mapId, layer: this.innerLayer })
-    }
+    this.parent
+      ? this.parent.removeLayer(this.innerLayer)
+      : this.removeLayer({ id: this.mapId, layer: this.innerLayer })
   },
 
   methods: {
