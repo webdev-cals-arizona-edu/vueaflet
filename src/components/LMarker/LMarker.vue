@@ -35,11 +35,8 @@
           ? this.innerLayer.dragging.enable()
           : this.innerLayer.dragging.disable()
       },
-      'options.icon': {
-        handler(icon) {
-          this.innerLayer.setIcon(icon)
-        },
-        deep: true
+      'options.icon'(icon) {
+        this.innerLayer.setIcon(icon)
       }
     }
   }

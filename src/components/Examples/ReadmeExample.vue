@@ -16,7 +16,7 @@
         :events="['add']"
         layer-name="featureGroup" 
         v-on:add="handlFeatureGroupAdd">
-        <l-marker v-bind="markerProps" popup="Hello. I am a marker."/>
+        <l-marker v-bind="markerProps"/>
         <l-circle v-bind="circleProps" popup="Hello. I am a circle."/>
         <l-polygon v-bind="polygonProps" popup="Hello. I am a polygon." v-if="togglePolygonChildOfGroup"/>
       </l-feature-group>
@@ -25,6 +25,7 @@
     <button @click.prevent="toggleFeatureGroup = !toggleFeatureGroup">Toggle Feature Group</button>
     <button @click.prevent="togglePolygonChildOfGroup = !togglePolygonChildOfGroup">Toggle Polygon Child of Group</button>
     <button @click.prevent="handleDisableDragMarker">Toggle drag marker</button>
+    <button @click.prevent="handleMarkerClick">Toggle marker icon</button>
     <mock-controls/>
 
     <p>
@@ -36,6 +37,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import MockControls from './MockControls'
+  import Leaflet from 'leaflet'
 
   export default {
     components: {
@@ -49,6 +51,7 @@
     data() {
       return {
         mapId: 'exampleMap',
+        markerClicks: 0,
         toggleFeatureGroup: true,
         togglePolygonChildOfGroup: true,
         tileLayer: {
@@ -64,7 +67,11 @@
           latlng: [51.488224, -0.090208],
           options: { draggable: true }
         },
-        markerProps: { latlng: [51.5, -0.09] },
+        markerProps: { 
+          popup: 'Hello. I am a marker.',
+          latlng: [51.5, -0.09],
+          options: {}
+        },
         circleProps: {
           latlng: [51.508, -0.11],
           options: {
@@ -91,7 +98,7 @@
         },
         rectangleProps: {
           latlng: [[51.496, -0.115], [51.489, -0.102]],
-          options: {color: "#ff7800", weight: 1}
+          options: { color: "#ff7800", weight: 1 }
         },
         multiPolylineProps: {
           latlng: [
@@ -110,6 +117,34 @@
     methods: {
       handleMapClick(e) {
         alert(e.latlng)
+      },
+      handleMarkerClick() {
+        this.markerClicks = this.markerClicks + 1
+
+        if (this.markerClicks % 2 === 0) {
+          this.markerProps.options = Object.assign({}, this.markerProps.options, {
+            icon: Leaflet.icon({
+              iconUrl: 'https://esri.github.io/esri-leaflet/img/bus-stop-west.png',
+              iconSize: [25, 41],
+              shadowSize: [41, 41],
+              iconAnchor: [12.5, 41],
+              shadowAnchor: [13.1, 41],
+              popupAnchor: [2, -33]
+            })
+          })
+        } else {
+          this.markerProps.options = Object.assign({}, this.markerProps.options, {
+            icon: Leaflet.icon({
+              iconUrl: require('leaflet/dist/images/marker-icon.png'),
+              shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+              iconSize: [25, 41],
+              shadowSize: [41, 41],
+              iconAnchor: [12.5, 41],
+              shadowAnchor: [13.1, 41],
+              popupAnchor: [2, -33]
+            })
+          })
+        }
       },
       handleDragMarkerReady(marker) {
         marker.bindPopup('Drag me!').openPopup()
