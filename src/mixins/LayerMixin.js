@@ -43,6 +43,7 @@ export default {
   },
 
   mounted() {
+    // setup listeners
     this.addEventListeners()
     this.addLayerToParent()
 
