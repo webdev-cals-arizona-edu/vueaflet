@@ -40,6 +40,8 @@
 
     provide() {
       return {
+        // this will get injected into all children
+        // when groupds and layers are created, this id gets passed to the vueaflet store to in form it where to "addLayer"
         mapId: this.mapId
       }
     },
@@ -91,6 +93,7 @@
       }).then(() => {
         this.ready = true
         this.$emit('ready')
+        // TODO: added enable bus
         VueafletBus.$emit(`map-${this.mapId}-ready`)
       })
 

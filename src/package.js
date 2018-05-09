@@ -9,6 +9,9 @@ const createInstaller = (components) => (Vue, options) => {
 }
 
 const createVueaflet = () => { 
+  // https://vuejs.org/v2/guide/plugins.html
+  // Vue plugins, at minimum, need to return an object with an install function
+  // createInstaller is a double arrow function; returns another function, creates a closure over imported components
   return { install: createInstaller(components) }
 }
 

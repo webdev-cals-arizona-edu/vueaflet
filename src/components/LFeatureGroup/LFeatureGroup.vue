@@ -32,21 +32,26 @@
     data() {
       return {
         layerTypeLookup,
+        // TODO: move this to root instance
         innerFeatureGroup: null
       }
     },
     
     props: {
+      // optional layerName becomes key in $store.state.vueaflet.namedLayers
       layerName: String,
       layers: Array,
+      // https://leafletjs.com/reference-1.3.0.html#featuregroup
       options: {
         type: Object,
         default: () => { return {} }
       },
+      // https://leafletjs.com/reference-1.3.0.html#featuregroup
       events: {
         type: Array,
         default: () => { return [] }
       },
+      // this prop enables VueafletBus which broadcasts all data.events across the app
       enableBus: Boolean,
       order: [String, Number]
     },
@@ -58,7 +63,6 @@
         ? existingFeatureGroup
         : Leaflet.featureGroup()
 
-      // only $emit on the VueafletBus is flag is enabled
       this.events.forEach((event) => {
         this.innerFeatureGroup.on(event, (ev) => { 
           this.$emit(event, { 
@@ -66,6 +70,7 @@
           }) 
         })
 
+        // only $emit on the VueafletBus is flag is enabled
         this.enableBus && this.innerFeatureGroup.on(event, (ev) => {
           VueafletBus.$emit(`feature-group-${this.mapId}-${event}`, {
             event: ev, layer: this.innerFeatureGroup
@@ -100,6 +105,8 @@
         removeLayer: VUEAFLET_REMOVE_MAP_LAYER
       }),
       ...mapActions(['removeNamedLayer']),
+      // LFeatureGroup takes advantage of registerOptions in order to set a custom Leaflet pane named after this.layerName
+      // this.layerName cannot be passed down to children or it would prevent future functionalily of named layers for UI elements
       registerOptions(options) {
         return Object.assign({}, options, {
           pane: (this.layerName) ? this.layerName : null,

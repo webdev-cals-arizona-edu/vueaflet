@@ -75,6 +75,8 @@
       initRoutine() {
         let existingLayer = this.getNamedLayer(this.layerName)
 
+        // if layer already exists, use L.geoJSON.addData method
+        // see https://leafletjs.com/reference-1.3.0.html#geojson
         this.innerGeoJSON = (existingLayer)
           ? existingLayer.addData(this.features)
           : Leaflet.geoJSON(

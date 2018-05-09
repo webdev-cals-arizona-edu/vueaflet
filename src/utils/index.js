@@ -16,6 +16,7 @@ export function layerTypeLookup(type) {
   return layerTypes[type]
 }
 
+// globally registers components
 export const registerComponents = (Vue, components) => {
   if (!Vue || !components) throw new Error('[registerComponents] missing params')
     
