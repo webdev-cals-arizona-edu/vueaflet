@@ -15,7 +15,7 @@
       <l-feature-group v-if="toggleFeatureGroup" 
         :events="['add']"
         layer-name="featureGroup" 
-        v-on:add="handlFeatureGroupAdd">
+        v-on:add="handleFeatureGroupAdd">
         <l-marker v-bind="markerProps"/>
         <l-circle v-bind="circleProps" popup="Hello. I am a circle."/>
         <l-polygon v-bind="polygonProps" popup="Hello. I am a polygon." v-if="togglePolygonChildOfGroup"/>
@@ -155,7 +155,7 @@
       handleDisableDragMarker() {
         this.dragMarkerProps.options.draggable = !this.dragMarkerProps.options.draggable
       },
-      handlFeatureGroupAdd(e) {
+      handleFeatureGroupAdd(e) {
         console.log(e)
       }
     }
