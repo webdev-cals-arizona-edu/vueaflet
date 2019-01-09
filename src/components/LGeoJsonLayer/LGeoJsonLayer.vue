@@ -81,7 +81,7 @@
           ? existingLayer.addData(this.features)
           : Leaflet.geoJSON(
             this.features,
-            Object.assign({}, this.options, { pane: this.layerName })
+            {...this.options, ...{ pane: this.layerName }}
           )
 
         this.events.forEach((event) => {

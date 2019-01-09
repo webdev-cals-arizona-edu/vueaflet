@@ -108,10 +108,10 @@
       // LFeatureGroup takes advantage of registerOptions in order to set a custom Leaflet pane named after this.layerName
       // this.layerName cannot be passed down to children or it would prevent future functionalily of named layers for UI elements
       registerOptions(options) {
-        return Object.assign({}, options, {
+        return {...options, ...{
           pane: (this.layerName) ? this.layerName : null,
           ...this.options
-        })
+        }}
       }
     }
   }
