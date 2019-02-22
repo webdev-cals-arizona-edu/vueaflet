@@ -1,0 +1,11 @@
+-- Finish this tutorial https://medium.com/justfrontendthings/how-to-create-and-publish-your-own-vuejs-component-library-on-npm-using-vue-cli-28e60943eed3
+-- Change "main" in package.json in each package to point to dist
+-- Create example projects for both Vueaflet and EsriVueaflet in the projects folder
+
+Notes:
+* list projects in lerna.json
+* list projects in package.json
+* userWOrkspaces in lerna.json
+* user lerna add to use sibling packages when creating a new project
+* add sourceType: 'unambiguous' to each projects babel.config.js
+* lerna add @vueaflet/esri --scope=esri-vueaflet-example - scope ensure it is only added to a project with package.json with that name
