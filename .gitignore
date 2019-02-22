@@ -2,8 +2,8 @@
 node_modules
 !/projects/
 /projects/*
-!/projects/esri-vueaflet-example/
-!/projects/vueaflet-example/
+!/projects/esri-vueaflet-example/*
+!/projects/vueaflet-example/*
 /dist
 robots.txt
 
