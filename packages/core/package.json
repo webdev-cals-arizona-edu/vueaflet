@@ -1,0 +1,47 @@
+{
+  "name": "@vueaflet/core",
+  "version": "1.0.0",
+  "description": "A component driven approach to managing Leaflet objects using Vue and Vuex.",
+  "main": "dist/vueaflet.common.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webdev-cals-arizona-edu/vueaflet"
+  },
+  "author": {
+    "name": "CALS CCT",
+    "email": "webdev@cals.arizona.edu"
+  },
+  "license": "MIT",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build-bundle": "vue-cli-service build --target lib --name vueaflet './src/main.js'",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "dependencies": {
+    "leaflet": "^1.4.0",
+    "lodash.filter": "^4.6.0",
+    "lodash.foreach": "^4.5.0",
+    "lodash.reduce": "^4.6.0",
+    "lodash.values": "^4.3.0",
+    "vue": "^2.6.4",
+    "vuex": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.1.1",
+    "@vue/cli-plugin-eslint": "^3.1.1",
+    "@vue/cli-plugin-unit-jest": "^3.1.1",
+    "@vue/cli-service": "^3.1.1",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.5.21",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "gitHead": "116644517c4bf2de75c805205a6a267948af0645"
+}
