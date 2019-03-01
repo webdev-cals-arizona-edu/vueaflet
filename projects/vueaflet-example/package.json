@@ -1,6 +1,6 @@
 {
   "name": "vueaflet-example",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,8 +9,8 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@vueaflet/core": "^1.0.0",
-    "@vueaflet/esri": "^1.0.0",
+    "@vueaflet/core": "^1.0.1",
+    "@vueaflet/esri": "^1.0.1",
     "vue": "^2.5.22",
     "vuex": "^3.0.1"
   },
