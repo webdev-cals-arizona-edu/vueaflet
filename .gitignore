@@ -1,10 +1,23 @@
 .DS_Store
-node_modules/
+node_modules
+!/projects/
+/projects/*
+!/projects/esri-vueaflet-example/
+!/projects/vueaflet-example/
+/dist
+robots.txt
+
+/tests/e2e/reports/
+selenium-debug.log
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/test/unit/coverage/
-public/
 
 # Editor directories and files
 .idea
@@ -13,5 +26,4 @@ public/
 *.ntvs*
 *.njsproj
 *.sln
-
-*.tgz
+*.sw*

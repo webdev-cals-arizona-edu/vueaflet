@@ -52,7 +52,7 @@ Assuming you are using a `vue-cli` template, your `src/main.js` will look someth
 import Vue from 'vue'
 import App from './App'
 import store from 'store'
-import Vueaflet from 'vueaflet'
+import Vueaflet from '@vueaflet/core'
 
 Vue.use(Vueaflet)
 
@@ -67,7 +67,7 @@ This library relies on Vuex in order to store your Leaflet objects. In your `sto
 ```
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { createVueafletStore } from 'vueaflet'
+import { createVueafletStore } from '@vueaflet/core'
 
 const VueafletStore = createVueafletStore()
 
@@ -375,7 +375,7 @@ Pass in an array events (as strings) that are supported by the layer type. See [
   }
 </script>
 ```
-Additionaly, you can pass a boolean prop called `enabled-bus` which will also attach each event passed in the array of events to a global `VueafletBus`. More on that soon...
+Additionaly, you can pass a boolean prop called `enabled-bus` which will also attach each event passed in the array of events to property attached to each component as `this.$vueafletBus`. More on that soon...
 
 Couple of things to note:
 
