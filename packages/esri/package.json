@@ -12,6 +12,9 @@
     "email": "webdev@cals.arizona.edu"
   },
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
