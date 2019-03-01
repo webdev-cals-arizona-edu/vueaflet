@@ -11,14 +11,14 @@ This library (or set of components) uses [Vueaflet](https://github.com/webdev-ca
 ----------
 ## Getting Started
 ```
-npm install --save-dev esri-vueaflet
+npm install --save @vueaflet/esri
 ```
 Esri-Vueaflet will npm install vueaflet as well. However, you must `Vue.use()` both Esri-Vueaflet and Vueaflet. Assuming you are using a `vue-cli` template, your `src/main.js` will look something like this:
 ```
 import Vue from 'vue'
 import App from './App'
 import store from 'store'
-import Vueaflet from '@vueaflet/core'
+import Vueaflet from '@vueaflet/core' // core comes as a dependency of @vueaflet/esri
 import EsriVueaflet from '@vueaflet/esri'
 
 Vue.use(Vueaflet)

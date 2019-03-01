@@ -44,7 +44,7 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. Each
 ----------
 ## Getting Started
 ```
-npm install --save-dev vueaflet
+npm install --save @vueaflet/core
 ```
 
 Assuming you are using a `vue-cli` template, your `src/main.js` will look something like this:
