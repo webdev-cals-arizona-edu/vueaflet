@@ -1,7 +1,7 @@
 <template></template>
 
 <script>
-  import Leaflet from 'leaflet'
+  import * as Leaflet from 'leaflet'
   import { mapMutations } from 'vuex'
   import { VUEAFLET_ADD_MAP_LAYER, VUEAFLET_REMOVE_MAP_LAYER } from '@/store/mutation-types'
 

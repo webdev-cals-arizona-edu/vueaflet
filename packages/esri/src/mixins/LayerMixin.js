@@ -1,4 +1,4 @@
-import Leaflet from 'leaflet'
+import * as Leaflet from 'leaflet'
 import * as esri from 'esri-leaflet'
 import { mapMutations, mapGetters, mapActions } from 'vuex'
 import { 

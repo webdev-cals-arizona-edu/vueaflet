@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import Leaflet from 'leaflet'
+  import * as Leaflet from 'leaflet'
   import { mapGetters} from 'vuex'
 
   export default {

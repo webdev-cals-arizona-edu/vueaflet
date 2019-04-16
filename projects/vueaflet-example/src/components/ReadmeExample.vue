@@ -37,7 +37,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import MockControls from './MockControls'
-  import Leaflet from 'leaflet'
+  import * as Leaflet from 'leaflet'
 
   export default {
     components: {

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Leaflet from 'leaflet';
+import * as Leaflet from 'leaflet';
 import filter from 'lodash.filter';
 // TODO figure out better impementation of Leaflet.PM
 // import 'leaflet.pm'

@@ -4,7 +4,7 @@
   This mixin does all the heavy lifting for simple Leafleft UI and Vector layers.
 */
 
-import Leaflet from 'leaflet'
+import * as Leaflet from 'leaflet'
 import { mapMutations } from 'vuex'
 import { 
   VUEAFLET_ADD_MAP_LAYER, 
