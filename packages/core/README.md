@@ -8,6 +8,7 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. Each
  - `VueafletBus` now attached to root `Vue` instance
 	 - Use `this.$vueafletBus` instead of  `import { VueafletBus } from 'vueaflet'`
  - Project is dependent on leaflet 1.3.3 above; use `import * as Leaflet from 'leaflet'`
+ - `createVueafletStore` is deprecated, see [Getting Started](#getting-started)
 
 ### Table of Contents
  - [Getting Started](#getting-started)
