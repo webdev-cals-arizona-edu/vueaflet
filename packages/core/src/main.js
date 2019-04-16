@@ -4,7 +4,7 @@ import * as components from './components'
 import VueafletBus from './buses'
 
 // TODO: test options
-const createInstaller = c => (Vue) => {
+const createInstaller = c => (Vue, options) => {
   var bus = VueafletBus
 
   Object.defineProperty(Vue.prototype, '$vueafletBus', { //for "this.$bus"
@@ -17,6 +17,10 @@ const createInstaller = c => (Vue) => {
 
   // do something with options
   registerComponents(Vue, c)
+
+  if (!options.store) console.error('[@vueaflet/core] Please pass in reference to your store')
+
+  options.store.registerModule('vueaflet', vueafletStore)
 }
 
 // https://vuejs.org/v2/guide/plugins.html
@@ -24,11 +28,6 @@ const createInstaller = c => (Vue) => {
 // createInstaller is a double arrow function;
 //returns another function, creates a closure over imported components
 const Vueaflet = { install: createInstaller(components) }
-
-// TODO: test module name
-export const createVueafletStore = (moduleName = 'vueaflet') => (store) => {
-  store.registerModule(moduleName, { ...vueafletStore })
-}
 
 export const Bus = VueafletBus
 export default Vueaflet
