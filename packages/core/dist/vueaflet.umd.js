@@ -418,7 +418,7 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/vue-style-loader/lib/listToStyles.js
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/vue-style-loader/lib/listToStyles.js
 /**
  * Translates the list format produced by css-loader into something
  * easier to manipulate.
@@ -447,7 +447,7 @@ function listToStyles (parentId, list) {
   return styles
 }
 
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/vue-style-loader/lib/addStylesClient.js
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/vue-style-loader/lib/addStylesClient.js
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return addStylesClient; });
 /*
   MIT License http://www.opensource.org/licenses/mit-license.php
@@ -768,7 +768,7 @@ __webpack_require__.d(components_namespaceObject, "LPolyline", function() { retu
 __webpack_require__.d(components_namespaceObject, "LRectangle", function() { return LRectangle; });
 __webpack_require__.d(components_namespaceObject, "LTileLayer", function() { return LTileLayer_LTileLayer; });
 
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
 // This file is imported into lib/wc client bundles.
 
 if (typeof window !== 'undefined') {
@@ -781,69 +781,24 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js
-var get_own_property_descriptor = __webpack_require__("1486");
-var get_own_property_descriptor_default = /*#__PURE__*/__webpack_require__.n(get_own_property_descriptor);
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.object.define-property.js
+var es6_object_define_property = __webpack_require__("5100");
 
-// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js
-var get_own_property_symbols = __webpack_require__("f24e");
-var get_own_property_symbols_default = /*#__PURE__*/__webpack_require__.n(get_own_property_symbols);
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.function.name.js
+var es6_function_name = __webpack_require__("c880");
 
-// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/@babel/runtime-corejs2/core-js/object/keys.js
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/keys.js
 var keys = __webpack_require__("4cfc");
 var keys_default = /*#__PURE__*/__webpack_require__.n(keys);
 
-// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/@babel/runtime-corejs2/core-js/object/define-property.js
-var define_property = __webpack_require__("2dc0");
-var define_property_default = /*#__PURE__*/__webpack_require__.n(define_property);
-
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    define_property_default()(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js
-
-
-
-
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    var ownKeys = keys_default()(source);
-
-    if (typeof get_own_property_symbols_default.a === 'function') {
-      ownKeys = ownKeys.concat(get_own_property_symbols_default()(source).filter(function (sym) {
-        return get_own_property_descriptor_default()(source, sym).enumerable;
-      }));
-    }
-
-    ownKeys.forEach(function (key) {
-      _defineProperty(target, key, source[key]);
-    });
-  }
-
-  return target;
-}
-// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/core-js/modules/es6.function.name.js
-var es6_function_name = __webpack_require__("c880");
-
-// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/core-js/modules/web.dom.iterable.js
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__("2e73");
 
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.array.for-each.js
+var es6_array_for_each = __webpack_require__("af48");
+
 // CONCATENATED MODULE: ./src/utils/index.js
+
 
 
 
@@ -868,13 +823,35 @@ var utils_registerComponents = function registerComponents(Vue, components) {
     Vue.component(c.name, c);
   });
 };
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/define-property.js
+var define_property = __webpack_require__("2dc0");
+var define_property_default = /*#__PURE__*/__webpack_require__.n(define_property);
+
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    define_property_default()(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.array.map.js
+var es6_array_map = __webpack_require__("fb91");
+
 // EXTERNAL MODULE: external "vue"
 var external_vue_ = __webpack_require__("8bbf");
 var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
 
 // EXTERNAL MODULE: external "leaflet"
 var external_leaflet_ = __webpack_require__("860c");
-var external_leaflet_default = /*#__PURE__*/__webpack_require__.n(external_leaflet_);
 
 // EXTERNAL MODULE: external "lodash.filter"
 var external_lodash_filter_ = __webpack_require__("2a5e");
@@ -897,6 +874,8 @@ var VUEAFLET_PM_REMOVE_SHAPE_LAYERS = 'VUEAFLET_PM_REMOVE_SHAPE_LAYERS';
 var VUEAFLET_RESET = 'VUEAFLET_RESET';
 var VUEAFLET_INVALIDATE = 'VUEAFLET_INVALIDATE';
 // CONCATENATED MODULE: ./src/store/modules/vueaflet.js
+
+
 
 
 
@@ -1009,7 +988,7 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, VUEAFLET_CREATE_MA
   var _ref11$id = _ref11.id,
       id = _ref11$id === void 0 ? DEFAULT_MAP_ID : _ref11$id,
       options = _ref11.options;
-  state.maps[id] = external_leaflet_default.a.map(id, options); // state.maps[id].zoomControl.setPosition('bottomright');
+  state.maps[id] = external_leaflet_["map"](id, options); // state.maps[id].zoomControl.setPosition('bottomright');
 }), _defineProperty(_mutations, VUEAFLET_SET_VIEW, function (state, _ref12) {
   var _ref12$id = _ref12.id,
       id = _ref12$id === void 0 ? DEFAULT_MAP_ID : _ref12$id,
@@ -1106,14 +1085,46 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, VUEAFLET_CREATE_MA
   actions: actions,
   mutations: mutations
 });
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4c40957b-vue-loader-template"}!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LCircle/LCircle.vue?vue&type=template&id=dfe8f444&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LCircle/LCircle.vue?vue&type=template&id=74cda5c6&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LCircle/LCircle.vue?vue&type=template&id=dfe8f444&
+// CONCATENATED MODULE: ./src/components/LCircle/LCircle.vue?vue&type=template&id=74cda5c6&
 
-// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/@babel/runtime-corejs2/core-js/object/assign.js
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js
+var get_own_property_descriptor = __webpack_require__("1486");
+var get_own_property_descriptor_default = /*#__PURE__*/__webpack_require__.n(get_own_property_descriptor);
+
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js
+var get_own_property_symbols = __webpack_require__("f24e");
+var get_own_property_symbols_default = /*#__PURE__*/__webpack_require__.n(get_own_property_symbols);
+
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js
+
+
+
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    var ownKeys = keys_default()(source);
+
+    if (typeof get_own_property_symbols_default.a === 'function') {
+      ownKeys = ownKeys.concat(get_own_property_symbols_default()(source).filter(function (sym) {
+        return get_own_property_descriptor_default()(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/assign.js
 var object_assign = __webpack_require__("3821");
 var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
 
@@ -1124,6 +1135,7 @@ var external_vuex_ = __webpack_require__("5880");
 
 /* harmony default export */ var buses = (new external_vue_default.a());
 // CONCATENATED MODULE: ./src/mixins/LayerMixin.js
+
 
 
 
@@ -1180,7 +1192,7 @@ var external_vuex_ = __webpack_require__("5880");
     // this.registerOptions allows the parent to merge in options for it's children if context isn't available when child mounts
     // currently this.registerOptions is only being used by LFeatureGroup in order to set a custom "pane"
     this.mergedOptions = this.registerOptions ? this.registerOptions(this.options) : this.options;
-    this.innerLayer = external_leaflet_default.a[this.type](this.latlng, assign_default()({}, this.defaultOptions, this.mergedOptions));
+    this.innerLayer = external_leaflet_[this.type](this.latlng, assign_default()({}, this.defaultOptions, this.mergedOptions));
   },
   mounted: function mounted() {
     // setup listeners
@@ -1236,7 +1248,7 @@ var external_vuex_ = __webpack_require__("5880");
     }
   })
 });
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet-v1/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet-v1/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LCircle/LCircle.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LCircle/LCircle.vue?vue&type=script&lang=js&
 //
 //
 
@@ -1258,7 +1270,7 @@ var external_vuex_ = __webpack_require__("5880");
 });
 // CONCATENATED MODULE: ./src/components/LCircle/LCircle.vue?vue&type=script&lang=js&
  /* harmony default export */ var LCircle_LCirclevue_type_script_lang_js_ = (LCirclevue_type_script_lang_js_); 
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib/runtime/componentNormalizer.js
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
@@ -1373,17 +1385,18 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var LCircle = (component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4c40957b-vue-loader-template"}!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LFeatureGroup/LFeatureGroup.vue?vue&type=template&id=06fb83ed&
-var LFeatureGroupvue_type_template_id_06fb83ed_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"feature-group"},[_vm._t("default"),_vm._l((_vm.layers),function(layer,index){return [_c(_vm.layerTypeLookup(layer.type),_vm._b({key:layer.id,tag:"component"},'component',layer,false))]})],2)}
-var LFeatureGroupvue_type_template_id_06fb83ed_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LFeatureGroup/LFeatureGroup.vue?vue&type=template&id=5aa40759&
+var LFeatureGroupvue_type_template_id_5aa40759_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"feature-group"},[_vm._t("default"),_vm._l((_vm.layers),function(layer,index){return [_c(_vm.layerTypeLookup(layer.type),_vm._b({key:layer.id,tag:"component"},'component',layer,false))]})],2)}
+var LFeatureGroupvue_type_template_id_5aa40759_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LFeatureGroup/LFeatureGroup.vue?vue&type=template&id=06fb83ed&
+// CONCATENATED MODULE: ./src/components/LFeatureGroup/LFeatureGroup.vue?vue&type=template&id=5aa40759&
 
-// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/core-js/modules/es6.number.constructor.js
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.number.constructor.js
 var es6_number_constructor = __webpack_require__("ce9c");
 
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet-v1/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet-v1/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LFeatureGroup/LFeatureGroup.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LFeatureGroup/LFeatureGroup.vue?vue&type=script&lang=js&
+
 
 
 
@@ -1443,7 +1456,7 @@ var LFeatureGroup = {
     var _this = this;
 
     var existingFeatureGroup = this.getNamedLayer(this.layerName);
-    this.innerFeatureGroup = existingFeatureGroup ? existingFeatureGroup : external_leaflet_default.a.featureGroup();
+    this.innerFeatureGroup = existingFeatureGroup ? existingFeatureGroup : external_leaflet_["featureGroup"]();
     this.events.forEach(function (event) {
       _this.innerFeatureGroup.on(event, function (ev) {
         _this.$emit(event, {
@@ -1511,8 +1524,8 @@ var LFeatureGroup = {
 
 var LFeatureGroup_component = normalizeComponent(
   LFeatureGroup_LFeatureGroupvue_type_script_lang_js_,
-  LFeatureGroupvue_type_template_id_06fb83ed_render,
-  LFeatureGroupvue_type_template_id_06fb83ed_staticRenderFns,
+  LFeatureGroupvue_type_template_id_5aa40759_render,
+  LFeatureGroupvue_type_template_id_5aa40759_staticRenderFns,
   false,
   null,
   null,
@@ -1521,7 +1534,7 @@ var LFeatureGroup_component = normalizeComponent(
 )
 
 /* harmony default export */ var LFeatureGroup_LFeatureGroup = (LFeatureGroup_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4c40957b-vue-loader-template"}!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LGeoJsonCollection/LGeoJsonCollection.vue?vue&type=template&id=491764ff&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LGeoJsonCollection/LGeoJsonCollection.vue?vue&type=template&id=491764ff&
 var LGeoJsonCollectionvue_type_template_id_491764ff_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"geo-json-collection"},[_vm._l((_vm.collection),function(features,index){return [_c('l-geo-json-layer',{key:index,attrs:{"features":features,"options":_vm.getOptions(_vm.getGeometryType(features)),"layer-name":(_vm.layerName + "-" + (_vm.getGeometryType(features))),"events":['add'],"order":_vm.order},on:{"add":_vm.handleAddedToMap}})]})],2)}
 var LGeoJsonCollectionvue_type_template_id_491764ff_staticRenderFns = []
 
@@ -1536,7 +1549,7 @@ var external_lodash_values_default = /*#__PURE__*/__webpack_require__.n(external
 var external_lodash_reduce_ = __webpack_require__("3f12");
 var external_lodash_reduce_default = /*#__PURE__*/__webpack_require__.n(external_lodash_reduce_);
 
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet-v1/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet-v1/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LGeoJsonCollection/LGeoJsonCollection.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LGeoJsonCollection/LGeoJsonCollection.vue?vue&type=script&lang=js&
 
 //
 //
@@ -1669,14 +1682,15 @@ var LGeoJsonCollection_component = normalizeComponent(
 )
 
 /* harmony default export */ var LGeoJsonCollection_LGeoJsonCollection = (LGeoJsonCollection_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4c40957b-vue-loader-template"}!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LGeoJsonLayer/LGeoJsonLayer.vue?vue&type=template&id=3d124c6b&
-var LGeoJsonLayervue_type_template_id_3d124c6b_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
-var LGeoJsonLayervue_type_template_id_3d124c6b_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LGeoJsonLayer/LGeoJsonLayer.vue?vue&type=template&id=54c84b3a&
+var LGeoJsonLayervue_type_template_id_54c84b3a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
+var LGeoJsonLayervue_type_template_id_54c84b3a_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LGeoJsonLayer/LGeoJsonLayer.vue?vue&type=template&id=3d124c6b&
+// CONCATENATED MODULE: ./src/components/LGeoJsonLayer/LGeoJsonLayer.vue?vue&type=template&id=54c84b3a&
 
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet-v1/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet-v1/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LGeoJsonLayer/LGeoJsonLayer.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LGeoJsonLayer/LGeoJsonLayer.vue?vue&type=script&lang=js&
+
 
 
 
@@ -1687,8 +1701,8 @@ var LGeoJsonLayervue_type_template_id_3d124c6b_staticRenderFns = []
 
 
 
-delete external_leaflet_default.a.Icon.Default.prototype._getIconUrl;
-external_leaflet_default.a.Icon.Default.mergeOptions({
+delete external_leaflet_["Icon"].Default.prototype._getIconUrl;
+external_leaflet_["Icon"].Default.mergeOptions({
   iconRetinaUrl: __webpack_require__("75b2"),
   iconUrl: __webpack_require__("7a41"),
   shadowUrl: __webpack_require__("b31d")
@@ -1746,7 +1760,7 @@ var LGeoJsonLayer = {
       var existingLayer = this.getNamedLayer(this.layerName); // if layer already exists, use L.geoJSON.addData method
       // see https://leafletjs.com/reference-1.3.0.html#geojson
 
-      this.innerGeoJSON = existingLayer ? existingLayer.addData(this.features) : external_leaflet_default.a.geoJSON(this.features, assign_default()({}, this.options, {
+      this.innerGeoJSON = existingLayer ? existingLayer.addData(this.features) : external_leaflet_["geoJSON"](this.features, assign_default()({}, this.options, {
         pane: this.layerName
       }));
       this.events.forEach(function (event) {
@@ -1802,8 +1816,8 @@ var LGeoJsonLayer = {
 
 var LGeoJsonLayer_component = normalizeComponent(
   LGeoJsonLayer_LGeoJsonLayervue_type_script_lang_js_,
-  LGeoJsonLayervue_type_template_id_3d124c6b_render,
-  LGeoJsonLayervue_type_template_id_3d124c6b_staticRenderFns,
+  LGeoJsonLayervue_type_template_id_54c84b3a_render,
+  LGeoJsonLayervue_type_template_id_54c84b3a_staticRenderFns,
   false,
   null,
   null,
@@ -1812,7 +1826,7 @@ var LGeoJsonLayer_component = normalizeComponent(
 )
 
 /* harmony default export */ var LGeoJsonLayer_LGeoJsonLayer = (LGeoJsonLayer_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4c40957b-vue-loader-template"}!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LMap/LMap.vue?vue&type=template&id=41f5be12&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LMap/LMap.vue?vue&type=template&id=41f5be12&
 var LMapvue_type_template_id_41f5be12_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"map"},[_c('div',{staticClass:"map__mount",attrs:{"id":_vm.mapId}},[(_vm.ready)?_vm._t("default"):_vm._e(),(_vm.ready)?_vm._l((_vm.basemaps),function(basemap,index){return (_vm.activeBasemap === basemap.label)?_c('l-tile-layer',{key:basemap.label,attrs:{"url-template":basemap.urlTemplate,"options":basemap.options}}):_vm._e()}):_vm._e(),(_vm.ready)?_vm._l((_vm.layers),function(layer,index){return (layer.visible)?_c(_vm.layerTypeLookup(layer.type),_vm._b({key:index,tag:"component",attrs:{"layer-name":layer.label,"order":layer.order || index}},'component',layer,false)):_vm._e()}):_vm._e()],2)])}
 var LMapvue_type_template_id_41f5be12_staticRenderFns = []
 
@@ -1822,7 +1836,8 @@ var LMapvue_type_template_id_41f5be12_staticRenderFns = []
 // EXTERNAL MODULE: external "lodash.foreach"
 var external_lodash_foreach_ = __webpack_require__("af61");
 
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet-v1/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet-v1/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LMap/LMap.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LMap/LMap.vue?vue&type=script&lang=js&
+
 
 
 //
@@ -1962,7 +1977,7 @@ var LMap = {
 /* harmony default export */ var LMapvue_type_script_lang_js_ = (LMap);
 // CONCATENATED MODULE: ./src/components/LMap/LMap.vue?vue&type=script&lang=js&
  /* harmony default export */ var LMap_LMapvue_type_script_lang_js_ = (LMapvue_type_script_lang_js_); 
-// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/leaflet/dist/leaflet.css?vue&type=style&index=0&lang=css&
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/leaflet/dist/leaflet.css?vue&type=style&index=0&lang=css&
 var leafletvue_type_style_index_0_lang_css_ = __webpack_require__("d235");
 
 // EXTERNAL MODULE: ./src/components/LMap/LMap.vue?vue&type=style&index=1&lang=css&
@@ -1990,14 +2005,14 @@ var LMap_component = normalizeComponent(
 )
 
 /* harmony default export */ var LMap_LMap = (LMap_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4c40957b-vue-loader-template"}!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LMarker/LMarker.vue?vue&type=template&id=bcd1b6f6&
-var LMarkervue_type_template_id_bcd1b6f6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
-var LMarkervue_type_template_id_bcd1b6f6_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LMarker/LMarker.vue?vue&type=template&id=29eba716&
+var LMarkervue_type_template_id_29eba716_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
+var LMarkervue_type_template_id_29eba716_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LMarker/LMarker.vue?vue&type=template&id=bcd1b6f6&
+// CONCATENATED MODULE: ./src/components/LMarker/LMarker.vue?vue&type=template&id=29eba716&
 
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet-v1/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet-v1/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LMarker/LMarker.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LMarker/LMarker.vue?vue&type=script&lang=js&
 //
 //
 
@@ -2009,7 +2024,7 @@ var LMarker = {
     return {
       type: 'marker',
       defaultOptions: {
-        icon: external_leaflet_default.a.icon({
+        icon: external_leaflet_["icon"]({
           iconUrl: __webpack_require__("7a41"),
           shadowUrl: __webpack_require__("b31d"),
           iconSize: [25, 41],
@@ -2046,8 +2061,8 @@ var LMarker = {
 
 var LMarker_component = normalizeComponent(
   LMarker_LMarkervue_type_script_lang_js_,
-  LMarkervue_type_template_id_bcd1b6f6_render,
-  LMarkervue_type_template_id_bcd1b6f6_staticRenderFns,
+  LMarkervue_type_template_id_29eba716_render,
+  LMarkervue_type_template_id_29eba716_staticRenderFns,
   false,
   null,
   null,
@@ -2056,14 +2071,14 @@ var LMarker_component = normalizeComponent(
 )
 
 /* harmony default export */ var LMarker_LMarker = (LMarker_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4c40957b-vue-loader-template"}!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolygon/LPolygon.vue?vue&type=template&id=36ea237a&
-var LPolygonvue_type_template_id_36ea237a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
-var LPolygonvue_type_template_id_36ea237a_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolygon/LPolygon.vue?vue&type=template&id=214fc9a4&
+var LPolygonvue_type_template_id_214fc9a4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
+var LPolygonvue_type_template_id_214fc9a4_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LPolygon/LPolygon.vue?vue&type=template&id=36ea237a&
+// CONCATENATED MODULE: ./src/components/LPolygon/LPolygon.vue?vue&type=template&id=214fc9a4&
 
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet-v1/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet-v1/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolygon/LPolygon.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolygon/LPolygon.vue?vue&type=script&lang=js&
 //
 //
 
@@ -2095,8 +2110,8 @@ var LPolygonvue_type_template_id_36ea237a_staticRenderFns = []
 
 var LPolygon_component = normalizeComponent(
   LPolygon_LPolygonvue_type_script_lang_js_,
-  LPolygonvue_type_template_id_36ea237a_render,
-  LPolygonvue_type_template_id_36ea237a_staticRenderFns,
+  LPolygonvue_type_template_id_214fc9a4_render,
+  LPolygonvue_type_template_id_214fc9a4_staticRenderFns,
   false,
   null,
   null,
@@ -2105,14 +2120,14 @@ var LPolygon_component = normalizeComponent(
 )
 
 /* harmony default export */ var LPolygon = (LPolygon_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4c40957b-vue-loader-template"}!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolyline/LPolyline.vue?vue&type=template&id=e515e1c2&
-var LPolylinevue_type_template_id_e515e1c2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
-var LPolylinevue_type_template_id_e515e1c2_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolyline/LPolyline.vue?vue&type=template&id=6ce49447&
+var LPolylinevue_type_template_id_6ce49447_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
+var LPolylinevue_type_template_id_6ce49447_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LPolyline/LPolyline.vue?vue&type=template&id=e515e1c2&
+// CONCATENATED MODULE: ./src/components/LPolyline/LPolyline.vue?vue&type=template&id=6ce49447&
 
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet-v1/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet-v1/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolyline/LPolyline.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolyline/LPolyline.vue?vue&type=script&lang=js&
 //
 //
 
@@ -2145,8 +2160,8 @@ var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contex
 
 var LPolyline_component = normalizeComponent(
   LPolyline_LPolylinevue_type_script_lang_js_,
-  LPolylinevue_type_template_id_e515e1c2_render,
-  LPolylinevue_type_template_id_e515e1c2_staticRenderFns,
+  LPolylinevue_type_template_id_6ce49447_render,
+  LPolylinevue_type_template_id_6ce49447_staticRenderFns,
   false,
   null,
   null,
@@ -2155,14 +2170,14 @@ var LPolyline_component = normalizeComponent(
 )
 
 /* harmony default export */ var LPolyline = (LPolyline_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4c40957b-vue-loader-template"}!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LRectangle/LRectangle.vue?vue&type=template&id=46ca907b&
-var LRectanglevue_type_template_id_46ca907b_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
-var LRectanglevue_type_template_id_46ca907b_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LRectangle/LRectangle.vue?vue&type=template&id=109eed22&
+var LRectanglevue_type_template_id_109eed22_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
+var LRectanglevue_type_template_id_109eed22_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LRectangle/LRectangle.vue?vue&type=template&id=46ca907b&
+// CONCATENATED MODULE: ./src/components/LRectangle/LRectangle.vue?vue&type=template&id=109eed22&
 
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet-v1/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet-v1/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LRectangle/LRectangle.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LRectangle/LRectangle.vue?vue&type=script&lang=js&
 //
 //
 
@@ -2195,8 +2210,8 @@ var LRectanglevue_type_script_lang_js_events = ['click', 'dblclick', 'mousedown'
 
 var LRectangle_component = normalizeComponent(
   LRectangle_LRectanglevue_type_script_lang_js_,
-  LRectanglevue_type_template_id_46ca907b_render,
-  LRectanglevue_type_template_id_46ca907b_staticRenderFns,
+  LRectanglevue_type_template_id_109eed22_render,
+  LRectanglevue_type_template_id_109eed22_staticRenderFns,
   false,
   null,
   null,
@@ -2205,14 +2220,14 @@ var LRectangle_component = normalizeComponent(
 )
 
 /* harmony default export */ var LRectangle = (LRectangle_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4c40957b-vue-loader-template"}!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LTileLayer/LTileLayer.vue?vue&type=template&id=6dc335d7&
-var LTileLayervue_type_template_id_6dc335d7_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
-var LTileLayervue_type_template_id_6dc335d7_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LTileLayer/LTileLayer.vue?vue&type=template&id=05f1dc6a&
+var LTileLayervue_type_template_id_05f1dc6a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
+var LTileLayervue_type_template_id_05f1dc6a_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LTileLayer/LTileLayer.vue?vue&type=template&id=6dc335d7&
+// CONCATENATED MODULE: ./src/components/LTileLayer/LTileLayer.vue?vue&type=template&id=05f1dc6a&
 
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet-v1/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet-v1/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet-v1/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet-v1/node_modules/vue-loader/lib??vue-loader-options!./src/components/LTileLayer/LTileLayer.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LTileLayer/LTileLayer.vue?vue&type=script&lang=js&
 
 //
 //
@@ -2236,7 +2251,7 @@ var LTileLayer = {
     }
   },
   created: function created() {
-    this.innerLayer = external_leaflet_default.a.tileLayer(this.urlTemplate, this.options);
+    this.innerLayer = external_leaflet_["tileLayer"](this.urlTemplate, this.options);
     this.addLayer({
       id: this.mapId,
       layer: this.innerLayer
@@ -2266,8 +2281,8 @@ var LTileLayer = {
 
 var LTileLayer_component = normalizeComponent(
   LTileLayer_LTileLayervue_type_script_lang_js_,
-  LTileLayervue_type_template_id_6dc335d7_render,
-  LTileLayervue_type_template_id_6dc335d7_staticRenderFns,
+  LTileLayervue_type_template_id_05f1dc6a_render,
+  LTileLayervue_type_template_id_05f1dc6a_staticRenderFns,
   false,
   null,
   null,
@@ -2295,7 +2310,7 @@ var LTileLayer_component = normalizeComponent(
  // TODO: test options
 
 var main_createInstaller = function createInstaller(c) {
-  return function (Vue) {
+  return function (Vue, options) {
     var bus = buses;
     Object.defineProperty(Vue.prototype, '$vueafletBus', {
       //for "this.$bus"
@@ -2310,6 +2325,8 @@ var main_createInstaller = function createInstaller(c) {
     }); // do something with options
 
     utils_registerComponents(Vue, c);
+    if (!options.store) console.error('[@vueaflet/core] Please pass in reference to your store');
+    options.store.registerModule('vueaflet', vueaflet);
   };
 }; // https://vuejs.org/v2/guide/plugins.html
 // Vue plugins, at minimum, need to return an object with an install function
@@ -2318,19 +2335,11 @@ var main_createInstaller = function createInstaller(c) {
 
 
 var Vueaflet = {
-  install: main_createInstaller(components_namespaceObject) // TODO: test module name
-
-};
-var main_createVueafletStore = function createVueafletStore() {
-  var moduleName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'vueaflet';
-  return function (store) {
-    store.registerModule(moduleName, _objectSpread({}, vueaflet));
-  };
+  install: main_createInstaller(components_namespaceObject)
 };
 var Bus = buses;
 /* harmony default export */ var main = (Vueaflet);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet-v1/node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
-/* concated harmony reexport createVueafletStore */__webpack_require__.d(__webpack_exports__, "createVueafletStore", function() { return main_createVueafletStore; });
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
 /* concated harmony reexport Bus */__webpack_require__.d(__webpack_exports__, "Bus", function() { return Bus; });
 
 
@@ -2824,6 +2833,57 @@ exports.f = __webpack_require__("3d85") ? gOPD : function getOwnPropertyDescript
 
 /***/ }),
 
+/***/ "418d":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 0 -> Array#forEach
+// 1 -> Array#map
+// 2 -> Array#filter
+// 3 -> Array#some
+// 4 -> Array#every
+// 5 -> Array#find
+// 6 -> Array#findIndex
+var ctx = __webpack_require__("124c");
+var IObject = __webpack_require__("aec0");
+var toObject = __webpack_require__("79c1");
+var toLength = __webpack_require__("bb64");
+var asc = __webpack_require__("6a8f");
+module.exports = function (TYPE, $create) {
+  var IS_MAP = TYPE == 1;
+  var IS_FILTER = TYPE == 2;
+  var IS_SOME = TYPE == 3;
+  var IS_EVERY = TYPE == 4;
+  var IS_FIND_INDEX = TYPE == 6;
+  var NO_HOLES = TYPE == 5 || IS_FIND_INDEX;
+  var create = $create || asc;
+  return function ($this, callbackfn, that) {
+    var O = toObject($this);
+    var self = IObject(O);
+    var f = ctx(callbackfn, that, 3);
+    var length = toLength(self.length);
+    var index = 0;
+    var result = IS_MAP ? create($this, length) : IS_FILTER ? create($this, 0) : undefined;
+    var val, res;
+    for (;length > index; index++) if (NO_HOLES || index in self) {
+      val = self[index];
+      res = f(val, index, O);
+      if (TYPE) {
+        if (IS_MAP) result[index] = res;   // map
+        else if (res) switch (TYPE) {
+          case 3: return true;             // some
+          case 5: return val;              // find
+          case 6: return index;            // findIndex
+          case 2: result.push(val);        // filter
+        } else if (IS_EVERY) return false; // every
+      }
+    }
+    return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : result;
+  };
+};
+
+
+/***/ }),
+
 /***/ "41d3":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2940,6 +3000,35 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAQAAAAD
 
 /***/ }),
 
+/***/ "4cb0":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var fails = __webpack_require__("a124");
+
+module.exports = function (method, arg) {
+  return !!method && fails(function () {
+    // eslint-disable-next-line no-useless-call
+    arg ? method.call(null, function () { /* empty */ }, 1) : method.call(null);
+  });
+};
+
+
+/***/ }),
+
+/***/ "4cf2":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.2.2 IsArray(argument)
+var cof = __webpack_require__("b735");
+module.exports = Array.isArray || function isArray(arg) {
+  return cof(arg) == 'Array';
+};
+
+
+/***/ }),
+
 /***/ "4cfc":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2961,6 +3050,16 @@ module.exports = __webpack_require__("ac5a").Object.assign;
 
 var document = __webpack_require__("0e8c").document;
 module.exports = document && document.documentElement;
+
+
+/***/ }),
+
+/***/ "5100":
+/***/ (function(module, exports, __webpack_require__) {
+
+var $export = __webpack_require__("ef37");
+// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+$export($export.S + $export.F * !__webpack_require__("3d85"), 'Object', { defineProperty: __webpack_require__("6f0d").f });
 
 
 /***/ }),
@@ -3190,6 +3289,19 @@ var meta = module.exports = {
   fastKey: fastKey,
   getWeak: getWeak,
   onFreeze: onFreeze
+};
+
+
+/***/ }),
+
+/***/ "6a8f":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 9.4.2.3 ArraySpeciesCreate(originalArray, length)
+var speciesConstructor = __webpack_require__("f8aa");
+
+module.exports = function (original, length) {
+  return new (speciesConstructor(original))(length);
 };
 
 
@@ -3757,6 +3869,25 @@ var cof = __webpack_require__("b735");
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
+
+
+/***/ }),
+
+/***/ "af48":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $export = __webpack_require__("ef37");
+var $forEach = __webpack_require__("418d")(0);
+var STRICT = __webpack_require__("4cb0")([].forEach, true);
+
+$export($export.P + $export.F * !STRICT, 'Array', {
+  // 22.1.3.10 / 15.4.4.18 Array.prototype.forEach(callbackfn [, thisArg])
+  forEach: function forEach(callbackfn /* , thisArg */) {
+    return $forEach(this, callbackfn, arguments[1]);
+  }
+});
 
 
 /***/ }),
@@ -4610,6 +4741,29 @@ module.exports = function (name) {
 
 /***/ }),
 
+/***/ "f8aa":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__("194e");
+var isArray = __webpack_require__("4cf2");
+var SPECIES = __webpack_require__("d951")('species');
+
+module.exports = function (original) {
+  var C;
+  if (isArray(original)) {
+    C = original.constructor;
+    // cross-realm fallback
+    if (typeof C == 'function' && (C === Array || isArray(C.prototype))) C = undefined;
+    if (isObject(C)) {
+      C = C[SPECIES];
+      if (C === null) C = undefined;
+    }
+  } return C === undefined ? Array : C;
+};
+
+
+/***/ }),
+
 /***/ "f962":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4633,6 +4787,24 @@ __webpack_require__("daa2")('keys', function () {
   return function keys(it) {
     return $keys(toObject(it));
   };
+});
+
+
+/***/ }),
+
+/***/ "fb91":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $export = __webpack_require__("ef37");
+var $map = __webpack_require__("418d")(1);
+
+$export($export.P + $export.F * !__webpack_require__("4cb0")([].map, true), 'Array', {
+  // 22.1.3.15 / 15.4.4.19 Array.prototype.map(callbackfn [, thisArg])
+  map: function map(callbackfn /* , thisArg */) {
+    return $map(this, callbackfn, arguments[1]);
+  }
 });
 
 
