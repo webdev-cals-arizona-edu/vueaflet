@@ -9,6 +9,7 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. Each
 	 - Use `this.$vueafletBus` instead of  `import { VueafletBus } from 'vueaflet'`
  - Project is dependent on leaflet 1.3.3 above; use `import * as Leaflet from 'leaflet'`
 
+### Table of Contents
  - [Getting Started](#getting-started)
  - [Quick Start Guide](#quick-start-guide)
    - [Preparing your page](#preparing-your-page)
