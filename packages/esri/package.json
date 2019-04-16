@@ -1,6 +1,6 @@
 {
   "name": "@vueaflet/esri",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A set of Esri-Leaflet components for Vue, utilizing the Vuex plugin and Vueaflet",
   "main": "dist/esri-vueaflet.common.js",
   "repository": {
@@ -23,7 +23,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@vueaflet/core": "^1.0.1",
+    "@vueaflet/core": "^1.1.0",
     "esri-leaflet": "^2.2.3",
     "esri-leaflet-cluster": "^2.0.0",
     "leaflet.markercluster": "^1.4.1",

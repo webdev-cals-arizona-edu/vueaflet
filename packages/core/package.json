@@ -1,6 +1,6 @@
 {
   "name": "@vueaflet/core",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A component driven approach to managing Leaflet objects using Vue and Vuex.",
   "main": "dist/vueaflet.common.js",
   "repository": {
