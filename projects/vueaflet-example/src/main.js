@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import App from './App.vue';
 import store from './store';
-import Vueaflet from '@vueaflet/core'
+import Vueaflet from '@vueaflet/core';
 
-Vue.use(Vueaflet)
+Vue.use(Vueaflet, { store });
 Vue.config.productionTip = false;
 
 new Vue({

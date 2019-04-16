@@ -1,8 +1,13 @@
-
 # Vueaflet #
+
 A component driven approach to managing Leaflet objects using Vue and Vuex. Each component registers its Leaflet object in a Vuex store, allowing easy access to your Leaflet objects anywhere in your Vue application.
 
-**This project is currently in development with ZERO test coverage! Use at your own risk :)** 
+> BREAKING CHANGES from v0.6.0 to v1.0.0
+
+ - Import changed from `vueaflet` to `@vueaflet/core` and `@vueaflet/esri`
+ - `VueafletBus` now attached to root `Vue` instance
+	 - Use `this.$vueafletBus` instead of  `import { VueafletBus } from 'vueaflet'`
+ - Project is dependent on leaflet 1.3.3 above; use `import * as Leaflet from 'leaflet'`
 
  - [Getting Started](#getting-started)
  - [Quick Start Guide](#quick-start-guide)
@@ -14,7 +19,8 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. Each
    - [Events](#events)
    - [Feature Groups](#feature-groups)
    - [Manage your layers using Vuex](#manage-your-layers-using-vuex)
- - [More Code Examples Here](https://github.com/webdev-cals-arizona-edu/vueaflet/tree/master/src/components/Examples)
+ - [More Code Examples Here](https://github.com/webdev-cals-arizona-edu/vueaflet/tree/master/projects/vueaflet-example/src/components)
+ - [EsriLeaflet (@vueaflet/esri)](https://github.com/webdev-cals-arizona-edu/vueaflet/tree/master/packages/esri)
 
 ### Demos
 [Demo for all code exmamples in /src/components/Examples](https://cct.cals.arizona.edu/vueaflet/)
@@ -45,6 +51,7 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. Each
 ## Getting Started
 ```
 npm install --save @vueaflet/core
+yarn add @vueaflet/core
 ```
 
 Assuming you are using a `vue-cli` template, your `src/main.js` will look something like this:
@@ -54,7 +61,8 @@ import App from './App'
 import store from 'store'
 import Vueaflet from '@vueaflet/core'
 
-Vue.use(Vueaflet)
+// attaches a 'vueaflet' module into your Vuex store
+Vue.use(Vueaflet, { store })
 
 new Vue({
   el: '#app',
@@ -63,24 +71,8 @@ new Vue({
   components: { App }
 })
 ```
-This library relies on Vuex in order to store your Leaflet objects. In your `store/index.js`, make the following modifications: 
-```
-import Vue from 'vue'
-import Vuex from 'vuex'
-import { createVueafletStore } from '@vueaflet/core'
+NOTE: This library relies on Vuex in order to store your Leaflet objects.
 
-const VueafletStore = createVueafletStore()
-
-Vue.use(Vuex)
-
-export default new Vuex.Store({
-  state: {},
-  actions: {},
-  modules: {},
-  plugins: [VueafletStore]
-})
-
-```
 ## Quick Start Guide
 These simple examples mirror the effort in the [Leaflet Quick Start Guide](http://leafletjs.com/examples/quick-start/). These examples use the single file component structure, loaded by `vue-loader`
 
@@ -176,7 +168,7 @@ Let's `setView` so we can start creating some layers. This is where Vuex comes i
 </script>
 
 ```
-When the `<l-map/>` component mounted, it added the Leaflet map object to a Vuex store (created during the `createVueafletStore()` process in your `store/index.js` file). Documentation on the shape of the Vueaflet store coming soon. Here are some other ways to get the map object from the store:
+When the `<l-map/>` component mounted, it added the Leaflet map object to a Vuex store. Documentation on the shape of the Vueaflet store coming soon. Here are some other ways to get the map object from the store:
 ```
 ...
 
@@ -529,3 +521,4 @@ Meanwhile in the other component:
 </script>
 ```
 Full vueaflet store documentation coming soon...
+

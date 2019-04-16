@@ -4,7 +4,7 @@ import store from './store';
 import Vueaflet from '@vueaflet/core'
 import EsriVueaflet from '@vueaflet/esri'
 
-Vue.use(Vueaflet)
+Vue.use(Vueaflet, { store })
 Vue.use(EsriVueaflet)
 Vue.config.productionTip = false;
 

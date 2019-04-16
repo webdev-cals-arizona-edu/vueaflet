@@ -12,6 +12,7 @@ This library (or set of components) uses [Vueaflet](https://github.com/webdev-ca
 ## Getting Started
 ```
 npm install --save @vueaflet/esri
+yarn add @vueaflet/core
 ```
 Esri-Vueaflet will npm install vueaflet as well. However, you must `Vue.use()` both Esri-Vueaflet and Vueaflet. Assuming you are using a `vue-cli` template, your `src/main.js` will look something like this:
 ```
@@ -21,7 +22,8 @@ import store from 'store'
 import Vueaflet from '@vueaflet/core' // core comes as a dependency of @vueaflet/esri
 import EsriVueaflet from '@vueaflet/esri'
 
-Vue.use(Vueaflet)
+// attaches a 'vueaflet' module into your Vuex store
+Vue.use(Vueaflet, { store })
 Vue.use(EsriVueaflet)
 
 new Vue({
@@ -31,24 +33,7 @@ new Vue({
   components: { App }
 })
 ```
-This library relies on Vuex in order to store your Leaflet/Esri-Leaflet objects. In your `store/index.js`, make the following modifications: 
-```
-import Vue from 'vue'
-import Vuex from 'vuex'
-import { createVueafletStore } from '@vueaflet/core'
-
-const VueafletStore = createVueafletStore()
-
-Vue.use(Vuex)
-
-export default new Vuex.Store({
-  state: {},
-  actions: {},
-  modules: {},
-  plugins: [VueafletStore]
-})
-
-```
+NOTE: This library relies on Vuex in order to store your Leaflet objects.
 
 ----------
 ## Code Examples
