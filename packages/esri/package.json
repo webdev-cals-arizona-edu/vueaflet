@@ -1,6 +1,6 @@
 {
   "name": "@vueaflet/esri",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "A set of Esri-Leaflet components for Vue, utilizing the Vuex plugin and Vueaflet",
   "main": "dist/esri-vueaflet.common.js",
   "repository": {
@@ -22,15 +22,14 @@
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@vueaflet/core": "^1.1.0",
     "@vue/cli-plugin-babel": "^3.1.1",
     "@vue/cli-plugin-eslint": "^3.1.1",
     "@vue/cli-plugin-unit-jest": "^3.1.1",
     "@vue/cli-service": "^3.1.1",
     "@vue/eslint-config-airbnb": "^4.0.0",
     "@vue/test-utils": "^1.0.0-beta.20",
+    "@vueaflet/core": "^2.0.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
