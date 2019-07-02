@@ -10,6 +10,10 @@ A component driven approach to managing Leaflet objects using Vue and Vuex. Each
  - Project is dependent on leaflet 1.3.3 above; use `import * as Leaflet from 'leaflet'`
  - `createVueafletStore` is deprecated, see [Getting Started](#getting-started)
 
+ > BREAKING CHANGES going to v2.0.0
+
+ - `leaflet` needs to be installed separately 
+
 ### Table of Contents
  - [Getting Started](#getting-started)
  - [Quick Start Guide](#quick-start-guide)
