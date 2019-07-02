@@ -46,5 +46,10 @@
     "vuex": "^3.1.1",
     "webpack-node-externals": "^1.7.2"
   },
+  "peerDependencies": {
+    "leaflet": "^1.3.0",
+    "vue": "^2.5.17",
+    "vuex": "^3.0.0"
+  },
   "gitHead": "116644517c4bf2de75c805205a6a267948af0645"
 }
