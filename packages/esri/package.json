@@ -1,6 +1,6 @@
 {
   "name": "@vueaflet/esri",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A set of Esri-Leaflet components for Vue, utilizing the Vuex plugin and Vueaflet",
   "main": "dist/esri-vueaflet.common.js",
   "repository": {
@@ -29,7 +29,7 @@
     "@vue/cli-service": "^3.1.1",
     "@vue/eslint-config-airbnb": "^4.0.0",
     "@vue/test-utils": "^1.0.0-beta.20",
-    "@vueaflet/core": "^2.0.0",
+    "@vueaflet/core": "^2.0.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
@@ -44,9 +44,9 @@
     "vuex": "^3.1.1"
   },
   "peerDependencies": {
-    "leaflet": "^1.3.0",
     "esri-leaflet": "^2.0.0",
     "esri-leaflet-cluster": "^2.0.0",
+    "leaflet": "^1.3.0",
     "leaflet.markercluster": "^1.0.0",
     "vue": "^2.5.17",
     "vuex": "^3.0.0"
