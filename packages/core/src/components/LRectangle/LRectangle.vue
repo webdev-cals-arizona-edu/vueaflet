@@ -1,7 +1,7 @@
 <template></template>
 
 <script>
-  import * as Leaflet from 'leaflet'
+  import L from 'leaflet'
   import LayerMixin from '@/mixins/LayerMixin'
 
   const events = [

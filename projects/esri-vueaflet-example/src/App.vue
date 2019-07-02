@@ -7,6 +7,7 @@
 
     <showing-arc-gis-basemap></showing-arc-gis-basemap>
     <basemap-with-labels></basemap-with-labels>
+    <dynamic-map-layer></dynamic-map-layer>
     <simple-feature-layer></simple-feature-layer>
     <simple-image-map-layer></simple-image-map-layer>
     <clustering-points></clustering-points>
@@ -17,6 +18,7 @@
 <script>
 import ShowingArcGisBasemap from '@/components/ShowingArcGisBasemap'
 import BasemapWithLabels from '@/components/BasemapWithLabels'
+import DynamicMapLayer from '@/components/DynamicMapLayer'
 import SimpleFeatureLayer from '@/components/SimpleFeatureLayer'
 import SimpleImageMapLayer from '@/components/SimpleImageMapLayer'
 import ClusteringPoints from '@/components/ClusteringPoints'
@@ -27,6 +29,7 @@ export default {
   components: {
     ShowingArcGisBasemap,
     BasemapWithLabels,
+    DynamicMapLayer,
     SimpleFeatureLayer,
     SimpleImageMapLayer,
     ClusteringPoints,

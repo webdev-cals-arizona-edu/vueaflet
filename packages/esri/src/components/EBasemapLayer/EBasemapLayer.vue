@@ -1,7 +1,6 @@
 <template></template>
 
 <script>
-  import * as Leaflet from 'leaflet'
   import { basemapLayer } from 'esri-leaflet'
   import LayerMixin from '@/mixins/LayerMixin'
 

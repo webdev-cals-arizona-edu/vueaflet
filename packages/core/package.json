@@ -23,13 +23,10 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "leaflet": "^1.4.0",
     "lodash.filter": "^4.6.0",
     "lodash.foreach": "^4.5.0",
     "lodash.reduce": "^4.6.0",
-    "lodash.values": "^4.3.0",
-    "vue": "^2.6.4",
-    "vuex": "^3.1.0"
+    "lodash.values": "^4.3.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.1.1",
@@ -43,7 +40,10 @@
     "babel-jest": "^23.6.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.5.21",
+    "leaflet": "^1.5.1",
+    "vue": "^2.6.10",
+    "vue-template-compiler": "^2.6.10",
+    "vuex": "^3.1.1",
     "webpack-node-externals": "^1.7.2"
   },
   "gitHead": "116644517c4bf2de75c805205a6a267948af0645"

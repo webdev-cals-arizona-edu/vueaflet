@@ -1,7 +1,7 @@
 <template></template>
 
 <script>
-  import * as Leaflet from 'leaflet'
+  import L from 'leaflet'
   import LayerMixin from '@/mixins/LayerMixin'
 
   let LMarker = {
@@ -13,7 +13,7 @@
       return {
         type: 'marker',
         defaultOptions: {
-          icon: Leaflet.icon({
+          icon: L.icon({
             iconUrl: require('leaflet/dist/images/marker-icon.png'),
             shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
             iconSize: [25, 41],

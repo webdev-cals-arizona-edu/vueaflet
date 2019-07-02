@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import * as Leaflet from 'leaflet';
+import L from 'leaflet';
 import filter from 'lodash.filter';
 // TODO figure out better impementation of Leaflet.PM
 // import 'leaflet.pm'
@@ -92,7 +92,7 @@ const actions = {
 
 const mutations = {
   [VUEAFLET_CREATE_MAP](state, { id = DEFAULT_MAP_ID, options }) {
-    state.maps[id] = Leaflet.map(id, options)
+    state.maps[id] = L.map(id, options)
     // state.maps[id].zoomControl.setPosition('bottomright');
   },
   [VUEAFLET_SET_VIEW](state, { id = DEFAULT_MAP_ID, config = {} }) {

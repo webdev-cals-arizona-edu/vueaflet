@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import * as Leaflet from 'leaflet'
+  import L from 'leaflet'
   import { mapGetters} from 'vuex'
 
   export default {
@@ -149,7 +149,7 @@
 
         return {
           pointToLayer: function (feature, latlng) {
-            return Leaflet.circleMarker(latlng, geojsonMarkerOptions);
+            return L.circleMarker(latlng, geojsonMarkerOptions);
           }
         }
       },

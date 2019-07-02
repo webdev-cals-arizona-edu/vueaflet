@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import * as Leaflet from 'leaflet'
+  import L from 'leaflet'
   import { mapMutations, mapGetters, mapActions } from 'vuex'
   import VueafletBus from '@/buses'
   import { 
@@ -61,7 +61,7 @@
 
       this.innerFeatureGroup = (existingFeatureGroup)
         ? existingFeatureGroup
-        : Leaflet.featureGroup()
+        : L.featureGroup()
 
       this.events.forEach((event) => {
         this.innerFeatureGroup.on(event, (ev) => { 

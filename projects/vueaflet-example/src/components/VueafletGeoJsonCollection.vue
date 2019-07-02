@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import * as Leaflet from 'leaflet'
+  import L from 'leaflet'
   import { mapGetters} from 'vuex'
 
   const featureCollection = [
@@ -285,7 +285,7 @@
         return {
           pane: `${vm.layerName}-${type}`,
           pointToLayer: function (feature, latlng) {
-            return Leaflet.circleMarker(latlng, {
+            return L.circleMarker(latlng, {
               radius: 8,
               fillColor: "#ff7800",
               color: "#000",

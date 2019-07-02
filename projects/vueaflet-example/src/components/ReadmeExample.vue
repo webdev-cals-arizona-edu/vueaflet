@@ -37,7 +37,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import MockControls from './MockControls'
-  import * as Leaflet from 'leaflet'
+  import L from 'leaflet'
 
   export default {
     components: {
@@ -123,7 +123,7 @@
 
         if (this.markerClicks % 2 === 0) {
           this.markerProps.options = Object.assign({}, this.markerProps.options, {
-            icon: Leaflet.icon({
+            icon: L.icon({
               iconUrl: 'https://esri.github.io/esri-leaflet/img/bus-stop-west.png',
               iconSize: [25, 41],
               shadowSize: [41, 41],
@@ -134,7 +134,7 @@
           })
         } else {
           this.markerProps.options = Object.assign({}, this.markerProps.options, {
-            icon: Leaflet.icon({
+            icon: L.icon({
               iconUrl: require('leaflet/dist/images/marker-icon.png'),
               shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
               iconSize: [25, 41],

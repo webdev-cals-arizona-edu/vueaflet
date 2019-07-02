@@ -1,7 +1,7 @@
 <template></template>
 
 <script>
-  import * as Leaflet from 'leaflet'
+  import L from 'leaflet'
   import { mapMutations } from 'vuex'
   import { VUEAFLET_ADD_MAP_LAYER, VUEAFLET_REMOVE_MAP_LAYER } from '@/store/mutation-types'
 
@@ -25,7 +25,7 @@
     },
 
     created() {
-      this.innerLayer = Leaflet.tileLayer(this.urlTemplate, this.options)
+      this.innerLayer = L.tileLayer(this.urlTemplate, this.options)
 
       this.addLayer({ id: this.mapId, layer: this.innerLayer })
     },

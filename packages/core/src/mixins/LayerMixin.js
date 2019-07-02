@@ -4,7 +4,7 @@
   This mixin does all the heavy lifting for simple Leafleft UI and Vector layers.
 */
 
-import * as Leaflet from 'leaflet'
+import L from 'leaflet'
 import { mapMutations } from 'vuex'
 import { 
   VUEAFLET_ADD_MAP_LAYER, 
@@ -52,7 +52,7 @@ export default {
     // this.registerOptions allows the parent to merge in options for it's children if context isn't available when child mounts
     // currently this.registerOptions is only being used by LFeatureGroup in order to set a custom "pane"
     this.mergedOptions = (this.registerOptions) ? this.registerOptions(this.options) : this.options
-    this.innerLayer = Leaflet[this.type](this.latlng, Object.assign({}, this.defaultOptions, this.mergedOptions))
+    this.innerLayer = L[this.type](this.latlng, Object.assign({}, this.defaultOptions, this.mergedOptions))
   },
 
   mounted() {

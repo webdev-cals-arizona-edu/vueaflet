@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("vuex"), require("leaflet"), require("@vueaflet/core"), require("leaflet.markercluster"), require("esri-leaflet-cluster"), require("esri-leaflet"));
+		module.exports = factory(require("vuex"), require("@vueaflet/core"), require("leaflet.markercluster"), require("esri-leaflet-cluster"), require("esri-leaflet"));
 	else if(typeof define === 'function' && define.amd)
-		define(["vuex", "leaflet", "@vueaflet/core", "leaflet.markercluster", "esri-leaflet-cluster", "esri-leaflet"], factory);
+		define(["vuex", "@vueaflet/core", "leaflet.markercluster", "esri-leaflet-cluster", "esri-leaflet"], factory);
 	else if(typeof exports === 'object')
-		exports["esri-vueaflet"] = factory(require("vuex"), require("leaflet"), require("@vueaflet/core"), require("leaflet.markercluster"), require("esri-leaflet-cluster"), require("esri-leaflet"));
+		exports["esri-vueaflet"] = factory(require("vuex"), require("@vueaflet/core"), require("leaflet.markercluster"), require("esri-leaflet-cluster"), require("esri-leaflet"));
 	else
-		root["esri-vueaflet"] = factory(root["vuex"], root["leaflet"], root["@vueaflet/core"], root["leaflet.markercluster"], root["esri-leaflet-cluster"], root["esri-leaflet"]);
-})((typeof self !== 'undefined' ? self : this), function(__WEBPACK_EXTERNAL_MODULE__5880__, __WEBPACK_EXTERNAL_MODULE__860c__, __WEBPACK_EXTERNAL_MODULE__8b26__, __WEBPACK_EXTERNAL_MODULE_a388__, __WEBPACK_EXTERNAL_MODULE_c7b8__, __WEBPACK_EXTERNAL_MODULE_d3d4__) {
+		root["esri-vueaflet"] = factory(root["vuex"], root["@vueaflet/core"], root["leaflet.markercluster"], root["esri-leaflet-cluster"], root["esri-leaflet"]);
+})((typeof self !== 'undefined' ? self : this), function(__WEBPACK_EXTERNAL_MODULE__5880__, __WEBPACK_EXTERNAL_MODULE__8b26__, __WEBPACK_EXTERNAL_MODULE_a388__, __WEBPACK_EXTERNAL_MODULE_c7b8__, __WEBPACK_EXTERNAL_MODULE_d3d4__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -145,12 +145,14 @@ var enumKeys = __webpack_require__("1e38");
 var isArray = __webpack_require__("80d1");
 var anObject = __webpack_require__("f1f4");
 var isObject = __webpack_require__("bdb7");
+var toObject = __webpack_require__("32b5");
 var toIObject = __webpack_require__("1ece");
 var toPrimitive = __webpack_require__("29cd");
 var createDesc = __webpack_require__("8c78");
 var _create = __webpack_require__("c9ec");
 var gOPNExt = __webpack_require__("41d3");
 var $GOPD = __webpack_require__("55e4");
+var $GOPS = __webpack_require__("769b");
 var $DP = __webpack_require__("5300");
 var $keys = __webpack_require__("029b");
 var gOPD = $GOPD.f;
@@ -167,7 +169,7 @@ var SymbolRegistry = shared('symbol-registry');
 var AllSymbols = shared('symbols');
 var OPSymbols = shared('op-symbols');
 var ObjectProto = Object[PROTOTYPE];
-var USE_NATIVE = typeof $Symbol == 'function';
+var USE_NATIVE = typeof $Symbol == 'function' && !!$GOPS.f;
 var QObject = global.QObject;
 // Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
 var setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
@@ -277,7 +279,7 @@ if (!USE_NATIVE) {
   $DP.f = $defineProperty;
   __webpack_require__("cfb1").f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__("0c85").f = $propertyIsEnumerable;
-  __webpack_require__("769b").f = $getOwnPropertySymbols;
+  $GOPS.f = $getOwnPropertySymbols;
 
   if (DESCRIPTORS && !__webpack_require__("52db")) {
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
@@ -328,6 +330,16 @@ $export($export.S + $export.F * !USE_NATIVE, 'Object', {
   getOwnPropertySymbols: $getOwnPropertySymbols
 });
 
+// Chrome 38 and 39 `Object.getOwnPropertySymbols` fails on primitives
+// https://bugs.chromium.org/p/v8/issues/detail?id=3443
+var FAILS_ON_PRIMITIVES = $fails(function () { $GOPS.f(1); });
+
+$export($export.S + $export.F * FAILS_ON_PRIMITIVES, 'Object', {
+  getOwnPropertySymbols: function getOwnPropertySymbols(it) {
+    return $GOPS.f(toObject(it));
+  }
+});
+
 // 24.3.2 JSON.stringify(value [, replacer [, space]])
 $JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function () {
   var S = $Symbol();
@@ -373,6 +385,22 @@ var defined = __webpack_require__("c8ae");
 module.exports = function (it) {
   return IObject(defined(it));
 };
+
+
+/***/ }),
+
+/***/ "0c1f":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 Object.keys(O)
+var toObject = __webpack_require__("79c1");
+var $keys = __webpack_require__("8996");
+
+__webpack_require__("5642")('keys', function () {
+  return function keys(it) {
+    return $keys(toObject(it));
+  };
+});
 
 
 /***/ }),
@@ -482,6 +510,10 @@ __webpack_require__.d(components_namespaceObject, "ETiledMapLayer", function() {
 // This file is imported into lib/wc client bundles.
 
 if (typeof window !== 'undefined') {
+  if (true) {
+    __webpack_require__("4141")
+  }
+
   var setPublicPath_i
   if ((setPublicPath_i = window.document.currentScript) && (setPublicPath_i = setPublicPath_i.src.match(/(.+\/)[^/]+\.js(\?.*)?$/))) {
     __webpack_require__.p = setPublicPath_i[1] // eslint-disable-line
@@ -494,9 +526,11 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.function.name.js
 var es6_function_name = __webpack_require__("c880");
 
-// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/keys.js
-var keys = __webpack_require__("4cfc");
-var keys_default = /*#__PURE__*/__webpack_require__.n(keys);
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.array.iterator.js
+var es6_array_iterator = __webpack_require__("dde3");
+
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.object.keys.js
+var es6_object_keys = __webpack_require__("0c1f");
 
 // EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__("2e73");
@@ -509,27 +543,23 @@ var es6_array_for_each = __webpack_require__("af48");
 
 
 
-var utils_registerComponents = function registerComponents(Vue, components) {
-  if (!Vue || !components) throw new Error('[registerComponents] missing params');
 
-  keys_default()(components).forEach(function (key) {
+var registerComponents = function registerComponents(Vue, components) {
+  if (!Vue || !components) throw new Error('[registerComponents] missing params');
+  Object.keys(components).forEach(function (key) {
     var c = components[key];
     Vue.component(c.name, c);
   });
 };
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"28868e37-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/EBasemapLayer/EBasemapLayer.vue?vue&type=template&id=5c63e3b9&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4ed4fd06-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/EBasemapLayer/EBasemapLayer.vue?vue&type=template&id=5c567924&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/EBasemapLayer/EBasemapLayer.vue?vue&type=template&id=5c63e3b9&
+// CONCATENATED MODULE: ./src/components/EBasemapLayer/EBasemapLayer.vue?vue&type=template&id=5c567924&
 
-// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/assign.js
-var object_assign = __webpack_require__("3821");
-var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
-
-// EXTERNAL MODULE: external "leaflet"
-var external_leaflet_ = __webpack_require__("860c");
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.object.assign.js
+var es6_object_assign = __webpack_require__("3cdf");
 
 // EXTERNAL MODULE: external "esri-leaflet"
 var external_esri_leaflet_ = __webpack_require__("d3d4");
@@ -541,6 +571,10 @@ var get_own_property_descriptor_default = /*#__PURE__*/__webpack_require__.n(get
 // EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js
 var get_own_property_symbols = __webpack_require__("f24e");
 var get_own_property_symbols_default = /*#__PURE__*/__webpack_require__.n(get_own_property_symbols);
+
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/keys.js
+var keys = __webpack_require__("4cfc");
+var keys_default = /*#__PURE__*/__webpack_require__.n(keys);
 
 // EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/define-property.js
 var define_property = __webpack_require__("2dc0");
@@ -624,7 +658,6 @@ var _this = undefined;
 
 
 
-
 /* harmony default export */ var LayerMixin = ({
   inject: {
     mapId: {
@@ -700,7 +733,7 @@ var _this = undefined;
     removeLayer: VUEAFLET_REMOVE_MAP_LAYER
   }), Object(external_vuex_["mapActions"])(['removeNamedLayer']), {
     construct: function construct() {
-      return external_esri_leaflet_[this.type](assign_default()({}, this.defaultOptions, this.mergedOptions));
+      return external_esri_leaflet_[this.type](Object.assign({}, this.defaultOptions, this.mergedOptions));
     },
     addEventListeners: function addEventListeners() {
       var _this2 = this;
@@ -739,7 +772,6 @@ var _this = undefined;
 //
 
 
-
 var EBasemapLayer = {
   name: 'e-basemap-layer',
   mixins: [LayerMixin],
@@ -761,7 +793,7 @@ var EBasemapLayer = {
   methods: {
     // overrides "construct" method within mixins/LayerMixin.js
     construct: function construct() {
-      return Object(external_esri_leaflet_["basemapLayer"])(this.basemap, assign_default()({}, this.defaultOptions, this.mergedOptions)); // Vector not supported yet
+      return Object(external_esri_leaflet_["basemapLayer"])(this.basemap, Object.assign({}, this.defaultOptions, this.mergedOptions)); // Vector not supported yet
       // if (!this.basemap) throw new Error('esri.basemapLayer requires basemap string for hosted basemap')
       // return (this.vector)
       //   ? esri.Vector.basemapLayer(this.basemap, Object.assign({}, this.defaultOptions, this.mergedOptions))
@@ -887,7 +919,7 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var EBasemapLayer_EBasemapLayer = (component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"28868e37-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/EClusterFeatureLayer/EClusterFeatureLayer.vue?vue&type=template&id=04dcb04b&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4ed4fd06-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/EClusterFeatureLayer/EClusterFeatureLayer.vue?vue&type=template&id=04dcb04b&
 var EClusterFeatureLayervue_type_template_id_04dcb04b_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
 var EClusterFeatureLayervue_type_template_id_04dcb04b_staticRenderFns = []
 
@@ -940,7 +972,7 @@ var EClusterFeatureLayer = {
   }), {
     // overrides "construct" method within mixins/LayerMixin.js
     construct: function construct() {
-      return external_esri_leaflet_cluster_default.a.featureLayer(assign_default()({}, this.defaultOptions, this.mergedOptions));
+      return external_esri_leaflet_cluster_default.a.featureLayer(Object.assign({}, this.defaultOptions, this.mergedOptions));
     },
     redraw: function redraw() {
       this.removeLayer({
@@ -977,7 +1009,7 @@ var EClusterFeatureLayer_component = normalizeComponent(
 )
 
 /* harmony default export */ var EClusterFeatureLayer_EClusterFeatureLayer = (EClusterFeatureLayer_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"28868e37-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/EFeatureLayer/EFeatureLayer.vue?vue&type=template&id=d6886706&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4ed4fd06-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/EFeatureLayer/EFeatureLayer.vue?vue&type=template&id=d6886706&
 var EFeatureLayervue_type_template_id_d6886706_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
 var EFeatureLayervue_type_template_id_d6886706_staticRenderFns = []
 
@@ -1029,7 +1061,7 @@ var EFeatureLayer_component = normalizeComponent(
 )
 
 /* harmony default export */ var EFeatureLayer_EFeatureLayer = (EFeatureLayer_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"28868e37-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/EDynamicMapLayer/EDynamicMapLayer.vue?vue&type=template&id=d58f59e0&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4ed4fd06-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/EDynamicMapLayer/EDynamicMapLayer.vue?vue&type=template&id=d58f59e0&
 var EDynamicMapLayervue_type_template_id_d58f59e0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
 var EDynamicMapLayervue_type_template_id_d58f59e0_staticRenderFns = []
 
@@ -1088,7 +1120,7 @@ var EDynamicMapLayer_component = normalizeComponent(
 )
 
 /* harmony default export */ var EDynamicMapLayer_EDynamicMapLayer = (EDynamicMapLayer_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"28868e37-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/EImageMapLayer/EImageMapLayer.vue?vue&type=template&id=6e6b09a8&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4ed4fd06-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/EImageMapLayer/EImageMapLayer.vue?vue&type=template&id=6e6b09a8&
 var EImageMapLayervue_type_template_id_6e6b09a8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
 var EImageMapLayervue_type_template_id_6e6b09a8_staticRenderFns = []
 
@@ -1140,7 +1172,7 @@ var EImageMapLayer_component = normalizeComponent(
 )
 
 /* harmony default export */ var EImageMapLayer_EImageMapLayer = (EImageMapLayer_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"28868e37-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/ETiledMapLayer/ETiledMapLayer.vue?vue&type=template&id=6d11a428&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4ed4fd06-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/ETiledMapLayer/ETiledMapLayer.vue?vue&type=template&id=6d11a428&
 var ETiledMapLayervue_type_template_id_6d11a428_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
 var ETiledMapLayervue_type_template_id_6d11a428_staticRenderFns = []
 
@@ -1198,7 +1230,7 @@ var ETiledMapLayer_component = normalizeComponent(
 var main_createInstaller = function createInstaller(components) {
   return function (Vue, options) {
     // do something with options
-    utils_registerComponents(Vue, components);
+    registerComponents(Vue, components);
   };
 };
 
@@ -1331,17 +1363,6 @@ $export.W = 32;  // wrap
 $export.U = 64;  // safe
 $export.R = 128; // real proto method for `library`
 module.exports = $export;
-
-
-/***/ }),
-
-/***/ "220a":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.3.1 Object.assign(target, source)
-var $export = __webpack_require__("2058");
-
-$export($export.S + $export.F, 'Object', { assign: __webpack_require__("5d68") });
 
 
 /***/ }),
@@ -1602,13 +1623,6 @@ var store = global[SHARED] || (global[SHARED] = {});
 
 /***/ }),
 
-/***/ "3821":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("4e39");
-
-/***/ }),
-
 /***/ "382d":
 /***/ (function(module, exports) {
 
@@ -1650,6 +1664,17 @@ module.exports = function (Constructor, NAME, next) {
 
 /***/ }),
 
+/***/ "3cdf":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.3.1 Object.assign(target, source)
+var $export = __webpack_require__("ef37");
+
+$export($export.S + $export.F, 'Object', { assign: __webpack_require__("ab23") });
+
+
+/***/ }),
+
 /***/ "3d85":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1680,6 +1705,49 @@ exports.f = __webpack_require__("3d85") ? gOPD : function getOwnPropertyDescript
   } catch (e) { /* empty */ }
   if (has(O, P)) return createDesc(!pIE.f.call(O, P), O[P]);
 };
+
+
+/***/ }),
+
+/***/ "4141":
+/***/ (function(module, exports) {
+
+// document.currentScript polyfill by Adam Miller
+
+// MIT license
+
+(function(document){
+  var currentScript = "currentScript",
+      scripts = document.getElementsByTagName('script'); // Live NodeList collection
+
+  // If browser needs currentScript polyfill, add get currentScript() to the document object
+  if (!(currentScript in document)) {
+    Object.defineProperty(document, currentScript, {
+      get: function(){
+
+        // IE 6-10 supports script readyState
+        // IE 10+ support stack trace
+        try { throw new Error(); }
+        catch (err) {
+
+          // Find the second match for the "at" string to get file src url from stack.
+          // Specifically works with the format of stack traces in IE.
+          var i, res = ((/.*at [^\(]*\((.*):.+:.+\)$/ig).exec(err.stack) || [false])[1];
+
+          // For all scripts on the page, if src matches or if ready state is interactive, return the script tag
+          for(i in scripts){
+            if(scripts[i].src == res || scripts[i].readyState == "interactive"){
+              return scripts[i];
+            }
+          }
+
+          // If no match, return null
+          return null;
+        }
+      }
+    });
+  }
+})(document);
 
 
 /***/ }),
@@ -1797,15 +1865,6 @@ module.exports = __webpack_require__("2354");
 
 /***/ }),
 
-/***/ "4e39":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("220a");
-module.exports = __webpack_require__("ac5a").Object.assign;
-
-
-/***/ }),
-
 /***/ "50cc":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1869,6 +1928,23 @@ exports.f = __webpack_require__("39b1") ? gOPD : function getOwnPropertyDescript
 
 /***/ }),
 
+/***/ "5642":
+/***/ (function(module, exports, __webpack_require__) {
+
+// most Object methods by ES6 should accept primitives
+var $export = __webpack_require__("ef37");
+var core = __webpack_require__("5c50");
+var fails = __webpack_require__("a124");
+module.exports = function (KEY, exec) {
+  var fn = (core.Object || {})[KEY] || Object[KEY];
+  var exp = {};
+  exp[KEY] = exec(fn);
+  $export($export.S + $export.F * fails(function () { fn(1); }), 'Object', exp);
+};
+
+
+/***/ }),
+
 /***/ "573a":
 /***/ (function(module, exports) {
 
@@ -1890,50 +1966,8 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__5880__;
 /***/ "5c50":
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.6.4' };
+var core = module.exports = { version: '2.6.9' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-
-
-/***/ }),
-
-/***/ "5d68":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// 19.1.2.1 Object.assign(target, source, ...)
-var getKeys = __webpack_require__("029b");
-var gOPS = __webpack_require__("769b");
-var pIE = __webpack_require__("0c85");
-var toObject = __webpack_require__("32b5");
-var IObject = __webpack_require__("6800");
-var $assign = Object.assign;
-
-// should work with symbols and should have deterministic property order (V8 bug)
-module.exports = !$assign || __webpack_require__("ed2f")(function () {
-  var A = {};
-  var B = {};
-  // eslint-disable-next-line no-undef
-  var S = Symbol();
-  var K = 'abcdefghijklmnopqrst';
-  A[S] = 7;
-  K.split('').forEach(function (k) { B[k] = k; });
-  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
-}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
-  var T = toObject(target);
-  var aLen = arguments.length;
-  var index = 1;
-  var getSymbols = gOPS.f;
-  var isEnum = pIE.f;
-  while (aLen > index) {
-    var S = IObject(arguments[index++]);
-    var keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S);
-    var length = keys.length;
-    var j = 0;
-    var key;
-    while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
-  } return T;
-} : $assign;
 
 
 /***/ }),
@@ -2241,6 +2275,14 @@ module.exports = Array.isArray || function isArray(arg) {
 
 /***/ }),
 
+/***/ "8109":
+/***/ (function(module, exports) {
+
+exports.f = Object.getOwnPropertySymbols;
+
+
+/***/ }),
+
 /***/ "82e1":
 /***/ (function(module, exports) {
 
@@ -2278,13 +2320,6 @@ var global = module.exports = typeof window != 'undefined' && window.Math == Mat
   : Function('return this')();
 if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
-
-/***/ }),
-
-/***/ "860c":
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE__860c__;
 
 /***/ }),
 
@@ -2453,10 +2488,56 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_a388__;
 
 /***/ }),
 
+/***/ "ab23":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// 19.1.2.1 Object.assign(target, source, ...)
+var DESCRIPTORS = __webpack_require__("3d85");
+var getKeys = __webpack_require__("8996");
+var gOPS = __webpack_require__("8109");
+var pIE = __webpack_require__("d0e9");
+var toObject = __webpack_require__("79c1");
+var IObject = __webpack_require__("aec0");
+var $assign = Object.assign;
+
+// should work with symbols and should have deterministic property order (V8 bug)
+module.exports = !$assign || __webpack_require__("a124")(function () {
+  var A = {};
+  var B = {};
+  // eslint-disable-next-line no-undef
+  var S = Symbol();
+  var K = 'abcdefghijklmnopqrst';
+  A[S] = 7;
+  K.split('').forEach(function (k) { B[k] = k; });
+  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
+}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
+  var T = toObject(target);
+  var aLen = arguments.length;
+  var index = 1;
+  var getSymbols = gOPS.f;
+  var isEnum = pIE.f;
+  while (aLen > index) {
+    var S = IObject(arguments[index++]);
+    var keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S);
+    var length = keys.length;
+    var j = 0;
+    var key;
+    while (length > j) {
+      key = keys[j++];
+      if (!DESCRIPTORS || isEnum.call(S, key)) T[key] = S[key];
+    }
+  } return T;
+} : $assign;
+
+
+/***/ }),
+
 /***/ "ac5a":
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.6.4' };
+var core = module.exports = { version: '2.6.9' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 

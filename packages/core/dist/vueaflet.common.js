@@ -136,12 +136,14 @@ var enumKeys = __webpack_require__("1e38");
 var isArray = __webpack_require__("80d1");
 var anObject = __webpack_require__("f1f4");
 var isObject = __webpack_require__("bdb7");
+var toObject = __webpack_require__("32b5");
 var toIObject = __webpack_require__("1ece");
 var toPrimitive = __webpack_require__("29cd");
 var createDesc = __webpack_require__("8c78");
 var _create = __webpack_require__("c9ec");
 var gOPNExt = __webpack_require__("41d3");
 var $GOPD = __webpack_require__("55e4");
+var $GOPS = __webpack_require__("769b");
 var $DP = __webpack_require__("5300");
 var $keys = __webpack_require__("029b");
 var gOPD = $GOPD.f;
@@ -158,7 +160,7 @@ var SymbolRegistry = shared('symbol-registry');
 var AllSymbols = shared('symbols');
 var OPSymbols = shared('op-symbols');
 var ObjectProto = Object[PROTOTYPE];
-var USE_NATIVE = typeof $Symbol == 'function';
+var USE_NATIVE = typeof $Symbol == 'function' && !!$GOPS.f;
 var QObject = global.QObject;
 // Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
 var setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
@@ -268,7 +270,7 @@ if (!USE_NATIVE) {
   $DP.f = $defineProperty;
   __webpack_require__("cfb1").f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__("0c85").f = $propertyIsEnumerable;
-  __webpack_require__("769b").f = $getOwnPropertySymbols;
+  $GOPS.f = $getOwnPropertySymbols;
 
   if (DESCRIPTORS && !__webpack_require__("52db")) {
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
@@ -319,6 +321,16 @@ $export($export.S + $export.F * !USE_NATIVE, 'Object', {
   getOwnPropertySymbols: $getOwnPropertySymbols
 });
 
+// Chrome 38 and 39 `Object.getOwnPropertySymbols` fails on primitives
+// https://bugs.chromium.org/p/v8/issues/detail?id=3443
+var FAILS_ON_PRIMITIVES = $fails(function () { $GOPS.f(1); });
+
+$export($export.S + $export.F * FAILS_ON_PRIMITIVES, 'Object', {
+  getOwnPropertySymbols: function getOwnPropertySymbols(it) {
+    return $GOPS.f(toObject(it));
+  }
+});
+
 // 24.3.2 JSON.stringify(value [, replacer [, space]])
 $JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function () {
   var S = $Symbol();
@@ -364,6 +376,22 @@ var defined = __webpack_require__("c8ae");
 module.exports = function (it) {
   return IObject(defined(it));
 };
+
+
+/***/ }),
+
+/***/ "0c1f":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 Object.keys(O)
+var toObject = __webpack_require__("79c1");
+var $keys = __webpack_require__("8996");
+
+__webpack_require__("5642")('keys', function () {
+  return function keys(it) {
+    return $keys(toObject(it));
+  };
+});
 
 
 /***/ }),
@@ -763,6 +791,10 @@ __webpack_require__.d(components_namespaceObject, "LTileLayer", function() { ret
 // This file is imported into lib/wc client bundles.
 
 if (typeof window !== 'undefined') {
+  if (true) {
+    __webpack_require__("4141")
+  }
+
   var setPublicPath_i
   if ((setPublicPath_i = window.document.currentScript) && (setPublicPath_i = setPublicPath_i.src.match(/(.+\/)[^/]+\.js(\?.*)?$/))) {
     __webpack_require__.p = setPublicPath_i[1] // eslint-disable-line
@@ -778,9 +810,11 @@ var es6_object_define_property = __webpack_require__("5100");
 // EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.function.name.js
 var es6_function_name = __webpack_require__("c880");
 
-// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/keys.js
-var keys = __webpack_require__("4cfc");
-var keys_default = /*#__PURE__*/__webpack_require__.n(keys);
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.array.iterator.js
+var es6_array_iterator = __webpack_require__("dde3");
+
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.object.keys.js
+var es6_object_keys = __webpack_require__("0c1f");
 
 // EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__("2e73");
@@ -789,6 +823,7 @@ var web_dom_iterable = __webpack_require__("2e73");
 var es6_array_for_each = __webpack_require__("af48");
 
 // CONCATENATED MODULE: ./src/utils/index.js
+
 
 
 
@@ -806,10 +841,9 @@ function layerTypeLookup(type) {
   return layerTypes[type];
 } // globally registers components
 
-var utils_registerComponents = function registerComponents(Vue, components) {
+var registerComponents = function registerComponents(Vue, components) {
   if (!Vue || !components) throw new Error('[registerComponents] missing params');
-
-  keys_default()(components).forEach(function (key) {
+  Object.keys(components).forEach(function (key) {
     var c = components[key];
     Vue.component(c.name, c);
   });
@@ -843,6 +877,7 @@ var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
 
 // EXTERNAL MODULE: external "leaflet"
 var external_leaflet_ = __webpack_require__("860c");
+var external_leaflet_default = /*#__PURE__*/__webpack_require__.n(external_leaflet_);
 
 // EXTERNAL MODULE: external "lodash.filter"
 var external_lodash_filter_ = __webpack_require__("2a5e");
@@ -979,7 +1014,7 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, VUEAFLET_CREATE_MA
   var _ref11$id = _ref11.id,
       id = _ref11$id === void 0 ? DEFAULT_MAP_ID : _ref11$id,
       options = _ref11.options;
-  state.maps[id] = external_leaflet_["map"](id, options); // state.maps[id].zoomControl.setPosition('bottomright');
+  state.maps[id] = external_leaflet_default.a.map(id, options); // state.maps[id].zoomControl.setPosition('bottomright');
 }), _defineProperty(_mutations, VUEAFLET_SET_VIEW, function (state, _ref12) {
   var _ref12$id = _ref12.id,
       id = _ref12$id === void 0 ? DEFAULT_MAP_ID : _ref12$id,
@@ -1076,12 +1111,12 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, VUEAFLET_CREATE_MA
   actions: actions,
   mutations: mutations
 });
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LCircle/LCircle.vue?vue&type=template&id=74cda5c6&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"795c21e8-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LCircle/LCircle.vue?vue&type=template&id=df1c9f26&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LCircle/LCircle.vue?vue&type=template&id=74cda5c6&
+// CONCATENATED MODULE: ./src/components/LCircle/LCircle.vue?vue&type=template&id=df1c9f26&
 
 // EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js
 var get_own_property_descriptor = __webpack_require__("1486");
@@ -1090,6 +1125,10 @@ var get_own_property_descriptor_default = /*#__PURE__*/__webpack_require__.n(get
 // EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js
 var get_own_property_symbols = __webpack_require__("f24e");
 var get_own_property_symbols_default = /*#__PURE__*/__webpack_require__.n(get_own_property_symbols);
+
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/keys.js
+var keys = __webpack_require__("4cfc");
+var keys_default = /*#__PURE__*/__webpack_require__.n(keys);
 
 // CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js
 
@@ -1115,9 +1154,8 @@ function _objectSpread(target) {
 
   return target;
 }
-// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/@babel/runtime-corejs2/core-js/object/assign.js
-var object_assign = __webpack_require__("3821");
-var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
+// EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.object.assign.js
+var es6_object_assign = __webpack_require__("3cdf");
 
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__("5880");
@@ -1183,7 +1221,7 @@ var external_vuex_ = __webpack_require__("5880");
     // this.registerOptions allows the parent to merge in options for it's children if context isn't available when child mounts
     // currently this.registerOptions is only being used by LFeatureGroup in order to set a custom "pane"
     this.mergedOptions = this.registerOptions ? this.registerOptions(this.options) : this.options;
-    this.innerLayer = external_leaflet_[this.type](this.latlng, assign_default()({}, this.defaultOptions, this.mergedOptions));
+    this.innerLayer = external_leaflet_default.a[this.type](this.latlng, Object.assign({}, this.defaultOptions, this.mergedOptions));
   },
   mounted: function mounted() {
     // setup listeners
@@ -1242,7 +1280,6 @@ var external_vuex_ = __webpack_require__("5880");
 // CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LCircle/LCircle.vue?vue&type=script&lang=js&
 //
 //
-
 
 /* harmony default export */ var LCirclevue_type_script_lang_js_ = ({
   name: 'l-circle',
@@ -1376,12 +1413,12 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var LCircle = (component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LFeatureGroup/LFeatureGroup.vue?vue&type=template&id=5aa40759&
-var LFeatureGroupvue_type_template_id_5aa40759_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"feature-group"},[_vm._t("default"),_vm._l((_vm.layers),function(layer,index){return [_c(_vm.layerTypeLookup(layer.type),_vm._b({key:layer.id,tag:"component"},'component',layer,false))]})],2)}
-var LFeatureGroupvue_type_template_id_5aa40759_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"795c21e8-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LFeatureGroup/LFeatureGroup.vue?vue&type=template&id=08c48a0d&
+var LFeatureGroupvue_type_template_id_08c48a0d_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"feature-group"},[_vm._t("default"),_vm._l((_vm.layers),function(layer,index){return [_c(_vm.layerTypeLookup(layer.type),_vm._b({key:layer.id,tag:"component"},'component',layer,false))]})],2)}
+var LFeatureGroupvue_type_template_id_08c48a0d_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LFeatureGroup/LFeatureGroup.vue?vue&type=template&id=5aa40759&
+// CONCATENATED MODULE: ./src/components/LFeatureGroup/LFeatureGroup.vue?vue&type=template&id=08c48a0d&
 
 // EXTERNAL MODULE: /Users/matteking/Dev/vueaflet/node_modules/core-js/modules/es6.number.constructor.js
 var es6_number_constructor = __webpack_require__("ce9c");
@@ -1447,7 +1484,7 @@ var LFeatureGroup = {
     var _this = this;
 
     var existingFeatureGroup = this.getNamedLayer(this.layerName);
-    this.innerFeatureGroup = existingFeatureGroup ? existingFeatureGroup : external_leaflet_["featureGroup"]();
+    this.innerFeatureGroup = existingFeatureGroup ? existingFeatureGroup : external_leaflet_default.a.featureGroup();
     this.events.forEach(function (event) {
       _this.innerFeatureGroup.on(event, function (ev) {
         _this.$emit(event, {
@@ -1496,7 +1533,7 @@ var LFeatureGroup = {
     // LFeatureGroup takes advantage of registerOptions in order to set a custom Leaflet pane named after this.layerName
     // this.layerName cannot be passed down to children or it would prevent future functionalily of named layers for UI elements
     registerOptions: function registerOptions(options) {
-      return assign_default()({}, options, _objectSpread({
+      return Object.assign({}, options, _objectSpread({
         pane: this.layerName ? this.layerName : null
       }, this.options));
     }
@@ -1515,8 +1552,8 @@ var LFeatureGroup = {
 
 var LFeatureGroup_component = normalizeComponent(
   LFeatureGroup_LFeatureGroupvue_type_script_lang_js_,
-  LFeatureGroupvue_type_template_id_5aa40759_render,
-  LFeatureGroupvue_type_template_id_5aa40759_staticRenderFns,
+  LFeatureGroupvue_type_template_id_08c48a0d_render,
+  LFeatureGroupvue_type_template_id_08c48a0d_staticRenderFns,
   false,
   null,
   null,
@@ -1525,7 +1562,7 @@ var LFeatureGroup_component = normalizeComponent(
 )
 
 /* harmony default export */ var LFeatureGroup_LFeatureGroup = (LFeatureGroup_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LGeoJsonCollection/LGeoJsonCollection.vue?vue&type=template&id=491764ff&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"795c21e8-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LGeoJsonCollection/LGeoJsonCollection.vue?vue&type=template&id=491764ff&
 var LGeoJsonCollectionvue_type_template_id_491764ff_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"geo-json-collection"},[_vm._l((_vm.collection),function(features,index){return [_c('l-geo-json-layer',{key:index,attrs:{"features":features,"options":_vm.getOptions(_vm.getGeometryType(features)),"layer-name":(_vm.layerName + "-" + (_vm.getGeometryType(features))),"events":['add'],"order":_vm.order},on:{"add":_vm.handleAddedToMap}})]})],2)}
 var LGeoJsonCollectionvue_type_template_id_491764ff_staticRenderFns = []
 
@@ -1673,12 +1710,12 @@ var LGeoJsonCollection_component = normalizeComponent(
 )
 
 /* harmony default export */ var LGeoJsonCollection_LGeoJsonCollection = (LGeoJsonCollection_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LGeoJsonLayer/LGeoJsonLayer.vue?vue&type=template&id=54c84b3a&
-var LGeoJsonLayervue_type_template_id_54c84b3a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
-var LGeoJsonLayervue_type_template_id_54c84b3a_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"795c21e8-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LGeoJsonLayer/LGeoJsonLayer.vue?vue&type=template&id=520a20aa&
+var LGeoJsonLayervue_type_template_id_520a20aa_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
+var LGeoJsonLayervue_type_template_id_520a20aa_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LGeoJsonLayer/LGeoJsonLayer.vue?vue&type=template&id=54c84b3a&
+// CONCATENATED MODULE: ./src/components/LGeoJsonLayer/LGeoJsonLayer.vue?vue&type=template&id=520a20aa&
 
 // CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LGeoJsonLayer/LGeoJsonLayer.vue?vue&type=script&lang=js&
 
@@ -1692,8 +1729,8 @@ var LGeoJsonLayervue_type_template_id_54c84b3a_staticRenderFns = []
 
 
 
-delete external_leaflet_["Icon"].Default.prototype._getIconUrl;
-external_leaflet_["Icon"].Default.mergeOptions({
+delete external_leaflet_default.a.Icon.Default.prototype._getIconUrl;
+external_leaflet_default.a.Icon.Default.mergeOptions({
   iconRetinaUrl: __webpack_require__("75b2"),
   iconUrl: __webpack_require__("7a41"),
   shadowUrl: __webpack_require__("b31d")
@@ -1751,7 +1788,7 @@ var LGeoJsonLayer = {
       var existingLayer = this.getNamedLayer(this.layerName); // if layer already exists, use L.geoJSON.addData method
       // see https://leafletjs.com/reference-1.3.0.html#geojson
 
-      this.innerGeoJSON = existingLayer ? existingLayer.addData(this.features) : external_leaflet_["geoJSON"](this.features, assign_default()({}, this.options, {
+      this.innerGeoJSON = existingLayer ? existingLayer.addData(this.features) : external_leaflet_default.a.geoJSON(this.features, Object.assign({}, this.options, {
         pane: this.layerName
       }));
       this.events.forEach(function (event) {
@@ -1807,8 +1844,8 @@ var LGeoJsonLayer = {
 
 var LGeoJsonLayer_component = normalizeComponent(
   LGeoJsonLayer_LGeoJsonLayervue_type_script_lang_js_,
-  LGeoJsonLayervue_type_template_id_54c84b3a_render,
-  LGeoJsonLayervue_type_template_id_54c84b3a_staticRenderFns,
+  LGeoJsonLayervue_type_template_id_520a20aa_render,
+  LGeoJsonLayervue_type_template_id_520a20aa_staticRenderFns,
   false,
   null,
   null,
@@ -1817,7 +1854,7 @@ var LGeoJsonLayer_component = normalizeComponent(
 )
 
 /* harmony default export */ var LGeoJsonLayer_LGeoJsonLayer = (LGeoJsonLayer_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LMap/LMap.vue?vue&type=template&id=41f5be12&
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"795c21e8-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LMap/LMap.vue?vue&type=template&id=41f5be12&
 var LMapvue_type_template_id_41f5be12_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"map"},[_c('div',{staticClass:"map__mount",attrs:{"id":_vm.mapId}},[(_vm.ready)?_vm._t("default"):_vm._e(),(_vm.ready)?_vm._l((_vm.basemaps),function(basemap,index){return (_vm.activeBasemap === basemap.label)?_c('l-tile-layer',{key:basemap.label,attrs:{"url-template":basemap.urlTemplate,"options":basemap.options}}):_vm._e()}):_vm._e(),(_vm.ready)?_vm._l((_vm.layers),function(layer,index){return (layer.visible)?_c(_vm.layerTypeLookup(layer.type),_vm._b({key:index,tag:"component",attrs:{"layer-name":layer.label,"order":layer.order || index}},'component',layer,false)):_vm._e()}):_vm._e()],2)])}
 var LMapvue_type_template_id_41f5be12_staticRenderFns = []
 
@@ -1996,12 +2033,12 @@ var LMap_component = normalizeComponent(
 )
 
 /* harmony default export */ var LMap_LMap = (LMap_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LMarker/LMarker.vue?vue&type=template&id=29eba716&
-var LMarkervue_type_template_id_29eba716_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
-var LMarkervue_type_template_id_29eba716_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"795c21e8-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LMarker/LMarker.vue?vue&type=template&id=5dc653b6&
+var LMarkervue_type_template_id_5dc653b6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
+var LMarkervue_type_template_id_5dc653b6_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LMarker/LMarker.vue?vue&type=template&id=29eba716&
+// CONCATENATED MODULE: ./src/components/LMarker/LMarker.vue?vue&type=template&id=5dc653b6&
 
 // CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LMarker/LMarker.vue?vue&type=script&lang=js&
 //
@@ -2015,7 +2052,7 @@ var LMarker = {
     return {
       type: 'marker',
       defaultOptions: {
-        icon: external_leaflet_["icon"]({
+        icon: external_leaflet_default.a.icon({
           iconUrl: __webpack_require__("7a41"),
           shadowUrl: __webpack_require__("b31d"),
           iconSize: [25, 41],
@@ -2052,8 +2089,8 @@ var LMarker = {
 
 var LMarker_component = normalizeComponent(
   LMarker_LMarkervue_type_script_lang_js_,
-  LMarkervue_type_template_id_29eba716_render,
-  LMarkervue_type_template_id_29eba716_staticRenderFns,
+  LMarkervue_type_template_id_5dc653b6_render,
+  LMarkervue_type_template_id_5dc653b6_staticRenderFns,
   false,
   null,
   null,
@@ -2062,17 +2099,16 @@ var LMarker_component = normalizeComponent(
 )
 
 /* harmony default export */ var LMarker_LMarker = (LMarker_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolygon/LPolygon.vue?vue&type=template&id=214fc9a4&
-var LPolygonvue_type_template_id_214fc9a4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
-var LPolygonvue_type_template_id_214fc9a4_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"795c21e8-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolygon/LPolygon.vue?vue&type=template&id=4319636e&
+var LPolygonvue_type_template_id_4319636e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
+var LPolygonvue_type_template_id_4319636e_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LPolygon/LPolygon.vue?vue&type=template&id=214fc9a4&
+// CONCATENATED MODULE: ./src/components/LPolygon/LPolygon.vue?vue&type=template&id=4319636e&
 
 // CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolygon/LPolygon.vue?vue&type=script&lang=js&
 //
 //
-
 
 /* harmony default export */ var LPolygonvue_type_script_lang_js_ = ({
   name: 'l-polygon',
@@ -2101,8 +2137,8 @@ var LPolygonvue_type_template_id_214fc9a4_staticRenderFns = []
 
 var LPolygon_component = normalizeComponent(
   LPolygon_LPolygonvue_type_script_lang_js_,
-  LPolygonvue_type_template_id_214fc9a4_render,
-  LPolygonvue_type_template_id_214fc9a4_staticRenderFns,
+  LPolygonvue_type_template_id_4319636e_render,
+  LPolygonvue_type_template_id_4319636e_staticRenderFns,
   false,
   null,
   null,
@@ -2111,17 +2147,16 @@ var LPolygon_component = normalizeComponent(
 )
 
 /* harmony default export */ var LPolygon = (LPolygon_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolyline/LPolyline.vue?vue&type=template&id=6ce49447&
-var LPolylinevue_type_template_id_6ce49447_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
-var LPolylinevue_type_template_id_6ce49447_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"795c21e8-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolyline/LPolyline.vue?vue&type=template&id=68fddcae&
+var LPolylinevue_type_template_id_68fddcae_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
+var LPolylinevue_type_template_id_68fddcae_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LPolyline/LPolyline.vue?vue&type=template&id=6ce49447&
+// CONCATENATED MODULE: ./src/components/LPolyline/LPolyline.vue?vue&type=template&id=68fddcae&
 
 // CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LPolyline/LPolyline.vue?vue&type=script&lang=js&
 //
 //
-
 
 var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contextmenu', 'dragstart', 'drag', 'dragend', 'move', 'add', 'remove', 'popupopen', 'popupclose', 'tooltipopen', 'tooltipclose'];
 /* harmony default export */ var LPolylinevue_type_script_lang_js_ = ({
@@ -2151,8 +2186,8 @@ var events = ['click', 'dblclick', 'mousedown', 'mouseover', 'mouseout', 'contex
 
 var LPolyline_component = normalizeComponent(
   LPolyline_LPolylinevue_type_script_lang_js_,
-  LPolylinevue_type_template_id_6ce49447_render,
-  LPolylinevue_type_template_id_6ce49447_staticRenderFns,
+  LPolylinevue_type_template_id_68fddcae_render,
+  LPolylinevue_type_template_id_68fddcae_staticRenderFns,
   false,
   null,
   null,
@@ -2161,12 +2196,12 @@ var LPolyline_component = normalizeComponent(
 )
 
 /* harmony default export */ var LPolyline = (LPolyline_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LRectangle/LRectangle.vue?vue&type=template&id=109eed22&
-var LRectanglevue_type_template_id_109eed22_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
-var LRectanglevue_type_template_id_109eed22_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"795c21e8-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LRectangle/LRectangle.vue?vue&type=template&id=3702e7ea&
+var LRectanglevue_type_template_id_3702e7ea_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
+var LRectanglevue_type_template_id_3702e7ea_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LRectangle/LRectangle.vue?vue&type=template&id=109eed22&
+// CONCATENATED MODULE: ./src/components/LRectangle/LRectangle.vue?vue&type=template&id=3702e7ea&
 
 // CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LRectangle/LRectangle.vue?vue&type=script&lang=js&
 //
@@ -2201,8 +2236,8 @@ var LRectanglevue_type_script_lang_js_events = ['click', 'dblclick', 'mousedown'
 
 var LRectangle_component = normalizeComponent(
   LRectangle_LRectanglevue_type_script_lang_js_,
-  LRectanglevue_type_template_id_109eed22_render,
-  LRectanglevue_type_template_id_109eed22_staticRenderFns,
+  LRectanglevue_type_template_id_3702e7ea_render,
+  LRectanglevue_type_template_id_3702e7ea_staticRenderFns,
   false,
   null,
   null,
@@ -2211,12 +2246,12 @@ var LRectangle_component = normalizeComponent(
 )
 
 /* harmony default export */ var LRectangle = (LRectangle_component.exports);
-// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cb2ba72a-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LTileLayer/LTileLayer.vue?vue&type=template&id=05f1dc6a&
-var LTileLayervue_type_template_id_05f1dc6a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
-var LTileLayervue_type_template_id_05f1dc6a_staticRenderFns = []
+// CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"795c21e8-vue-loader-template"}!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LTileLayer/LTileLayer.vue?vue&type=template&id=5a53a677&
+var LTileLayervue_type_template_id_5a53a677_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c("div")}
+var LTileLayervue_type_template_id_5a53a677_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/LTileLayer/LTileLayer.vue?vue&type=template&id=05f1dc6a&
+// CONCATENATED MODULE: ./src/components/LTileLayer/LTileLayer.vue?vue&type=template&id=5a53a677&
 
 // CONCATENATED MODULE: /Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--12-0!/Users/matteking/Dev/vueaflet/node_modules/thread-loader/dist/cjs.js!/Users/matteking/Dev/vueaflet/node_modules/babel-loader/lib!/Users/matteking/Dev/vueaflet/node_modules/cache-loader/dist/cjs.js??ref--0-0!/Users/matteking/Dev/vueaflet/node_modules/vue-loader/lib??vue-loader-options!./src/components/LTileLayer/LTileLayer.vue?vue&type=script&lang=js&
 
@@ -2242,7 +2277,7 @@ var LTileLayer = {
     }
   },
   created: function created() {
-    this.innerLayer = external_leaflet_["tileLayer"](this.urlTemplate, this.options);
+    this.innerLayer = external_leaflet_default.a.tileLayer(this.urlTemplate, this.options);
     this.addLayer({
       id: this.mapId,
       layer: this.innerLayer
@@ -2272,8 +2307,8 @@ var LTileLayer = {
 
 var LTileLayer_component = normalizeComponent(
   LTileLayer_LTileLayervue_type_script_lang_js_,
-  LTileLayervue_type_template_id_05f1dc6a_render,
-  LTileLayervue_type_template_id_05f1dc6a_staticRenderFns,
+  LTileLayervue_type_template_id_5a53a677_render,
+  LTileLayervue_type_template_id_5a53a677_staticRenderFns,
   false,
   null,
   null,
@@ -2315,7 +2350,7 @@ var main_createInstaller = function createInstaller(c) {
       }
     }); // do something with options
 
-    utils_registerComponents(Vue, c);
+    registerComponents(Vue, c);
     if (!options.store) console.error('[@vueaflet/core] Please pass in reference to your store');
     options.store.registerModule('vueaflet', vueaflet);
   };
@@ -2450,17 +2485,6 @@ $export.W = 32;  // wrap
 $export.U = 64;  // safe
 $export.R = 128; // real proto method for `library`
 module.exports = $export;
-
-
-/***/ }),
-
-/***/ "220a":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.3.1 Object.assign(target, source)
-var $export = __webpack_require__("2058");
-
-$export($export.S + $export.F, 'Object', { assign: __webpack_require__("5d68") });
 
 
 /***/ }),
@@ -2735,13 +2759,6 @@ module.exports = require("lodash.values");
 
 /***/ }),
 
-/***/ "3821":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("4e39");
-
-/***/ }),
-
 /***/ "382d":
 /***/ (function(module, exports) {
 
@@ -2783,6 +2800,17 @@ module.exports = function (Constructor, NAME, next) {
 
 /***/ }),
 
+/***/ "3cdf":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.3.1 Object.assign(target, source)
+var $export = __webpack_require__("ef37");
+
+$export($export.S + $export.F, 'Object', { assign: __webpack_require__("ab23") });
+
+
+/***/ }),
+
 /***/ "3d85":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2820,6 +2848,49 @@ exports.f = __webpack_require__("3d85") ? gOPD : function getOwnPropertyDescript
   } catch (e) { /* empty */ }
   if (has(O, P)) return createDesc(!pIE.f.call(O, P), O[P]);
 };
+
+
+/***/ }),
+
+/***/ "4141":
+/***/ (function(module, exports) {
+
+// document.currentScript polyfill by Adam Miller
+
+// MIT license
+
+(function(document){
+  var currentScript = "currentScript",
+      scripts = document.getElementsByTagName('script'); // Live NodeList collection
+
+  // If browser needs currentScript polyfill, add get currentScript() to the document object
+  if (!(currentScript in document)) {
+    Object.defineProperty(document, currentScript, {
+      get: function(){
+
+        // IE 6-10 supports script readyState
+        // IE 10+ support stack trace
+        try { throw new Error(); }
+        catch (err) {
+
+          // Find the second match for the "at" string to get file src url from stack.
+          // Specifically works with the format of stack traces in IE.
+          var i, res = ((/.*at [^\(]*\((.*):.+:.+\)$/ig).exec(err.stack) || [false])[1];
+
+          // For all scripts on the page, if src matches or if ready state is interactive, return the script tag
+          for(i in scripts){
+            if(scripts[i].src == res || scripts[i].readyState == "interactive"){
+              return scripts[i];
+            }
+          }
+
+          // If no match, return null
+          return null;
+        }
+      }
+    });
+  }
+})(document);
 
 
 /***/ }),
@@ -3027,15 +3098,6 @@ module.exports = __webpack_require__("2354");
 
 /***/ }),
 
-/***/ "4e39":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("220a");
-module.exports = __webpack_require__("ac5a").Object.assign;
-
-
-/***/ }),
-
 /***/ "50cc":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3064,7 +3126,7 @@ exports = module.exports = __webpack_require__("443a")(false);
 
 
 // module
-exports.push([module.i, ".leaflet-image-layer,.leaflet-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane,.leaflet-pane>canvas,.leaflet-pane>svg,.leaflet-tile,.leaflet-tile-container,.leaflet-zoom-box{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-overlay-pane svg,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer{max-width:none!important;max-height:none!important}.leaflet-container.leaflet-touch-zoom{touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}.leaflet-tile{-webkit-filter:inherit;filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-bottom,.leaflet-top{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-tile{will-change:opacity}.leaflet-fade-anim .leaflet-popup{opacity:0;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{-webkit-transform-origin:0 0;transform-origin:0 0}.leaflet-zoom-anim .leaflet-zoom-animated{will-change:transform;transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1),-webkit-transform .25s cubic-bezier(0,0,.25,1)}.leaflet-pan-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-tile{transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:-webkit-grab;cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-control,.leaflet-popup-pane{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:move;cursor:-webkit-grabbing;cursor:grabbing}.leaflet-image-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-image-layer.leaflet-interactive,.leaflet-marker-icon.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline:0}.leaflet-container a{color:#0078a8}.leaflet-container a.leaflet-active{outline:2px solid orange}.leaflet-zoom-box{border:2px dotted #38f;background:hsla(0,0%,100%,.5)}.leaflet-container{font:12px/1.5 Helvetica Neue,Arial,Helvetica,sans-serif}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a,.leaflet-bar a:hover{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:#000}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:hover{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:700 18px Lucida Console,Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in,.leaflet-touch .leaflet-control-zoom-out{font-size:22px}.leaflet-control-layers{box-shadow:0 1px 5px rgba(0,0,0,.4);background:#fff;border-radius:5px}.leaflet-control-layers-toggle{background-image:url(" + escape(__webpack_require__("484c")) + ");width:36px;height:36px}.leaflet-retina .leaflet-control-layers-toggle{background-image:url(" + escape(__webpack_require__("5754")) + ");background-size:26px 26px}.leaflet-touch .leaflet-control-layers-toggle{width:44px;height:44px}.leaflet-control-layers-expanded .leaflet-control-layers-toggle,.leaflet-control-layers .leaflet-control-layers-list{display:none}.leaflet-control-layers-expanded .leaflet-control-layers-list{display:block;position:relative}.leaflet-control-layers-expanded{padding:6px 10px 6px 6px;color:#333;background:#fff}.leaflet-control-layers-scrollbar{overflow-y:scroll;overflow-x:hidden;padding-right:5px}.leaflet-control-layers-selector{margin-top:2px;position:relative;top:1px}.leaflet-control-layers label{display:block}.leaflet-control-layers-separator{height:0;border-top:1px solid #ddd;margin:5px -10px 5px -6px}.leaflet-default-icon-path{background-image:url(" + escape(__webpack_require__("7a41")) + ")}.leaflet-container .leaflet-control-attribution{background:#fff;background:hsla(0,0%,100%,.7);margin:0}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:hover{text-decoration:underline}.leaflet-container .leaflet-control-attribution,.leaflet-container .leaflet-control-scale{font-size:11px}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;font-size:11px;white-space:nowrap;overflow:hidden;box-sizing:border-box;background:#fff;background:hsla(0,0%,100%,.5)}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers{box-shadow:none}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-layers{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px}.leaflet-popup-content{margin:13px 19px;line-height:1.4}.leaflet-popup-content p{margin:18px 0}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fff;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;padding:4px 4px 0 0;border:none;text-align:center;width:18px;height:14px;font:16px/14px Tahoma,Verdana,sans-serif;color:#c3c3c3;text-decoration:none;font-weight:700;background:transparent}.leaflet-container a.leaflet-popup-close-button:hover{color:#999}.leaflet-popup-scrolled{overflow:auto;border-bottom:1px solid #ddd;border-top:1px solid #ddd}.leaflet-oldie .leaflet-popup-content-wrapper{zoom:1}.leaflet-oldie .leaflet-popup-tip{width:24px;margin:0 auto;-ms-filter:\"progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)\";filter:progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678,M12=0.70710678,M21=-0.70710678,M22=0.70710678)}.leaflet-oldie .leaflet-popup-tip-container{margin-top:-1px}.leaflet-oldie .leaflet-control-layers,.leaflet-oldie .leaflet-control-zoom,.leaflet-oldie .leaflet-popup-content-wrapper,.leaflet-oldie .leaflet-popup-tip{border:1px solid #999}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-clickable{cursor:pointer;pointer-events:auto}.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before,.leaflet-tooltip-top:before{position:absolute;pointer-events:none;border:6px solid transparent;background:transparent;content:\"\"}.leaflet-tooltip-bottom{margin-top:6px}.leaflet-tooltip-top{margin-top:-6px}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff}.leaflet-tooltip-left{margin-left:-6px}.leaflet-tooltip-right{margin-left:6px}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{top:50%;margin-top:-6px}.leaflet-tooltip-left:before{right:0;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{left:0;margin-left:-12px;border-right-color:#fff}", ""]);
+exports.push([module.i, ".leaflet-image-layer,.leaflet-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane,.leaflet-pane>canvas,.leaflet-pane>svg,.leaflet-tile,.leaflet-tile-container,.leaflet-zoom-box{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile::-moz-selection{background:transparent}.leaflet-tile::selection{background:transparent}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-overlay-pane svg,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer{max-width:none!important;max-height:none!important}.leaflet-container.leaflet-touch-zoom{touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}.leaflet-tile{-webkit-filter:inherit;filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-bottom,.leaflet-top{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-tile{will-change:opacity}.leaflet-fade-anim .leaflet-popup{opacity:0;-webkit-transition:opacity .2s linear;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{-webkit-transform-origin:0 0;transform-origin:0 0}.leaflet-zoom-anim .leaflet-zoom-animated{will-change:transform;-webkit-transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1),-webkit-transform .25s cubic-bezier(0,0,.25,1)}.leaflet-pan-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-tile{-webkit-transition:none;transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:-webkit-grab;cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-control,.leaflet-popup-pane{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:move;cursor:-webkit-grabbing;cursor:grabbing}.leaflet-image-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-image-layer.leaflet-interactive,.leaflet-marker-icon.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline:0}.leaflet-container a{color:#0078a8}.leaflet-container a.leaflet-active{outline:2px solid orange}.leaflet-zoom-box{border:2px dotted #38f;background:hsla(0,0%,100%,.5)}.leaflet-container{font:12px/1.5 Helvetica Neue,Arial,Helvetica,sans-serif}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a,.leaflet-bar a:hover{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:#000}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:hover{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:700 18px Lucida Console,Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in,.leaflet-touch .leaflet-control-zoom-out{font-size:22px}.leaflet-control-layers{box-shadow:0 1px 5px rgba(0,0,0,.4);background:#fff;border-radius:5px}.leaflet-control-layers-toggle{background-image:url(" + escape(__webpack_require__("484c")) + ");width:36px;height:36px}.leaflet-retina .leaflet-control-layers-toggle{background-image:url(" + escape(__webpack_require__("5754")) + ");background-size:26px 26px}.leaflet-touch .leaflet-control-layers-toggle{width:44px;height:44px}.leaflet-control-layers-expanded .leaflet-control-layers-toggle,.leaflet-control-layers .leaflet-control-layers-list{display:none}.leaflet-control-layers-expanded .leaflet-control-layers-list{display:block;position:relative}.leaflet-control-layers-expanded{padding:6px 10px 6px 6px;color:#333;background:#fff}.leaflet-control-layers-scrollbar{overflow-y:scroll;overflow-x:hidden;padding-right:5px}.leaflet-control-layers-selector{margin-top:2px;position:relative;top:1px}.leaflet-control-layers label{display:block}.leaflet-control-layers-separator{height:0;border-top:1px solid #ddd;margin:5px -10px 5px -6px}.leaflet-default-icon-path{background-image:url(" + escape(__webpack_require__("7a41")) + ")}.leaflet-container .leaflet-control-attribution{background:#fff;background:hsla(0,0%,100%,.7);margin:0}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:hover{text-decoration:underline}.leaflet-container .leaflet-control-attribution,.leaflet-container .leaflet-control-scale{font-size:11px}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;font-size:11px;white-space:nowrap;overflow:hidden;box-sizing:border-box;background:#fff;background:hsla(0,0%,100%,.5)}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers{box-shadow:none}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-layers{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px}.leaflet-popup-content{margin:13px 19px;line-height:1.4}.leaflet-popup-content p{margin:18px 0}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fff;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;padding:4px 4px 0 0;border:none;text-align:center;width:18px;height:14px;font:16px/14px Tahoma,Verdana,sans-serif;color:#c3c3c3;text-decoration:none;font-weight:700;background:transparent}.leaflet-container a.leaflet-popup-close-button:hover{color:#999}.leaflet-popup-scrolled{overflow:auto;border-bottom:1px solid #ddd;border-top:1px solid #ddd}.leaflet-oldie .leaflet-popup-content-wrapper{zoom:1}.leaflet-oldie .leaflet-popup-tip{width:24px;margin:0 auto;-ms-filter:\"progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)\";filter:progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678,M12=0.70710678,M21=-0.70710678,M22=0.70710678)}.leaflet-oldie .leaflet-popup-tip-container{margin-top:-1px}.leaflet-oldie .leaflet-control-layers,.leaflet-oldie .leaflet-control-zoom,.leaflet-oldie .leaflet-popup-content-wrapper,.leaflet-oldie .leaflet-popup-tip{border:1px solid #999}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-clickable{cursor:pointer;pointer-events:auto}.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before,.leaflet-tooltip-top:before{position:absolute;pointer-events:none;border:6px solid transparent;background:transparent;content:\"\"}.leaflet-tooltip-bottom{margin-top:6px}.leaflet-tooltip-top{margin-top:-6px}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff}.leaflet-tooltip-left{margin-left:-6px}.leaflet-tooltip-right{margin-left:6px}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{top:50%;margin-top:-6px}.leaflet-tooltip-left:before{right:0;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{left:0;margin-left:-12px;border-right-color:#fff}", ""]);
 
 // exports
 
@@ -3125,6 +3187,23 @@ exports.f = __webpack_require__("39b1") ? gOPD : function getOwnPropertyDescript
 
 /***/ }),
 
+/***/ "5642":
+/***/ (function(module, exports, __webpack_require__) {
+
+// most Object methods by ES6 should accept primitives
+var $export = __webpack_require__("ef37");
+var core = __webpack_require__("5c50");
+var fails = __webpack_require__("a124");
+module.exports = function (KEY, exec) {
+  var fn = (core.Object || {})[KEY] || Object[KEY];
+  var exp = {};
+  exp[KEY] = exec(fn);
+  $export($export.S + $export.F * fails(function () { fn(1); }), 'Object', exp);
+};
+
+
+/***/ }),
+
 /***/ "573a":
 /***/ (function(module, exports) {
 
@@ -3153,50 +3232,8 @@ module.exports = require("vuex");
 /***/ "5c50":
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.6.4' };
+var core = module.exports = { version: '2.6.9' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-
-
-/***/ }),
-
-/***/ "5d68":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// 19.1.2.1 Object.assign(target, source, ...)
-var getKeys = __webpack_require__("029b");
-var gOPS = __webpack_require__("769b");
-var pIE = __webpack_require__("0c85");
-var toObject = __webpack_require__("32b5");
-var IObject = __webpack_require__("6800");
-var $assign = Object.assign;
-
-// should work with symbols and should have deterministic property order (V8 bug)
-module.exports = !$assign || __webpack_require__("ed2f")(function () {
-  var A = {};
-  var B = {};
-  // eslint-disable-next-line no-undef
-  var S = Symbol();
-  var K = 'abcdefghijklmnopqrst';
-  A[S] = 7;
-  K.split('').forEach(function (k) { B[k] = k; });
-  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
-}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
-  var T = toObject(target);
-  var aLen = arguments.length;
-  var index = 1;
-  var getSymbols = gOPS.f;
-  var isEnum = pIE.f;
-  while (aLen > index) {
-    var S = IObject(arguments[index++]);
-    var keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S);
-    var length = keys.length;
-    var j = 0;
-    var key;
-    while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
-  } return T;
-} : $assign;
 
 
 /***/ }),
@@ -3544,6 +3581,14 @@ module.exports = Array.isArray || function isArray(arg) {
 
 /***/ }),
 
+/***/ "8109":
+/***/ (function(module, exports) {
+
+exports.f = Object.getOwnPropertySymbols;
+
+
+/***/ }),
+
 /***/ "82e1":
 /***/ (function(module, exports) {
 
@@ -3764,10 +3809,56 @@ module.exports = function (exec) {
 
 /***/ }),
 
+/***/ "ab23":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// 19.1.2.1 Object.assign(target, source, ...)
+var DESCRIPTORS = __webpack_require__("3d85");
+var getKeys = __webpack_require__("8996");
+var gOPS = __webpack_require__("8109");
+var pIE = __webpack_require__("d0e9");
+var toObject = __webpack_require__("79c1");
+var IObject = __webpack_require__("aec0");
+var $assign = Object.assign;
+
+// should work with symbols and should have deterministic property order (V8 bug)
+module.exports = !$assign || __webpack_require__("a124")(function () {
+  var A = {};
+  var B = {};
+  // eslint-disable-next-line no-undef
+  var S = Symbol();
+  var K = 'abcdefghijklmnopqrst';
+  A[S] = 7;
+  K.split('').forEach(function (k) { B[k] = k; });
+  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
+}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
+  var T = toObject(target);
+  var aLen = arguments.length;
+  var index = 1;
+  var getSymbols = gOPS.f;
+  var isEnum = pIE.f;
+  while (aLen > index) {
+    var S = IObject(arguments[index++]);
+    var keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S);
+    var length = keys.length;
+    var j = 0;
+    var key;
+    while (length > j) {
+      key = keys[j++];
+      if (!DESCRIPTORS || isEnum.call(S, key)) T[key] = S[key];
+    }
+  } return T;
+} : $assign;
+
+
+/***/ }),
+
 /***/ "ac5a":
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.6.4' };
+var core = module.exports = { version: '2.6.9' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 

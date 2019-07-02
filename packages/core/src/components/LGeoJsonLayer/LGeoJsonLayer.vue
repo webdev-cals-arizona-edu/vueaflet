@@ -1,7 +1,7 @@
 <template></template>
 
 <script>
-  import * as Leaflet from 'leaflet'
+  import L from 'leaflet'
   import { mapMutations, mapGetters, mapActions } from 'vuex'
   import VueafletBus from '@/buses'
   import { 
@@ -11,8 +11,8 @@
   } from '@/store/mutation-types'
 
 
-  delete Leaflet.Icon.Default.prototype._getIconUrl
-  Leaflet.Icon.Default.mergeOptions({
+  delete L.Icon.Default.prototype._getIconUrl
+  L.Icon.Default.mergeOptions({
     iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
     iconUrl: require('leaflet/dist/images/marker-icon.png'),
     shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
@@ -79,7 +79,7 @@
         // see https://leafletjs.com/reference-1.3.0.html#geojson
         this.innerGeoJSON = (existingLayer)
           ? existingLayer.addData(this.features)
-          : Leaflet.geoJSON(
+          : L.geoJSON(
             this.features,
             Object.assign({}, this.options, { pane: this.layerName })
           )
