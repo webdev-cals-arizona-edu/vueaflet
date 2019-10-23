@@ -10,7 +10,7 @@ This library (or set of components) uses [Vueaflet](https://github.com/webdev-ca
 
 > BREAKING CHANGES going to v2.0.0
 
- - `esri-leaflet`, `esri-leaflet-cluster` and `leaflet.markercluster` need to be installed separately
+ - `esri-leaflet`, `esri-leaflet-cluster (must use 2.0.0)` and `leaflet.markercluster` need to be installed separately
  - `@vueaflet/core` is no longer a dependency, but needs to be installed separately
 
 ----------
